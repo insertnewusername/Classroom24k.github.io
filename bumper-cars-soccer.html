@@ -2,23 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumper Cars Soccer | Classroom 24k</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav><a href="index.html">← Back</a></nav>
+
+    <nav>
+        <a href="index.html">← Back to Home</a>
+    </nav>
 
     <div class="container">
         <h1>Bumper Cars Soccer</h1>
 
         <div id="game-container"></div>
 
-        <button onclick="openFullscreen()" class="fullscreen-btn">⛶ Fullscreen</button>
+        <button class="fullscreen-btn" onclick="openFullscreen()">⛶ Fullscreen Mode</button>
+
+        <div class="info-box">
+            <h2>About the Game</h2>
+            <p>
+                Bumper Cars Soccer is a high-octane physics game where you drive a 
+                sturdy bumper car to strike a giant soccer ball into the opponent's goal. 
+                Use your speed and weight to outmaneuver the other cars!
+            </p>
+            
+            <h2>Controls</h2>
+            <ul>
+                <li><strong>WASD or Arrow Keys:</strong> Drive and Steer your car.</li>
+                <li><strong>Spacebar:</strong> Activate Nitro Boost for extra power.</li>
+                <li><strong>R Key:</strong> Reset your car if you get stuck or flipped.</li>
+            </ul>
+
+            <h2>Tips for Winning</h2>
+            <p>
+                Don't just chase the ball! Try to time your <strong>Nitro Boost</strong> 
+                right before you hit the ball to send it flying across the arena. 
+                Defending your own goal is just as important as attacking.
+            </p>
+        </div>
     </div>
 
     <script src="script.js"></script>
     <script>
-        // 4. Just tell the script which game to load!
+        // This tells the Master Script which game to load into the container
         setupGame("https://abinbins.github.io/a2/bumper-cars-soccer/");
     </script>
+
 </body>
 </html>
