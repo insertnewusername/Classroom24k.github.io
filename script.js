@@ -2,18 +2,19 @@
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     
-    // Safety check to ensure the container exists
     if (!container) return;
 
-    // 1. Create the Click to Play Overlay
+    // 1. Create the Click to Play Overlay with a Big Icon
     const overlay = document.createElement('div');
     overlay.id = 'clickableArea';
     overlay.innerHTML = `
-        <div id="playButton">CLICK TO PLAY</div>
-        <div class="play-subtext">Classroom 24k - The Blue Zone</div>
+        <div id="playButton">
+            <div style="font-size: 100px; line-height: 1;">▶</div>
+            <div style="font-size: 24px; font-weight: bold; letter-spacing: 3px; margin-top: 10px;">PLAY</div>
+        </div>
     `;
 
-    // 2. Create the Iframe (forced to 100% of container)
+    // 2. Create the Iframe
     const iframe = document.createElement('iframe');
     iframe.id = 'gameFrame';
     iframe.src = gameUrl;
@@ -23,13 +24,12 @@ function setupGame(gameUrl) {
     iframe.setAttribute('allowfullscreen', '');
     iframe.style.display = 'none';
 
-    // 3. Logic to swap overlay for iframe when clicked
+    // 3. Logic to swap them
     overlay.onclick = function() {
         overlay.style.display = 'none';
         iframe.style.display = 'block';
     };
 
-    // 4. Put them on the page
     container.appendChild(overlay);
     container.appendChild(iframe);
 }
@@ -39,9 +39,9 @@ function openFullscreen() {
     const elem = document.getElementById("game-container");
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari/Chrome support */
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
         elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 support */
+    } else if (elem.msRequestFullscreen) { /* IE11 */
         elem.msRequestFullscreen();
     }
 }
