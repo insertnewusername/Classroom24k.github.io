@@ -44,18 +44,19 @@ nav a:hover {
     padding: 0 20px;
 }
 
-/* --- COMPACT SQUARE GAME CARDS --- */
+/* --- THE PERFECT SQUARE GRID --- */
 .game-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px; /* Space between the squares */
+    gap: 20px;
 }
 
 .game-card {
     background: #001f3f;
-    width: 200px; /* Precise Square Width */
-    height: 200px; /* Precise Square Height */
+    /* This locks the card size to a square */
+    width: 180px; 
+    height: 180px; 
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -66,14 +67,14 @@ nav a:hover {
 }
 
 .game-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+    transform: translateY(-8px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
     border-color: #00d4ff;
 }
 
 .game-img-container {
     width: 100%;
-    height: 150px; /* Image takes up 75% of the square */
+    height: 135px; /* Image takes up 75% of the square */
     overflow: hidden;
     background: #000;
 }
@@ -81,7 +82,7 @@ nav a:hover {
 .game-img-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Prevents image stretching */
+    object-fit: cover; /* Keeps image from stretching */
 }
 
 .game-info {
@@ -94,16 +95,16 @@ nav a:hover {
 
 .game-info h3 {
     margin: 0;
-    padding: 5px 10px;
+    padding: 0 10px;
     color: #ffffff;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* --- GAME PLAYER STYLES --- */
+/* --- GAME PLAYER PAGE --- */
 #game-container {
     position: relative;
     width: 100%;
@@ -112,7 +113,8 @@ nav a:hover {
     border: 4px solid #00d4ff;
     border-radius: 15px;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
 }
 
 #clickableArea {
@@ -127,12 +129,12 @@ nav a:hover {
 
 #playButton {
     color: #ffffff;
-    text-shadow: 0 0 20px #00d4ff;
-    transition: transform 0.2s;
+    text-shadow: 0 0 25px #00d4ff;
+    transition: transform 0.2s ease;
 }
 
 #clickableArea:hover #playButton {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 .fullscreen-btn {
@@ -140,13 +142,13 @@ nav a:hover {
     color: #00d4ff;
     border: 2px solid #00d4ff;
     padding: 12px 40px;
-    border-radius: 50px; /* Pill Shape */
+    border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
     transition: 0.3s;
     display: inline-block;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .fullscreen-btn:hover {
@@ -157,10 +159,11 @@ nav a:hover {
 
 .info-box {
     background: #001f3f;
-    padding: 25px;
+    padding: 30px;
     border-radius: 15px;
     text-align: left;
     border-left: 6px solid #00d4ff;
     max-width: 900px;
-    margin: 0 auto 50px auto;
+    margin: 0 auto 60px auto;
+    line-height: 1.6;
 }
