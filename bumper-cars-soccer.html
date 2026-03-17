@@ -2,26 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bumper Cars Soccer | Classroom 24k</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
+    <nav><a href="index.html">← Back</a></nav>
 
-    <nav>
-        <a href="index.html">← Back to Home</a>
-    </nav>
-
-    <div class="container" style="text-align:center;">
+    <div class="container">
         <h1>Bumper Cars Soccer</h1>
-        
-        <div class="iframe-wrapper">
-            <iframe src="https://abinbins.github.io/a2/bumper-cars-soccer/" allowfullscreen></iframe>
-        </div>
 
-        <div class="info-box">
-            <h2>Controls</h2>
-            <p>WASD to drive, Space to Boost.</p>
-        </div>
+        <div id="game-container"></div>
+
+        <button onclick="openFullscreen()" class="fullscreen-btn">⛶ Fullscreen</button>
     </div>
 
+    <script src="script.js"></script>
+    <script>
+        // 4. Just tell the script which game to load!
+        setupGame("https://abinbins.github.io/a2/bumper-cars-soccer/");
+    </script>
 </body>
 </html>
