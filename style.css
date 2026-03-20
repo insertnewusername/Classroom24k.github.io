@@ -19,6 +19,13 @@ header {
     border-radius: 8px;
     border: 2px solid #00aaff;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
+    transition: 0.3s;
+    cursor: pointer; /* Shows it is a link */
+}
+
+header:hover {
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
 }
 
 header h1 {
@@ -135,7 +142,6 @@ nav a:hover {
 
 /* --- NEON GREEN PLAY BUTTON --- */
 #playButton {
-    /* Smooth 0.7s growth transition */
     transition: transform 0.7s ease-in-out; 
     color: #ffffff;
     display: flex;
@@ -146,7 +152,7 @@ nav a:hover {
 .play-icon { 
     font-size: 100px; 
     line-height: 1; 
-    color: #39ff14; /* Electric Neon Green */
+    color: #39ff14; 
     text-shadow: 0 0 10px #fff, 0 0 25px #39ff14, 0 0 50px #39ff14;
 }
 
@@ -159,7 +165,7 @@ nav a:hover {
 }
 
 #clickableArea:hover #playButton {
-    transform: scale(1.1); /* Gentle 10% growth */
+    transform: scale(1.1);
 }
 
 .fullscreen-btn {
@@ -190,12 +196,10 @@ nav a:hover {
     margin: 0 auto 60px auto;
     line-height: 1.7;
     position: relative;
-    /* Clean, narrow 2px border around the whole box */
     border: 2px solid transparent;
     background-clip: padding-box;
 }
 
-/* Gradient glow frame around the entire box */
 .info-box::before {
     content: '';
     position: absolute;
