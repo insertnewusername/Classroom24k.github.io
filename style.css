@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Cyber-Neon Edition */
+/* style.css - Classroom 24k Locked-In Edition */
 
 body {
     background-color: #081221; 
@@ -9,13 +9,13 @@ body {
     text-align: center;
 }
 
-/* --- SLIM HEADER --- */
+/* --- LOCKED SLIM HEADER --- */
 header {
     background-color: #1c426e; 
-    width: 60%; /* Width across the screen */
+    width: 60%; 
     max-width: 700px;
     margin: 15px auto; 
-    padding: 8px; /* Reduced padding makes it "thinner" top-to-bottom */
+    padding: 8px; 
     border-radius: 8px;
     border: 2px solid #00aaff;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
@@ -23,12 +23,13 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 1.4rem; /* Smaller font to fit the slim header */
+    font-size: 1.4rem; 
     text-transform: uppercase;
     letter-spacing: 3px;
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
 }
 
+/* --- NAVIGATION --- */
 nav {
     background-color: #0d1b2e; 
     padding: 10px;
@@ -86,7 +87,6 @@ nav a:hover {
 .game-img-container {
     width: 100%;
     height: 135px;
-    overflow: hidden;
     background: #000;
 }
 
@@ -105,8 +105,6 @@ nav a:hover {
 
 .game-info h3 {
     margin: 0;
-    padding: 0 10px;
-    color: #ffffff;
     font-size: 0.85rem;
     text-transform: uppercase;
 }
@@ -137,7 +135,8 @@ nav a:hover {
 
 /* --- NEON GREEN PLAY BUTTON --- */
 #playButton {
-    transition: transform 0.6s ease-out; 
+    /* Smooth 0.7s growth transition */
+    transition: transform 0.7s ease-in-out; 
     color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -148,8 +147,7 @@ nav a:hover {
     font-size: 100px; 
     line-height: 1; 
     color: #39ff14; /* Electric Neon Green */
-    /* Intense Green Neon Glow */
-    text-shadow: 0 0 10px #fff, 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 60px #1db954;
+    text-shadow: 0 0 10px #fff, 0 0 25px #39ff14, 0 0 50px #39ff14;
 }
 
 .play-text { 
@@ -157,12 +155,11 @@ nav a:hover {
     font-weight: bold; 
     letter-spacing: 4px; 
     margin-top: 10px; 
-    color: #ffffff;
     text-shadow: 0 0 10px #39ff14;
 }
 
 #clickableArea:hover #playButton {
-    transform: scale(1.1);
+    transform: scale(1.1); /* Gentle 10% growth */
 }
 
 .fullscreen-btn {
@@ -183,7 +180,7 @@ nav a:hover {
     color: #081221;
 }
 
-/* --- UPDATED GRADIENT INFO BOX --- */
+/* --- SMOOTH GLOWING ABOUT BOX --- */
 .info-box {
     background: #0d1b2e; 
     padding: 30px;
@@ -191,13 +188,21 @@ nav a:hover {
     text-align: left;
     max-width: 900px;
     margin: 0 auto 60px auto;
-    line-height: 1.6;
+    line-height: 1.7;
     position: relative;
-    /* This creates the big gradient left border effect */
-    border: 1px solid #1c426e;
-    border-left: 10px solid transparent; 
-    border-image: linear-gradient(to bottom, #00d4ff, #0044ff, #1c426e) 1 100%;
-    box-shadow: -10px 0 20px rgba(0, 170, 255, 0.1);
+    /* Clean, narrow 2px border around the whole box */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+/* Gradient glow frame around the entire box */
+.info-box::before {
+    content: '';
+    position: absolute;
+    top: -2px; bottom: -2px; left: -2px; right: -2px;
+    background: linear-gradient(135deg, #00d4ff, #1c426e);
+    border-radius: 16px;
+    z-index: -1;
 }
 
 .info-box h2 {
