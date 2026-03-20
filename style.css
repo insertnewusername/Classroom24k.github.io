@@ -1,10 +1,9 @@
 /* style.css - Classroom 24k Cyber Dark Design */
 
 body {
-    /* Very dark, near-black navy for maximum contrast */
-    background-color: #081221; 
+    background-color: #081221; /* Darker, near-black navy */
     color: #ffffff;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', Roboto, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -12,10 +11,9 @@ body {
 
 /* --- NAVIGATION & HEADER --- */
 header {
-    /* Deep Navy Header */
-    background-color: #1c426e;
+    background-color: #1c426e; /* Your requested header color */
     padding: 25px;
-    border-bottom: 2px solid #00d4ff; /* Neon accent line */
+    border-bottom: 2px solid #00d4ff; /* Single sharp neon line */
 }
 
 header h1 {
@@ -23,7 +21,6 @@ header h1 {
     font-size: 2.2rem;
     text-transform: uppercase;
     letter-spacing: 4px;
-    /* Subtle neon text glow */
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
@@ -34,13 +31,12 @@ nav {
 }
 
 nav a {
-    color: #00d4ff; /* Neon blue links */
+    color: #00d4ff; 
     text-decoration: none;
     font-weight: bold;
     margin: 0 15px;
     text-transform: uppercase;
     font-size: 0.85rem;
-    letter-spacing: 1px;
     transition: 0.3s;
 }
 
@@ -78,7 +74,6 @@ nav a:hover {
 
 .game-card:hover {
     transform: translateY(-8px);
-    /* Neon border and shadow on hover */
     border-color: #00d4ff;
     box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
 }
@@ -107,7 +102,6 @@ nav a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0d1b2e;
 }
 
 .game-info h3 {
