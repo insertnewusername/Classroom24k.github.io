@@ -1,17 +1,17 @@
-/* style.css - Classroom 24k Restored Edition */
+/* style.css - Classroom 24k Final Cyber-Neon Edition */
 
 body {
-    background-color: #081221;
+    background-color: #081221; 
     color: #ffffff;
-    font-family: 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-/* --- HEADER & NAV --- */
+/* --- NAVIGATION & HEADER --- */
 header {
-    background-color: #1c426e;
+    background-color: #1c426e; 
     padding: 25px;
     border-bottom: 3px solid #00aaff;
 }
@@ -37,19 +37,89 @@ nav a {
     margin: 0 15px;
     text-transform: uppercase;
     font-size: 0.85rem;
+    transition: 0.3s;
 }
 
-/* --- THE RESTORED GAME FRAME --- */
+nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* --- SQUARE GAME GRID (INDEX PAGE) --- */
+.game-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.game-card {
+    background: #0d1b2e;
+    width: 180px; 
+    height: 180px; 
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 2px solid #1c426e;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
+    border-color: #00aaff;
+}
+
+.game-img-container {
+    width: 100%;
+    height: 135px;
+    overflow: hidden;
+    background: #000;
+}
+
+.game-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-info {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-info h3 {
+    margin: 0;
+    padding: 0 10px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- GAME PLAYER FRAME --- */
 #game-container {
     position: relative;
     width: 100%;
-    max-width: 1200px; /* Big enough for high-res monitors */
-    height: 80vh;      /* Restored to original large size */
-    background-color: #000;
+    max-width: 1100px;
+    height: 80vh; 
+    background: #000;
+    border: 4px solid #00aaff;
     border-radius: 15px;
     overflow: hidden;
-    margin: 0 auto 25px auto;
-    border: 4px solid #00aaff; 
+    margin: 0 auto 20px auto;
     box-shadow: 0 0 35px rgba(0, 170, 255, 0.4);
 }
 
@@ -63,98 +133,38 @@ nav a {
     cursor: pointer;
 }
 
-/* --- PLAY BUTTON FIX --- */
+/* --- NEON PLAY BUTTON - SMOOTH GENTLE REACT --- */
 #playButton {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* 0.6s ease-out for a slower, more graceful growth */
+    transition: transform 0.6s ease-out; 
     color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    pointer-events: none; /* Helps hover trigger correctly */
-}
-
-/* This makes the whole group grow when the frame is hovered */
-#clickableArea:hover #playButton {
-    transform: scale(1.3);
 }
 
 .play-icon { 
     font-size: 100px; 
     line-height: 1; 
-    text-shadow: 0 0 20px #00aaff; 
+    color: #00aaff;
+    text-shadow: 0 0 10px #fff, 0 0 20px #00aaff, 0 0 40px #00aaff;
 }
+
 .play-text { 
     font-size: 24px; 
     font-weight: bold; 
-    letter-spacing: 3px; 
+    letter-spacing: 4px; 
     margin-top: 10px; 
+    text-shadow: 0 0 10px #00aaff;
 }
 
-/* --- THE WIDE GRADIENT DESCRIPTION BOX --- */
-.info-box {
-    background-color: #0d1b2e;
-    padding: 35px;
-    border-radius: 15px;
-    text-align: left;
-    max-width: 900px;
-    margin: 0 auto 60px auto;
-    line-height: 1.7;
-    position: relative;
-    /* Creating a thick left-side border accent */
-    border-left: 8px solid #00aaff; 
-    /* Adding the gradient to the other sides */
-    border-top: 2px solid #1c426e;
-    border-right: 2px solid #1c426e;
-    border-bottom: 2px solid #1c426e;
-    box-shadow: -10px 0 20px rgba(0, 170, 255, 0.2);
-}
-
-.info-box h2 {
-    color: #00aaff;
-    margin-top: 0;
-    text-transform: uppercase;
-}
-
-/* --- INDEX PAGE GRID (Keeping Squares) --- */
-.game-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-}
-
-.game-card {
-    background-color: #0d1b2e; 
-    width: 180px; 
-    height: 180px; 
-    border-radius: 12px;
-    overflow: hidden;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid #1c426e;
-    transition: 0.3s;
-}
-
-.game-card:hover {
-    transform: translateY(-8px);
-    border-color: #00aaff;
-}
-
-.game-img-container {
-    width: 100%;
-    height: 135px;
-    overflow: hidden;
-}
-
-.game-img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* Subtle 1.1 scale for a gentle reaction */
+#clickableArea:hover #playButton {
+    transform: scale(1.1);
 }
 
 .fullscreen-btn {
-    background-color: #1c426e;
+    background: #1c426e;
     color: #ffffff;
     border: 2px solid #00aaff;
     padding: 12px 40px;
@@ -162,11 +172,35 @@ nav a {
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 50px;
     transition: 0.3s;
+    display: inline-block;
+    margin-bottom: 40px;
 }
 
 .fullscreen-btn:hover {
-    background-color: #00aaff;
+    background: #00aaff;
     color: #081221;
+    box-shadow: 0 0 15px #00aaff;
+}
+
+/* --- RESTORED ORIGINAL INFO BOX STYLE --- */
+.info-box {
+    background: #0d1b2e; 
+    padding: 30px;
+    border-radius: 15px;
+    text-align: left;
+    border-left: 8px solid #00aaff; /* Thick left-side neon accent */
+    border-top: 1px solid #1c426e;
+    border-right: 1px solid #1c426e;
+    border-bottom: 1px solid #1c426e;
+    max-width: 900px;
+    margin: 0 auto 60px auto;
+    line-height: 1.6;
+    box-shadow: -10px 0 20px rgba(0, 170, 255, 0.1);
+}
+
+.info-box h2 {
+    color: #00aaff;
+    margin-top: 0;
+    text-transform: uppercase;
 }
