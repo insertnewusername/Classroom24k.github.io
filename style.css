@@ -1,8 +1,8 @@
-/* style.css - Classroom 24k Flat Navy Design */
+/* style.css - Classroom 24k Deep Midnight Design */
 
 body {
-    /* Solid Navy Background - No Gradients */
-    background-color: #1c426e; 
+    /* Deep Navy Background */
+    background-color: #123155; 
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -12,9 +12,10 @@ body {
 
 /* --- NAVIGATION & HEADER --- */
 header {
-    /* Your requested solid #14549e */
-    background-color: #14549e;
+    /* Header color #1c426e */
+    background-color: #1c426e;
     padding: 20px;
+    border-bottom: 1px solid #0d233d;
 }
 
 header h1 {
@@ -25,10 +26,10 @@ header h1 {
 }
 
 nav {
-    /* Slightly darker navy bar for contrast */
-    background-color: #0f3a6d; 
+    /* Slightly darker than the header for separation */
+    background-color: #163557; 
     padding: 12px;
-    border-bottom: 2px solid #0d2b4f;
+    border-bottom: 2px solid #0d233d;
 }
 
 nav a {
@@ -38,11 +39,11 @@ nav a {
     margin: 0 15px;
     text-transform: uppercase;
     font-size: 0.9rem;
-    transition: color 0.2s;
+    transition: opacity 0.2s;
 }
 
 nav a:hover {
-    color: #a0c4ff;
+    opacity: 0.7;
 }
 
 .container {
@@ -51,7 +52,7 @@ nav a:hover {
     padding: 0 20px;
 }
 
-/* --- FLAT SQUARE GAME CARDS --- */
+/* --- DEEP NAVY SQUARE GAME CARDS --- */
 .game-grid {
     display: flex;
     flex-wrap: wrap;
@@ -60,8 +61,8 @@ nav a:hover {
 }
 
 .game-card {
-    /* Darker navy for the card box */
-    background-color: #0d2b4f; 
+    /* Darker "Inset" color for cards */
+    background-color: #0d233d; 
     width: 180px; 
     height: 180px; 
     border-radius: 8px;
@@ -69,19 +70,18 @@ nav a:hover {
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    border: 1px solid #254b7a;
-    transition: transform 0.2s ease, background-color 0.2s;
+    border: 1px solid #1c426e;
+    transition: transform 0.2s ease;
 }
 
 .game-card:hover {
-    /* Subtle interaction: Card lifts and lightens slightly */
     transform: translateY(-5px);
-    background-color: #14355e;
+    background-color: #122a47;
 }
 
 .game-img-container {
     width: 100%;
-    height: 135px; /* Square proportions for the thumbnail */
+    height: 135px;
     overflow: hidden;
     background-color: #000000;
 }
@@ -119,13 +119,13 @@ nav a:hover {
     border-radius: 10px;
     overflow: hidden;
     margin: 0 auto 20px auto;
-    border: 1px solid #254b7a;
+    border: 1px solid #1c426e;
 }
 
 #clickableArea {
     width: 100%;
     height: 100%;
-    background-color: #14355e; /* Solid color "Click to Play" area */
+    background-color: #1c426e; /* Solid navy "Play" area */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -139,9 +139,10 @@ nav a:hover {
 }
 
 .fullscreen-btn {
-    background-color: #14549e;
+    /* Matches the header color for consistency */
+    background-color: #1c426e;
     color: #ffffff;
-    border: none;
+    border: 1px solid #2a5a8f;
     padding: 12px 35px;
     border-radius: 4px;
     cursor: pointer;
@@ -149,25 +150,23 @@ nav a:hover {
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 50px;
-    transition: background-color 0.2s;
 }
 
 .fullscreen-btn:hover {
-    background-color: #1c6ad1;
+    background-color: #24558d;
 }
 
 .info-box {
-    background-color: #0d2b4f;
+    background-color: #0d233d;
     padding: 30px;
     border-radius: 8px;
     text-align: left;
     max-width: 850px;
     margin: 0 auto 60px auto;
     line-height: 1.6;
-    border: 1px solid #254b7a;
+    border: 1px solid #1c426e;
 }
 
 .info-box h2 {
     margin-top: 0;
-    color: #ffffff;
 }
