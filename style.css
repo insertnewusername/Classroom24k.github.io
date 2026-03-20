@@ -9,22 +9,21 @@ body {
     text-align: center;
 }
 
-/* --- SLIM NAVIGATION & HEADER --- */
+/* --- SLIM HEADER --- */
 header {
     background-color: #1c426e; 
-    /* Making the header around half the size and centered */
-    width: 50%;
-    max-width: 600px;
-    margin: 20px auto; 
-    padding: 15px;
-    border-radius: 10px;
-    border: 3px solid #00aaff;
+    width: 60%; /* Width across the screen */
+    max-width: 700px;
+    margin: 15px auto; 
+    padding: 8px; /* Reduced padding makes it "thinner" top-to-bottom */
+    border-radius: 8px;
+    border: 2px solid #00aaff;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
 }
 
 header h1 {
     margin: 0;
-    font-size: 1.8rem; /* Slightly smaller for the smaller box */
+    font-size: 1.4rem; /* Smaller font to fit the slim header */
     text-transform: uppercase;
     letter-spacing: 3px;
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
@@ -32,7 +31,7 @@ header h1 {
 
 nav {
     background-color: #0d1b2e; 
-    padding: 12px;
+    padding: 10px;
     border-bottom: 1px solid #1c426e;
     margin-bottom: 20px;
 }
@@ -43,13 +42,12 @@ nav a {
     font-weight: bold;
     margin: 0 15px;
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     transition: 0.3s;
 }
 
 nav a:hover {
     color: #ffffff;
-    text-shadow: 0 0 10px #00aaff;
 }
 
 .container {
@@ -58,7 +56,7 @@ nav a:hover {
     padding: 0 20px;
 }
 
-/* --- SQUARE GAME GRID (INDEX PAGE) --- */
+/* --- SQUARE GAME GRID --- */
 .game-grid {
     display: flex;
     flex-wrap: wrap;
@@ -111,9 +109,6 @@ nav a:hover {
     color: #ffffff;
     font-size: 0.85rem;
     text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 /* --- GAME PLAYER FRAME --- */
@@ -140,7 +135,7 @@ nav a:hover {
     cursor: pointer;
 }
 
-/* --- NEON PLAY BUTTON - SMOOTH GENTLE REACT --- */
+/* --- NEON GREEN PLAY BUTTON --- */
 #playButton {
     transition: transform 0.6s ease-out; 
     color: #ffffff;
@@ -152,8 +147,9 @@ nav a:hover {
 .play-icon { 
     font-size: 100px; 
     line-height: 1; 
-    color: #00aaff;
-    text-shadow: 0 0 10px #fff, 0 0 20px #00aaff, 0 0 40px #00aaff;
+    color: #39ff14; /* Electric Neon Green */
+    /* Intense Green Neon Glow */
+    text-shadow: 0 0 10px #fff, 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 60px #1db954;
 }
 
 .play-text { 
@@ -161,7 +157,8 @@ nav a:hover {
     font-weight: bold; 
     letter-spacing: 4px; 
     margin-top: 10px; 
-    text-shadow: 0 0 10px #00aaff;
+    color: #ffffff;
+    text-shadow: 0 0 10px #39ff14;
 }
 
 #clickableArea:hover #playButton {
@@ -178,29 +175,28 @@ nav a:hover {
     font-weight: bold;
     text-transform: uppercase;
     transition: 0.3s;
-    display: inline-block;
     margin-bottom: 40px;
 }
 
 .fullscreen-btn:hover {
     background: #00aaff;
     color: #081221;
-    box-shadow: 0 0 15px #00aaff;
 }
 
-/* --- RESTORED ORIGINAL INFO BOX STYLE --- */
+/* --- UPDATED GRADIENT INFO BOX --- */
 .info-box {
     background: #0d1b2e; 
     padding: 30px;
     border-radius: 15px;
     text-align: left;
-    border-left: 8px solid #00aaff; 
-    border-top: 1px solid #1c426e;
-    border-right: 1px solid #1c426e;
-    border-bottom: 1px solid #1c426e;
     max-width: 900px;
     margin: 0 auto 60px auto;
     line-height: 1.6;
+    position: relative;
+    /* This creates the big gradient left border effect */
+    border: 1px solid #1c426e;
+    border-left: 10px solid transparent; 
+    border-image: linear-gradient(to bottom, #00d4ff, #0044ff, #1c426e) 1 100%;
     box-shadow: -10px 0 20px rgba(0, 170, 255, 0.1);
 }
 
@@ -210,9 +206,6 @@ nav a:hover {
     text-transform: uppercase;
 }
 
-/* Small Screen Fix for the half-width header */
 @media (max-width: 600px) {
-    header {
-        width: 90%;
-    }
+    header { width: 90%; }
 }
