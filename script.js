@@ -1,53 +1,64 @@
-// --- GOOGLE ANALYTICS ---
-(function() {
-    var gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-2D22NMRV2Z";
-    document.head.appendChild(gtagScript);
+// --- UNIVERSAL NAVIGATION GENERATOR ---
+function generateNav() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
 
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-2D22NMRV2Z');
-    window.gtag = gtag;
-})();
+    const categories = [
+        { name: "Popular", link: "index.html" },
+        { name: "Driving", link: "index.html" },
+        { name: "Multiplayer", link: "index.html" },
+        { name: "Sport", link: "index.html" }
+    ];
 
-// --- MASTER GAME SETUP ---
-function setupGame(gameUrl) {
-    const container = document.getElementById('game-container');
-    if (!container) return;
+    let navHTML = '';
+    categories.forEach(cat => {
+        navHTML += `<a href="${cat.link}">${cat.name}</a>`;
+    });
 
-    const overlay = document.createElement('div');
-    overlay.id = 'clickableArea';
-    overlay.innerHTML = `
-        <div id="playButton">
-            <div style="font-size: 100px; line-height: 1;">▶</div>
-            <div style="font-size: 24px; font-weight: bold; letter-spacing: 3px; margin-top: 10px;">PLAY</div>
+    navHTML += `
+        <div class="search-container">
+            <input type="text" id="gameSearch" placeholder="Search games..." onkeyup="filterGames()">
         </div>
     `;
-
-    const iframe = document.createElement('iframe');
-    iframe.id = 'gameFrame';
-    iframe.src = gameUrl;
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.style.display = 'none';
-
-    overlay.onclick = function() {
-        overlay.style.display = 'none';
-        iframe.style.display = 'block';
-    };
-
-    container.appendChild(overlay);
-    container.appendChild(iframe);
+    nav.innerHTML = navHTML;
 }
 
-// --- FULLSCREEN LOGIC ---
+// --- SEARCH FILTER LOGIC ---
+function filterGames() {
+    let input = document.getElementById('gameSearch').value.toLowerCase();
+    let cards = document.getElementsByClassName('game-card');
+
+    for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].querySelector('h3').innerText.toLowerCase();
+        cards[i].style.display = title.includes(input) ? "" : "none";
+    }
+}
+
+// --- GAME LOADING LOGIC ---
+function setupGame(gameUrl) {
+    const container = document.getElementById('game-container');
+    
+    container.innerHTML = `
+        <div id="clickableArea" onclick="loadIframe('${gameUrl}')">
+            <div id="playButton">
+                <div class="play-icon">▶</div>
+                <div class="play-text">PLAY</div>
+            </div>
+        </div>
+    `;
+}
+
+function loadIframe(url) {
+    const container = document.getElementById('game-container');
+    container.innerHTML = `<iframe src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
+}
+
 function openFullscreen() {
-    const elem = document.getElementById("game-container");
+    const elem = document.querySelector("iframe");
     if (!elem) return;
-    if (elem.requestFullscreen) { elem.requestFullscreen(); } 
-    else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+    if (elem.requestFullscreen) elem.requestFullscreen();
+    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
+
+window.addEventListener('DOMContentLoaded', generateNav);
