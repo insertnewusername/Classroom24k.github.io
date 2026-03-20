@@ -9,25 +9,32 @@ body {
     text-align: center;
 }
 
-/* --- NAVIGATION & HEADER --- */
+/* --- SLIM NAVIGATION & HEADER --- */
 header {
     background-color: #1c426e; 
-    padding: 25px;
-    border-bottom: 3px solid #00aaff;
+    /* Making the header around half the size and centered */
+    width: 50%;
+    max-width: 600px;
+    margin: 20px auto; 
+    padding: 15px;
+    border-radius: 10px;
+    border: 3px solid #00aaff;
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.2rem;
+    font-size: 1.8rem; /* Slightly smaller for the smaller box */
     text-transform: uppercase;
-    letter-spacing: 4px;
-    text-shadow: 0 0 15px rgba(0, 170, 255, 0.6);
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
 }
 
 nav {
     background-color: #0d1b2e; 
     padding: 12px;
     border-bottom: 1px solid #1c426e;
+    margin-bottom: 20px;
 }
 
 nav a {
@@ -47,7 +54,7 @@ nav a:hover {
 
 .container {
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 0 auto;
     padding: 0 20px;
 }
 
@@ -135,7 +142,6 @@ nav a:hover {
 
 /* --- NEON PLAY BUTTON - SMOOTH GENTLE REACT --- */
 #playButton {
-    /* 0.6s ease-out for a slower, more graceful growth */
     transition: transform 0.6s ease-out; 
     color: #ffffff;
     display: flex;
@@ -158,7 +164,6 @@ nav a:hover {
     text-shadow: 0 0 10px #00aaff;
 }
 
-/* Subtle 1.1 scale for a gentle reaction */
 #clickableArea:hover #playButton {
     transform: scale(1.1);
 }
@@ -189,7 +194,7 @@ nav a:hover {
     padding: 30px;
     border-radius: 15px;
     text-align: left;
-    border-left: 8px solid #00aaff; /* Thick left-side neon accent */
+    border-left: 8px solid #00aaff; 
     border-top: 1px solid #1c426e;
     border-right: 1px solid #1c426e;
     border-bottom: 1px solid #1c426e;
@@ -203,4 +208,11 @@ nav a:hover {
     color: #00aaff;
     margin-top: 0;
     text-transform: uppercase;
+}
+
+/* Small Screen Fix for the half-width header */
+@media (max-width: 600px) {
+    header {
+        width: 90%;
+    }
 }
