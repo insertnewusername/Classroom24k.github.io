@@ -1,7 +1,7 @@
-/* style.css - Classroom 24k Cyber Dark Design */
+/* style.css - Classroom 24k Cyber-Glow Design */
 
 body {
-    background-color: #081221; /* Darker, near-black navy */
+    background-color: #081221; /* Deep Midnight */
     color: #ffffff;
     font-family: 'Segoe UI', Roboto, sans-serif;
     margin: 0;
@@ -11,9 +11,9 @@ body {
 
 /* --- NAVIGATION & HEADER --- */
 header {
-    background-color: #1c426e; /* Your requested header color */
+    background-color: #1c426e;
     padding: 25px;
-    border-bottom: 2px solid #00d4ff; /* Single sharp neon line */
+    border-bottom: 3px solid #00aaff; /* Darker neon blue */
 }
 
 header h1 {
@@ -21,7 +21,7 @@ header h1 {
     font-size: 2.2rem;
     text-transform: uppercase;
     letter-spacing: 4px;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    text-shadow: 0 0 15px rgba(0, 170, 255, 0.6);
 }
 
 nav {
@@ -31,7 +31,7 @@ nav {
 }
 
 nav a {
-    color: #00d4ff; 
+    color: #00aaff; 
     text-decoration: none;
     font-weight: bold;
     margin: 0 15px;
@@ -42,7 +42,7 @@ nav a {
 
 nav a:hover {
     color: #ffffff;
-    text-shadow: 0 0 8px #00d4ff;
+    text-shadow: 0 0 8px #00aaff;
 }
 
 .container {
@@ -51,7 +51,7 @@ nav a:hover {
     padding: 0 20px;
 }
 
-/* --- THE NEON SQUARE GRID --- */
+/* --- SQUARE GAME CARDS --- */
 .game-grid {
     display: flex;
     flex-wrap: wrap;
@@ -74,8 +74,8 @@ nav a:hover {
 
 .game-card:hover {
     transform: translateY(-8px);
-    border-color: #00d4ff;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    border-color: #00aaff;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
 }
 
 .game-img-container {
@@ -89,12 +89,6 @@ nav a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.9);
-    transition: 0.3s;
-}
-
-.game-card:hover .game-img-container img {
-    filter: brightness(1.1);
 }
 
 .game-info {
@@ -110,12 +104,9 @@ nav a:hover {
     color: #ffffff;
     font-size: 0.85rem;
     text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-/* --- GAME PLAYER PAGE --- */
+/* --- THE NEON GAME FRAME --- */
 #game-container {
     position: relative;
     width: 100%;
@@ -124,13 +115,15 @@ nav a:hover {
     border-radius: 15px;
     overflow: hidden;
     margin: 0 auto 25px auto;
-    border: 2px solid #1c426e;
+    /* The "Popping Out" Neon Border */
+    border: 4px solid #00aaff; 
+    box-shadow: 0 0 35px rgba(0, 170, 255, 0.4);
 }
 
 #clickableArea {
     width: 100%;
     height: 100%;
-    background-color: #0d1b2e;
+    background: radial-gradient(circle, #1c426e 0%, #081221 100%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,18 +131,17 @@ nav a:hover {
 }
 
 #playButton {
-    color: #00d4ff;
+    color: #ffffff;
     font-size: 1.5rem;
-    font-weight: bold;
-    text-shadow: 0 0 15px #00d4ff;
+    text-shadow: 0 0 20px #00aaff;
 }
 
 .fullscreen-btn {
     background-color: #1c426e;
     color: #ffffff;
-    border: 2px solid #00d4ff;
+    border: 2px solid #00aaff;
     padding: 12px 40px;
-    border-radius: 8px;
+    border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
     text-transform: uppercase;
@@ -159,24 +151,29 @@ nav a:hover {
 }
 
 .fullscreen-btn:hover {
-    background-color: #00d4ff;
+    background-color: #00aaff;
     color: #081221;
-    box-shadow: 0 0 15px #00d4ff;
+    box-shadow: 0 0 15px #00aaff;
 }
 
+/* --- THE NEON DESCRIPTION BOX --- */
 .info-box {
     background-color: #0d1b2e;
     padding: 35px;
-    border-radius: 12px;
+    border-radius: 15px;
     text-align: left;
     max-width: 850px;
     margin: 0 auto 60px auto;
     line-height: 1.7;
-    border: 1px solid #1c426e;
-    color: #b0c4de;
+    /* Neon Electric Blue Gradient Border Effect */
+    border: 3px solid transparent;
+    border-image: linear-gradient(135deg, #00aaff, #0044ff) 1;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .info-box h2 {
-    color: #00d4ff;
+    color: #00aaff;
     margin-top: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
