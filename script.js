@@ -1,156 +1,67 @@
-/**
- * script.js - Classroom 24k Final Master REPAIR V2.0
- * Integrated with Neon CSS and Optimized Search
- */
+// script.js - Classroom 24k V4.7
 
-// --- 1. GOOGLE ANALYTICS ---
-(function() {
-    var gtagScript = document.createElement('script');
-    gtagScript.async = true;
-    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-2D22NMRV2Z";
-    document.head.appendChild(gtagScript);
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-2D22NMRV2Z');
-})();
-
-// --- 2. UNIVERSAL NAVIGATION ---
-function generateNav() {
-    const nav = document.querySelector('nav');
-    if (!nav) return;
-    nav.innerHTML = `
-        <div class="search-container">
-            <input type="text" id="gameSearch" placeholder="Search Games..." 
-                   onkeydown="if(event.key==='Enter') filterGames()">
+function setupGame(url) {
+    const container = document.getElementById('game-container');
+    
+    // 1. Create Play Overlay with Triangle
+    container.innerHTML = `
+        <div id="play-overlay" style="
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(8, 18, 33, 0.8); display: flex; 
+            justify-content: center; align-items: center; z-index: 20;">
+            
+            <div class="play-now-btn" id="start-game-trigger">
+                <span style="margin-right: 10px;">▶</span> PLAY NOW
+            </div>
         </div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="popular.html">Popular</a>
-            <a href="driving.html">Driving</a>
-            <a href="multiplayer.html">Multiplayer</a>
-        </div>
+        <iframe src="" id="game-iframe"></iframe>
     `;
-}
 
-// --- 3. SEARCH LOGIC (Redirects + UI Filtering) ---
-function filterGames() {
-    let inputField = document.getElementById('gameSearch');
-    if (!inputField) return;
-    
-    let input = inputField.value.toLowerCase();
-    let cards = document.getElementsByClassName('game-card');
-    let noResultsMsg = document.getElementById('noResults');
-    
-    // REDIRECT: If searching from a sub-page, jump to index with the query
-    const path = window.location.pathname;
-    const isHomePage = path.endsWith('index.html') || path.endsWith('/') || path === "";
-
-    if (!isHomePage && input.length > 0) {
-        window.location.href = "index.html?search=" + encodeURIComponent(input);
-        return;
-    }
-
-    // UI Elements to toggle for a clean search result look
-    const featuredBanner = document.querySelector('.featured-banner');
-    const allCarousels = document.querySelectorAll('.carousel-container');
-    const allGamesHeader = document.querySelector('.full-library-section h2');
-
-    if (input.length > 0) {
-        if (featuredBanner) featuredBanner.style.display = "none";
-        allCarousels.forEach(c => { c.style.display = "none"; });
-        
-        if (allGamesHeader) {
-            allGamesHeader.innerText = "Search Results";
-            allGamesHeader.style.marginTop = "20px";
-        }
-    } else {
-        if (featuredBanner) featuredBanner.style.display = "flex";
-        allCarousels.forEach(c => { c.style.display = "block"; });
-        if (allGamesHeader) {
-            allGamesHeader.innerText = "All Games";
-            allGamesHeader.style.marginTop = "80px";
-        }
-        if (noResultsMsg) noResultsMsg.style.display = "none";
-    }
-
-    let visibleCount = 0;
-    for (let card of cards) {
-        let title = card.querySelector('h3').innerText.toLowerCase();
-        if (title.includes(input)) {
-            card.style.display = "block"; // Card handles its own flex settings in CSS
-            visibleCount++;
-        } else {
-            card.style.display = "none";
-        }
-    }
-
-    if (noResultsMsg) {
-        noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
-    }
-}
-
-// --- 4. CAROUSEL LOGIC ---
-function scrollCarousel(btn, direction) {
-    const container = btn.closest('.carousel-container');
-    const track = container.querySelector('.carousel-track');
-    const scrollAmount = 660; // Approx 3 cards + gaps
-    track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-}
-
-function initCarousels() {
-    const tracks = document.querySelectorAll('.carousel-track');
-    tracks.forEach(track => {
-        track.addEventListener('wheel', (e) => {
-            if (e.deltaY !== 0) {
-                const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth && e.deltaY > 0;
-                const isAtStart = track.scrollLeft <= 0 && e.deltaY < 0;
-                if (!isAtEnd && !isAtStart) { 
-                    e.preventDefault(); 
-                    track.scrollLeft += e.deltaY; 
-                }
-            }
-        }, { passive: false });
+    // 2. Click Logic to load Iframe
+    document.getElementById('start-game-trigger').addEventListener('click', function() {
+        const iframe = document.getElementById('game-iframe');
+        iframe.src = url;
+        document.getElementById('play-overlay').style.display = 'none';
     });
 }
 
-// --- 5. GAME LOADING (Expanding Triangle + Text) ---
-function setupGame(gameUrl) {
+// Fullscreen Function
+function toggleFullscreen() {
     const container = document.getElementById('game-container');
-    if (!container) return;
-    
-    container.innerHTML = `
-        <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:#081221;" onclick="loadIframe('${gameUrl}')">
-            
-            <div class="play-now-btn" style="background:transparent !important; border:none !important; box-shadow:none !important; animation: neonPulse 2s infinite !important;">
-                
-                <div style="font-size:120px; color:#ffffff; text-shadow: 0 0 15px #00aaff, 0 0 30px #ffffff; line-height:1; margin-bottom:10px;">▶</div>
-                
-                <div style="background:#ffffff; color:#081221; padding:12px 45px; border-radius:50px; border:2px solid #00aaff; box-shadow: 0 0 10px #00aaff; font-weight:bold; letter-spacing:2px;">
-                    PLAY NOW
-                </div>
-                
-            </div>
-        </div>`;
+    if (!document.fullscreenElement) {
+        container.requestFullscreen().catch(err => {
+            alert(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
 }
-// --- 6. INITIALIZATION ---
-window.addEventListener('DOMContentLoaded', () => {
-    generateNav();
-    initCarousels();
-    
-    // Cross-page search handling
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchVal = urlParams.get('search');
-    if (searchVal) {
-        const input = document.getElementById('gameSearch');
-        if (input) { 
-            input.value = searchVal; 
-            setTimeout(() => {
-                filterGames();
-                // Smooth scroll to the library section on arrival
-                const lib = document.querySelector('.full-library-section');
-                if(lib) lib.scrollIntoView({ behavior: 'smooth' });
-            }, 200); 
-        }
+
+// Carousel Scroll Logic
+function scrollCarousel(id, direction) {
+    const track = document.getElementById(id);
+    const scrollAmount = 300;
+    if (direction === 'left') {
+        track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    } else {
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+}
+
+// Search Function
+function filterGames() {
+    const input = document.getElementById('gameSearch').value.toLowerCase();
+    const cards = document.querySelectorAll('.game-card');
+    cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = title.includes(input) ? 'flex' : 'none';
+    });
+}
+
+// Initial Listener for Fullscreen Button
+document.addEventListener('DOMContentLoaded', () => {
+    const fsBtn = document.querySelector('.fullscreen-btn');
+    if (fsBtn) {
+        fsBtn.addEventListener('click', toggleFullscreen);
     }
 });
