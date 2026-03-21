@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR - V2.0 RESTORED */
+/* style.css - Classroom 24k Master Restoration V6.2 */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 a { text-decoration: none !important; }
@@ -10,29 +10,52 @@ body {
     text-align: center;
 }
 
-/* --- TOP HEADER & NAV --- */
-header {
-    background-color: #1c426e; 
-    display: table; margin: 25px auto; padding: 12px 50px; 
-    border-radius: 15px; border: 2px solid #00aaff; cursor: pointer;
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
-}
-
+/* --- 1. NAVIGATION & SEARCH --- */
 nav {
-    background-color: #0d1b2e; padding: 15px 5%;
+    background-color: #0d1b2e;
+    padding: 15px 5%;
     border-bottom: 2px solid #1c426e;
     display: flex; justify-content: space-between; align-items: center;
     position: sticky; top: 0; z-index: 2000;
 }
 
 .search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
-#gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 10px; color: white; width: 220px; outline: none; }
+#gameSearch { 
+    background: #081221; border: 1px solid #1c426e; border-radius: 6px; 
+    padding: 10px; color: white; width: 220px; outline: none; 
+}
 
 .nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
-.nav-links a { color: #00aaff !important; transition: 0.2s; }
+.nav-links a { color: #00aaff !important; transition: 0.2s; text-shadow: 0 0 10px #00aaff; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- FEATURED BANNER (V2.0 RESTORED) --- */
+/* --- 2. FULLSCREEN BUTTON (Restored Refined Hover) --- */
+.fullscreen-btn { 
+    display: inline-block; 
+    background: #1c426e; 
+    color: #00aaff;
+    border: 2px solid #00aaff;
+    padding: 12px 50px; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    margin: 20px 0; 
+    transition: all 0.3s ease; /* Smooth transition for everything */
+}
+
+.fullscreen-btn:hover { 
+    /* Richer, calmer blue background */
+    background: #153458;  
+    border-color: #0088cc;
+    color: #ffffff;
+    transform: translateY(-2px); /* Slight lift instead of scaling big */
+    
+    /* Softened glow: reduced spread and added transparency */
+    box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3);  
+}
+
+/* --- 3. FEATURED BANNER --- */
 .featured-banner {
     width: 95%; max-width: 1100px; height: 400px;
     margin: 30px auto 50px auto; border-radius: 20px;
@@ -54,25 +77,7 @@ nav {
     width: 100%; padding: 50px; text-align: left; 
 }
 
-.featured-title { color: #ffffff !important; font-size: 3rem; margin: 0; }
-.featured-desc { color: #ffffff !important; margin: 10px 0 20px 0; }
-
-/* --- NEON BUTTONS & ANIMATIONS --- */
-.play-now-btn, .fullscreen-btn {
-    display: inline-block; background: #ffffff; color: #081221 !important; 
-    padding: 12px 45px; border-radius: 50px; font-weight: bold;
-    text-transform: uppercase; border: 2px solid #00aaff;
-    box-shadow: 0 0 10px #00aaff, 0 0 20px #ffffff;
-    transition: 0.3s ease; animation: neonPulse 2s infinite;
-    cursor: pointer;
-}
-
-.play-now-btn:hover, .fullscreen-btn:hover {
-    background: #00aaff; color: #ffffff !important;
-    transform: scale(1.05); box-shadow: 0 0 25px #00aaff, 0 0 40px #00aaff;
-}
-
-/* --- GAME CARDS (STRICT 200px SQUARES) --- */
+/* --- 4. GAME CARDS (STRICT 200px SQUARES) --- */
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; }
 
 .game-card {
@@ -91,7 +96,7 @@ nav {
 }
 .game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- GAME PAGE & ABOUT --- */
+/* --- 5. GAME CONTAINER & OVERLAY --- */
 #game-container {
     width: 95%; max-width: 1100px; height: 75vh;
     background: #000; border: 4px solid #00aaff;
@@ -99,13 +104,7 @@ nav {
     overflow: hidden; box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
 }
 
-#play-overlay {
-    position: absolute; inset: 0; background: rgba(8, 18, 33, 0.95);
-    display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100;
-}
-
-.neon-triangle { font-size: 80px; color: #f0faff; text-shadow: 0 0 20px #00aaff; margin-bottom: 20px; }
-
+/* --- 6. ABOUT SECTION --- */
 .about-section {
     width: 95%; max-width: 1100px; margin: 60px auto; padding: 4px;
     border-radius: 20px; background: linear-gradient(45deg, #00aaff, #1c426e, #0d1b2e);
@@ -114,9 +113,3 @@ nav {
 
 /* --- CATEGORY HEADERS --- */
 .category-header { text-align: left; margin: 40px 5%; color: #00aaff; text-transform: uppercase; font-size: 1.8rem; }
-
-@keyframes neonPulse {
-    0% { box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; }
-    50% { box-shadow: 0 0 25px #00aaff, 0 0 15px #ffffff; }
-    100% { box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; }
-}
