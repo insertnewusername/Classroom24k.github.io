@@ -1,4 +1,4 @@
-// --- GOOGLE ANALYTICS ---
+// --- LOGIC MASTER ---
 (function() {
     var gtagScript = document.createElement('script');
     gtagScript.async = true;
@@ -11,7 +11,6 @@
     window.gtag = gtag;
 })();
 
-// --- UNIVERSAL NAVIGATION ---
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -28,15 +27,14 @@ function generateNav() {
     `;
 }
 
-// --- CAROUSEL SCROLLING ---
+// Carousel Scroll Logic
 function scrollCarousel(btn, direction) {
     const wrapper = btn.parentElement;
     const track = wrapper.querySelector('.carousel-track');
-    const scrollAmount = 400; // Adjust how far it slides
+    const scrollAmount = 440; // Roughly 2 cards + gap
     track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
-// --- SEARCH LOGIC ---
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
@@ -50,14 +48,14 @@ function filterGames() {
     }
 }
 
-// --- GAME LOADING & FULLSCREEN ---
+// Fullscreen/Game Logic
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     container.innerHTML = `
         <div id="clickableArea" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
             <div id="playButton">
-                <div class="play-icon">▶</div>
+                <div class="play-icon" style="font-size:80px; text-shadow: 0 0 20px #00aaff;">▶</div>
                 <div style="font-weight:bold; letter-spacing:2px;">PLAY</div>
             </div>
         </div>`;
@@ -66,7 +64,6 @@ function setupGame(gameUrl) {
 function loadIframe(url) {
     const container = document.getElementById('game-container');
     container.innerHTML = `<iframe id="game-frame" src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
-    setTimeout(() => { document.getElementById('game-frame').focus(); }, 100);
 }
 
 function openFullscreen() {
@@ -74,7 +71,6 @@ function openFullscreen() {
     if (!elem) return;
     if (elem.requestFullscreen) elem.requestFullscreen();
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
