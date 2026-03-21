@@ -10,7 +10,6 @@ body {
     overflow-x: hidden;
 }
 
-/* --- THE GAME PAGE TITLE --- */
 .game-page-title {
     color: #ffffff !important;
     font-size: 2.2rem; 
@@ -21,7 +20,6 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-/* --- HEADER & NAVIGATION --- */
 header {
     background-color: #1c426e; 
     width: 60%; 
@@ -38,14 +36,6 @@ header {
 header:hover {
     transform: translateY(-2px);
     box-shadow: 0 0 25px rgba(0, 170, 255, 0.5);
-}
-
-header h1 { 
-    margin: 0; 
-    font-size: 1.4rem; 
-    text-transform: uppercase; 
-    letter-spacing: 3px; 
-    color: white; 
 }
 
 nav {
@@ -75,264 +65,86 @@ nav {
     outline: none;
 }
 
-.nav-links { 
-    display: flex; 
-    gap: 30px; 
-    margin-left: 30px; 
-    text-transform: uppercase; 
-    font-weight: bold; 
-}
-
-.nav-links a { 
-    color: #00aaff; 
-    text-decoration: none; 
-    transition: 0.3s; 
-}
-
+.nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
+.nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- FEATURED BANNER --- */
 .featured-banner {
-    width: 95%; 
-    max-width: 1100px; 
-    height: 400px;
-    margin: 0 auto 50px auto; 
-    border-radius: 20px;
-    position: relative; 
-    overflow: hidden;
-    border: 3px solid #00aaff; 
-    display: flex; 
-    align-items: flex-end;
-    background: #000; 
-    cursor: pointer;
+    width: 95%; max-width: 1100px; height: 400px;
+    margin: 0 auto 50px auto; border-radius: 20px;
+    position: relative; overflow: hidden;
+    border: 3px solid #00aaff; display: flex; align-items: flex-end;
+    background: #000; cursor: pointer;
 }
 
 .featured-banner::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
-    transition: transform 0.7s ease;
-    z-index: 1;
+    transition: transform 0.7s ease; z-index: 1;
 }
 
 .featured-banner:hover::before { transform: scale(1.08); }
 
 .featured-overlay { 
-    position: relative; 
-    z-index: 2;
+    position: relative; z-index: 2;
     background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, rgba(8, 18, 33, 0.4) 60%, transparent 100%); 
-    width: 100%; 
-    padding: 50px; 
-    text-align: left; 
+    width: 100%; padding: 50px; text-align: left; 
 }
-
-.featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
-.featured-desc { font-size: 1.2rem; color: white; margin: 10px 0 20px 0; opacity: 0.9; }
 
 .play-now-btn {
-    display: inline-block; 
-    background: #00aaff; 
-    color: #081221; 
-    padding: 12px 40px; 
-    border-radius: 50px; 
-    font-weight: bold;
-    text-transform: uppercase; 
-    transition: 0.3s ease;
-    position: relative; 
-    z-index: 3;
+    display: inline-block; background: #00aaff; color: #081221; 
+    padding: 12px 40px; border-radius: 50px; font-weight: bold;
+    text-transform: uppercase; transition: 0.3s ease; position: relative; z-index: 3;
 }
 
-.play-now-btn:hover {
-    transform: scale(1.15);
-    background: #ffffff;
-    box-shadow: 0 0 20px #ffffff;
-}
-
-/* --- CAROUSELS --- */
-.carousel-container { 
-    width: 90%; 
-    max-width: 1100px; 
-    margin: 0 auto 60px auto; 
-    text-align: left; 
-    position: relative; 
-}
-
-.carousel-title { 
-    font-size: 1.4rem; 
-    color: #00aaff; 
-    text-transform: uppercase; 
-    border-left: 4px solid #00aaff; 
-    padding-left: 15px; 
-    margin-bottom: 15px; 
-}
-
-.carousel-wrapper { 
-    position: relative; 
-    display: flex; 
-    align-items: center; 
-    width: 100%; 
-}
-
+.carousel-container { width: 90%; max-width: 1100px; margin: 0 auto 60px auto; text-align: left; position: relative; }
+.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 .carousel-track {
-    display: flex; 
-    flex-direction: row; 
-    flex-wrap: nowrap; 
-    gap: 20px; 
-    overflow-x: auto; 
-    padding: 15px 0; 
-    scroll-behavior: smooth; 
-    scrollbar-width: none; 
-    width: 100%;
+    display: flex; flex-direction: row; flex-wrap: nowrap; 
+    gap: 20px; overflow-x: auto; padding: 15px 0; 
+    scroll-behavior: smooth; scrollbar-width: none; width: 100%;
 }
-
 .carousel-track::-webkit-scrollbar { display: none; }
 
 .scroll-btn {
-    position: absolute; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    width: 45px; 
-    height: 45px; 
-    background: rgba(28, 66, 110, 0.95);
-    color: #00aaff; 
-    border: 2px solid #00aaff; 
-    border-radius: 50%;
-    cursor: pointer; 
-    z-index: 10; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    font-size: 1.5rem;
-    transition: 0.3s;
+    position: absolute; top: 50%; transform: translateY(-50%); 
+    width: 45px; height: 45px; background: rgba(28, 66, 110, 0.95);
+    color: #00aaff; border: 2px solid #00aaff; border-radius: 50%;
+    cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center;
 }
 
-.scroll-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 15px #00aaff; }
-.left-btn { left: -25px; }
-.right-btn { right: -25px; }
-
-/* --- GRID & CARDS --- */
-.game-grid {
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center; 
-    gap: 25px; 
-    padding: 30px 0; 
-    width: 100%;
-}
-
+.game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; width: 100%; }
 .game-card {
-    flex: 0 0 200px; 
-    height: 200px; 
-    background: #0d1b2e;
-    border-radius: 12px; 
-    border: 2px solid #1c426e; 
-    text-decoration: none;
-    overflow: hidden; 
-    transition: 0.3s; 
-    display: flex; 
-    flex-direction: column;
+    flex: 0 0 200px; height: 200px; background: #0d1b2e;
+    border-radius: 12px; border: 2px solid #1c426e; text-decoration: none;
+    overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
 }
-
-.game-card:hover { 
-    transform: translateY(-5px); 
-    border-color: #00aaff; 
-}
-
+.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 .game-img-container { width: 100%; height: 150px; overflow: hidden; background: #000; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
-.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; }
-.game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
-
-/* --- GAME PLAYER & START SCREEN --- */
 #game-container { 
-    width: 100%; 
-    max-width: 1100px; 
-    height: 75vh; 
-    background: #000; 
-    border: 3px solid #00aaff; 
-    border-radius: 15px; 
-    margin: 0 auto 10px auto; 
-    position: relative; 
-    overflow: hidden; 
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
+    width: 100%; max-width: 1100px; height: 75vh; background: #000; 
+    border: 3px solid #00aaff; border-radius: 15px; margin: 0 auto 10px auto; 
+    position: relative; overflow: hidden; 
 }
 
-#playButton { 
-    transition: transform 0.3s ease-in-out; 
-    text-align: center; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+.play-icon { font-size: 100px; color: white; text-shadow: 0 0 30px #00aaff; line-height: 1; }
+.play-text { font-weight: bold; font-size: 1.5rem; letter-spacing: 4px; color: white; text-shadow: 0 0 10px #00aaff; }
 
-#clickableArea:hover #playButton { 
-    transform: scale(1.15); 
-}
-
-.play-icon { 
-    font-size: 100px; /* Big, visible icon */
-    color: white; 
-    text-shadow: 0 0 30px #00aaff; 
-    margin-bottom: 10px;
-    line-height: 1;
-}
-
-.play-text {
-    font-weight: bold; 
-    font-size: 1.5rem;
-    letter-spacing: 4px; 
-    color: white;
-    text-shadow: 0 0 10px #00aaff;
-}
-
-/* --- FULLSCREEN BUTTON (Refined Hover) --- */
 .fullscreen-btn { 
-    display: inline-block; 
-    background: #1c426e; 
-    color: #ffffff; 
-    border: 2px solid #00aaff; 
-    padding: 15px 45px; 
-    border-radius: 50px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    margin: 20px 0; 
-    transition: all 0.3s ease; /* Smooth transition for everything */
+    display: inline-block; background: #1c426e; color: #ffffff; 
+    border: 2px solid #00aaff; padding: 15px 45px; border-radius: 50px; 
+    cursor: pointer; font-weight: bold; text-transform: uppercase; 
+    margin: 20px 0; transition: all 0.3s ease;
 }
+.fullscreen-btn:hover { background: #153458; border-color: #0088cc; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3); }
 
-.fullscreen-btn:hover { 
-    /* Changed from bright #00aaff to a richer, calmer blue */
-    background: #153458; 
-    border-color: #0088cc;
-    color: #ffffff;
-    transform: translateY(-2px); /* Slight lift instead of scaling big */
-    
-    /* Softened the glow: reduced spread and added transparency */
-    box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3); 
-}
-
-/* --- ABOUT SECTION --- */
 .about-section {
-    max-width: 1100px; 
-    margin: 40px auto; 
-    padding: 2px; 
-    border-radius: 20px; 
+    max-width: 1100px; margin: 40px auto; padding: 2px; border-radius: 20px; 
     background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
-    background-size: 200% 200%; 
-    animation: borderGlow 5s linear infinite;
+    background-size: 200% 200%; animation: borderGlow 5s linear infinite;
 }
+.about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
 
-.about-content { 
-    background: #081221; 
-    padding: 35px; 
-    border-radius: 18px; 
-    text-align: left; 
-}
-
-@keyframes borderGlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+@keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
