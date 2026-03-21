@@ -1,5 +1,7 @@
 /* style.css - Classroom 24k Final Master REPAIR */
 
+* { box-sizing: border-box; }
+
 body {
     background-color: #081221; 
     color: #ffffff;
@@ -7,14 +9,25 @@ body {
     margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
-/* --- HEADER --- */
+/* --- HEADER & NAV --- */
 header {
     background-color: #1c426e; 
     display: table; margin: 20px auto; padding: 10px 40px; 
     border-radius: 12px; border: 2px solid #00aaff; cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
     transition: 0.2s ease;
 }
 header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transform: uppercase; letter-spacing: 4px; }
+
+nav {
+    background-color: #0d1b2e; padding: 15px 30px; border-bottom: 2px solid #1c426e; 
+    margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
+}
+.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
+#gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 10px; color: white; width: 220px; outline: none; }
+.nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
+.nav-links a { color: #00aaff; text-decoration: none; transition: 0.2s; }
+.nav-links a:hover { color: #ffffff; }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
@@ -24,57 +37,60 @@ header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transf
     border: 3px solid #00aaff; display: flex; align-items: flex-end;
     background: #000; cursor: pointer;
 }
-
-/* FIX: Image Growth Restored */
 .featured-banner::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
-    transition: transform 0.4s ease-in-out; z-index: 1;
+    transition: transform 0.4s ease; z-index: 1;
 }
 .featured-banner:hover::before { transform: scale(1.08); }
+.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 20%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
 
-.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
-
-/* --- PULSING PLAY BUTTON (FEATURED) --- */
 .play-now-btn {
     display: inline-block; background: #00aaff; color: #081221 !important; 
     padding: 12px 45px; border-radius: 50px; font-weight: bold;
     text-transform: uppercase; transition: 0.2s ease;
-    animation: breathe 1.5s ease-in-out infinite;
 }
-@keyframes breathe {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 170, 255, 0.4); }
-    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 170, 255, 0.7); }
+.play-now-btn:hover { background: #ffffff; transform: scale(1.05); }
+
+/* --- CAROUSELS --- */
+.carousel-container { 
+    width: 95%; max-width: 1100px; margin: 0 auto 60px auto; 
+    text-align: left; position: relative;
+    border: 1px solid rgba(0, 170, 255, 0.3); 
+    padding: 25px; border-radius: 15px; background: rgba(13, 27, 46, 0.5);
+}
+.carousel-title { 
+    color: #00aaff !important; text-transform: uppercase; 
+    margin: 0 0 20px 0; font-size: 1.6rem; letter-spacing: 3px; 
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
 }
 
-/* --- CAROUSEL & VISIBLE ARROWS --- */
-.carousel-container { width: 95%; max-width: 1100px; margin: 0 auto 60px auto; text-align: left; position: relative; }
 .carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 
 .carousel-track {
     display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
-    gap: 20px; overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; scrollbar-width: none;
+    gap: 20px; overflow-x: auto; padding: 10px 0; 
+    scroll-behavior: smooth; scrollbar-width: none; width: 100%;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 
-/* FIX: Arrow Visibility */
 .scroll-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 50px; height: 50px; background: #1c426e; color: #00aaff;
     border: 2px solid #00aaff; border-radius: 50%; cursor: pointer;
-    z-index: 100; font-size: 24px; font-weight: bold;
-    display: flex; justify-content: center; align-items: center; transition: 0.2s;
+    z-index: 100; font-size: 24px; display: flex; justify-content: center; align-items: center;
 }
-.scroll-btn:hover { background: #00aaff; color: #ffffff; }
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
-/* --- GAME CARDS: FORCED SQUARE --- */
+/* --- GAME CARDS (SQUARES) --- */
+.game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; }
+
 .game-card {
-    flex: 0 0 200px; width: 200px; height: 200px; /* Perfect Square */
+    flex: 0 0 200px; width: 200px; height: 200px; 
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
     text-decoration: none !important; overflow: hidden; position: relative;
-    transition: 0.2s; display: flex; flex-direction: column;
+    transition: 0.2s; display: block;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
@@ -82,29 +98,28 @@ header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transf
 .game-img-container img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 
 .game-info { 
-    position: absolute; bottom: 0; width: 100%; z-index: 2;
-    background: rgba(28, 66, 110, 0.95); padding: 10px 0;
-    border-top: 1px solid #00aaff;
+    position: absolute; bottom: 0; left: 0; width: 100%; z-index: 2;
+    background: #1c426e !important; /* Solid background prevents overlap mess */
+    padding: 10px 0; border-top: 1px solid #00aaff;
 }
 .game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- GAME PLAYER: NO BLUE HOVER BOX --- */
-#game-container { 
-    width: 100%; max-width: 1100px; height: 75vh; background: #000; 
-    border: 3px solid #00aaff; border-radius: 15px; margin: 0 auto; 
-    position: relative; overflow: hidden; 
+/* --- ABOUT SECTION (GRADIENT RESTORED) --- */
+.about-section {
+    max-width: 1100px; margin: 60px auto; padding: 4px; border-radius: 20px; 
+    background: linear-gradient(45deg, #00aaff, #1c426e, #00aaff, #0d1b2e);
+    background-size: 400% 400%; animation: borderGlow 6s ease infinite;
+}
+.about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
+.about-content h2 { color: #00aaff; text-transform: uppercase; margin-top: 0; }
+
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* FIX: Removing the hover effect that creates a box around the iframe */
-#game-container:hover { border-color: #00aaff; box-shadow: none; }
-#clickableArea { background: #081221; transition: none; }
-#clickableArea:hover { background: #081221; } /* Stops the background shift */
-
-/* PILL BUTTON */
-.fullscreen-btn { 
-    display: inline-block; background: #00aaff; color: #081221; 
-    padding: 12px 50px; border-radius: 50px; 
-    cursor: pointer; font-weight: bold; text-transform: uppercase; 
-    margin: 20px 0; border: none; transition: 0.2s;
-}
-.fullscreen-btn:hover { background: #ffffff; transform: scale(1.05); }
+/* --- GAME PAGE STUFF --- */
+.game-page-title { color: #ffffff !important; font-size: 2.8rem; margin: 30px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+#game-container { width: 100%; max-width: 1100px; height: 75vh; background: #000; border: 3px solid #00aaff; border-radius: 15px; margin: 0 auto; position: relative; }
+.fullscreen-btn { display: inline-block; background: #00aaff; color: #081221; padding: 12px 50px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin: 20px 0; border: none; }
