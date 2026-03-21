@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Master Edition */
+/* style.css - Classroom 24k Refined Edition */
 
 body {
     background-color: #081221; 
@@ -9,174 +9,113 @@ body {
     text-align: center;
 }
 
-/* --- LOCKED SLIM HEADER --- */
+/* --- SLIM HEADER --- */
 header {
     background-color: #1c426e; 
-    width: 60%; 
-    max-width: 700px;
-    margin: 15px auto; 
-    padding: 8px; 
-    border-radius: 8px;
-    border: 2px solid #00aaff;
+    width: 60%; max-width: 700px;
+    margin: 15px auto; padding: 8px; 
+    border-radius: 8px; border: 2px solid #00aaff;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
-    transition: 0.3s;
     cursor: pointer;
 }
 
-header:hover {
-    border-color: #ffffff;
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
-}
-
 header h1 {
-    margin: 0;
-    font-size: 1.4rem; 
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    margin: 0; font-size: 1.4rem; 
+    text-transform: uppercase; letter-spacing: 3px;
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
 }
 
-/* --- NAVIGATION & SEARCH --- */
+/* --- NAVIGATION & SEARCH LEFT --- */
 nav {
     background-color: #0d1b2e; 
-    padding: 10px;
+    padding: 10px 20px;
     border-bottom: 1px solid #1c426e;
     margin-bottom: 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
 }
 
-nav a {
-    color: #00aaff;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    transition: 0.3s;
+.search-container {
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    border-right: 2px solid #1c426e; /* The Divider */
 }
-
-nav a:hover { color: #ffffff; }
-
-.search-container { margin-left: 10px; }
 
 #gameSearch {
     background: #081221;
     border: 1px solid #1c426e;
-    border-radius: 20px;
-    padding: 6px 15px;
+    border-radius: 4px;
+    padding: 6px 12px;
     color: white;
     outline: none;
-    transition: all 0.4s ease;
     font-size: 0.8rem;
-    width: 140px;
+    width: 160px;
 }
 
-#gameSearch:focus {
-    border-color: #39ff14;
-    box-shadow: 0 0 12px rgba(57, 255, 20, 0.3);
-    width: 180px;
-}
+#gameSearch:focus { border-color: #00aaff; }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- SQUARE GAME GRID --- */
-.game-grid {
+.nav-links {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.8rem;
 }
 
+.nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
+.nav-links a:hover { color: #ffffff; }
+
+/* --- GAME PAGE TITLE --- */
+.game-title-header {
+    font-size: 2rem;
+    margin: 10px 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffffff;
+}
+
+/* --- SQUARE GRID --- */
+.game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 .game-card {
-    background: #0d1b2e;
-    width: 180px; height: 180px; 
-    border-radius: 12px;
-    overflow: hidden;
-    transition: 0.4s ease;
-    border: 2px solid #1c426e;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
+    background: #0d1b2e; width: 180px; height: 180px; 
+    border-radius: 12px; border: 2px solid #1c426e;
+    text-decoration: none; overflow: hidden; transition: 0.4s;
 }
+.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
-.game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
-    border-color: #00aaff;
-}
-
-.game-img-container { width: 100%; height: 135px; background: #000; }
-.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
-.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; }
-.game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; color: #fff; }
-
-/* --- GAME PLAYER FRAME --- */
-#game-container {
-    position: relative;
-    width: 100%; max-width: 1100px;
-    height: 80vh; 
-    background: #000;
-    border: 4px solid #00aaff;
-    border-radius: 15px;
-    overflow: hidden;
-    margin: 0 auto 20px auto;
-    box-shadow: 0 0 35px rgba(0, 170, 255, 0.4);
-}
-
-#clickableArea {
-    width: 100%; height: 100%;
-    background: radial-gradient(circle, #1c426e 0%, #081221 100%);
-    display: flex; justify-content: center; align-items: center;
-    cursor: pointer;
-}
-
-#playButton {
-    transition: transform 0.7s ease-in-out; 
-    display: flex; flex-direction: column; align-items: center;
-}
-
+/* --- WHITE NEON PLAY BUTTON --- */
 .play-icon { 
-    font-size: 100px; color: #39ff14; 
-    text-shadow: 0 0 10px #fff, 0 0 25px #39ff14, 0 0 50px #39ff14;
+    font-size: 100px; color: #ffffff; 
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #00aaff, 0 0 30px #00aaff;
 }
-
 .play-text { 
-    font-size: 24px; font-weight: bold; letter-spacing: 4px; 
-    margin-top: 10px; text-shadow: 0 0 10px #39ff14;
+    font-size: 24px; color: #ffffff; font-weight: bold; 
+    margin-top: 10px; text-shadow: 0 0 10px #ffffff;
 }
 
+/* --- FRAME & BOX --- */
+#game-container {
+    width: 100%; max-width: 1100px; height: 80vh; 
+    background: #000; border: 4px solid #00aaff;
+    border-radius: 15px; margin: 0 auto 20px auto;
+    position: relative; overflow: hidden;
+}
+#clickableArea {
+    width: 100%; height: 100%; display: flex;
+    justify-content: center; align-items: center; cursor: pointer;
+    background: radial-gradient(circle, #1c426e 0%, #081221 100%);
+}
+#playButton { transition: transform 0.7s ease-in-out; }
 #clickableArea:hover #playButton { transform: scale(1.1); }
 
-.fullscreen-btn {
-    background: #1c426e; color: #ffffff; border: 2px solid #00aaff;
-    padding: 12px 40px; border-radius: 50px; cursor: pointer;
-    text-transform: uppercase; transition: 0.3s; margin-bottom: 40px;
-}
-
-.fullscreen-btn:hover { background: #00aaff; color: #081221; }
-
-/* --- SMOOTH GLOWING ABOUT BOX --- */
 .info-box {
     background: #0d1b2e; padding: 30px; border-radius: 15px;
     text-align: left; max-width: 900px; margin: 0 auto 60px auto;
-    line-height: 1.7; position: relative;
-    border: 2px solid transparent; background-clip: padding-box;
+    position: relative; border: 2px solid transparent; background-clip: padding-box;
 }
-
 .info-box::before {
-    content: ''; position: absolute;
-    top: -2px; bottom: -2px; left: -2px; right: -2px;
-    background: linear-gradient(135deg, #00d4ff, #1c426e);
-    border-radius: 16px; z-index: -1;
+    content: ''; position: absolute; top: -2px; bottom: -2px; left: -2px; right: -2px;
+    background: linear-gradient(135deg, #00d4ff, #1c426e); border-radius: 16px; z-index: -1;
 }
-
-.info-box h2 { color: #00aaff; margin-top: 0; text-transform: uppercase; }
-
-@media (max-width: 600px) { header { width: 90%; } }
