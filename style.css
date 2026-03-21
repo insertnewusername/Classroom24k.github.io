@@ -4,48 +4,28 @@ body {
     background-color: #081221; 
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0; 
-    padding: 0; 
-    text-align: center;
-    overflow-x: hidden;
+    margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
 /* --- HEADER --- */
 header {
     background-color: #1c426e; 
-    display: table;
-    margin: 20px auto; 
-    padding: 15px 40px; 
-    border-radius: 12px; 
-    border: 2px solid #00aaff; 
-    cursor: pointer;
+    display: table; margin: 20px auto; padding: 10px 40px; 
+    border-radius: 12px; border: 2px solid #00aaff; cursor: pointer;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
-    transition: 0.3s ease;
+    transition: 0.2s ease;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.2rem;
-    color: #ffffff !important;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-}
+header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transform: uppercase; letter-spacing: 4px; }
 
 /* --- NAVIGATION --- */
 nav {
-    background-color: #0d1b2e; 
-    padding: 15px 30px; 
-    border-bottom: 2px solid #1c426e; 
-    margin-bottom: 25px;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
+    background-color: #0d1b2e; padding: 15px 30px; border-bottom: 2px solid #1c426e; 
+    margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
 }
-
-.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
 #gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 10px; color: white; width: 220px; outline: none; }
 .nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
-.nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
+.nav-links a { color: #00aaff; text-decoration: none; transition: 0.2s; }
 .nav-links a:hover { color: #ffffff; }
 
 /* --- FEATURED BANNER --- */
@@ -56,101 +36,91 @@ nav {
     border: 3px solid #00aaff; display: flex; align-items: flex-end;
     background: #000; cursor: pointer;
 }
-
 .featured-banner::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
-    transition: transform 0.7s ease; z-index: 1;
+    transition: transform 0.5s ease; z-index: 1;
 }
-
 .featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
 .featured-title { color: #ffffff !important; font-size: 3rem; margin: 0; }
-.featured-desc { color: #ffffff !important; margin: 10px 0 20px 0; }
 
-/* --- BUTTONS & BREATHING --- */
+/* --- SNAPPY BUTTONS & BREATHING --- */
 .play-now-btn, #playButton {
     display: inline-block; background: #00aaff; color: #081221 !important; 
     padding: 12px 45px; border-radius: 50px; font-weight: bold;
-    text-transform: uppercase; transition: 0.4s ease;
-    animation: breathe 3s ease-in-out infinite;
+    text-transform: uppercase; transition: 0.2s ease;
+    animation: breathe 1.5s ease-in-out infinite;
 }
-
 .play-now-btn:hover { transform: scale(1.1); background: #ffffff; }
 
-/* FIX: Stop Play Icon from turning white on hover */
-#clickableArea:hover #playButton { transform: scale(1.1); background: #00aaff !important; color: #081221 !important; }
+/* Clean hover for the Play Icon - No blue square */
+#clickableArea:hover #playButton { 
+    transform: scale(1.15); 
+    background: #00aaff !important; 
+    color: #081221 !important; 
+}
 
 @keyframes breathe {
     0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 170, 255, 0.4); }
-    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 170, 255, 0.7); }
+    50% { transform: scale(1.04); box-shadow: 0 0 20px rgba(0, 170, 255, 0.7); }
 }
 
-/* --- CAROUSEL: FIXING HORIZONTAL STACKING --- */
+/* --- CAROUSEL & TRACK --- */
 .carousel-container { width: 90%; max-width: 1100px; margin: 0 auto 60px auto; text-align: left; position: relative; }
-.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; overflow: visible; }
-
+.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 .carousel-track {
-    display: flex !important; 
-    flex-direction: row !important; /* Force horizontal */
-    flex-wrap: nowrap !important; /* Prevent vertical stacking */
-    gap: 20px; 
-    overflow-x: auto; 
-    padding: 20px 0;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
+    display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
+    gap: 20px; overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; scrollbar-width: none;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 
-/* FIX: Carousel Arrow Icons */
 .scroll-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 50px; height: 50px; background: #1c426e; color: #00aaff;
     border: 2px solid #00aaff; border-radius: 50%; cursor: pointer;
-    z-index: 10; font-size: 24px; font-weight: bold;
-    display: flex; justify-content: center; align-items: center; transition: 0.3s;
+    z-index: 10; font-size: 24px; display: flex; justify-content: center; align-items: center;
 }
-.scroll-btn:hover { background: #00aaff; color: #ffffff; }
-.left-btn { left: -25px; }
-.right-btn { right: -25px; }
 
-/* --- GAME CARDS: FIXING SQUARE SHAPE & BORDERS --- */
+/* --- GAME CARDS: NO OVERLAP FIX --- */
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; }
-
 .game-card {
-    flex: 0 0 200px; width: 200px; height: 200px; /* Force Perfect Square */
+    flex: 0 0 200px; width: 200px; height: 260px; /* Taller to prevent overlap */
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
-    text-decoration: none !important; overflow: hidden; position: relative;
-    transition: 0.3s; display: flex; flex-direction: column;
+    text-decoration: none !important; overflow: hidden; 
+    display: flex; flex-direction: column; transition: 0.2s;
 }
-
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
-.game-img-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1; }
+.game-img-container { width: 100%; height: 200px; overflow: hidden; }
 .game-img-container img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 
-/* FIX: Thin internal border for text */
 .game-info { 
-    position: absolute; bottom: 0; width: 100%; z-index: 2;
-    background: rgba(28, 66, 110, 0.9); padding: 8px 0;
-    border-top: 1px solid #00aaff; /* Subtle divider */
+    background: #1c426e; height: 60px; display: flex; align-items: center; justify-content: center;
+    border-top: 2px solid #00aaff; /* Solid, non-transparent border */
 }
 .game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- GAME PAGE TITLE --- */
-.game-page-title {
-    color: #ffffff !important;
-    font-size: 2.5rem !important; /* Made big again */
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin: 30px 0;
-    font-weight: bold;
+/* --- FULLSCREEN PILL BUTTON --- */
+.fullscreen-btn { 
+    display: inline-block; background: #00aaff; color: #081221; 
+    padding: 12px 50px; border-radius: 50px; /* Pill Shape */
+    cursor: pointer; font-weight: bold; text-transform: uppercase; 
+    margin: 20px 0; transition: 0.2s; border: none;
 }
+.fullscreen-btn:hover { background: #ffffff; transform: scale(1.05); }
 
-#game-container { 
-    width: 100%; max-width: 1100px; height: 75vh; background: #000; 
-    border: 3px solid #00aaff; border-radius: 15px; margin: 0 auto; 
-    position: relative; overflow: hidden; 
+/* --- ABOUT SECTION: GRADIENT BORDER --- */
+.about-section {
+    max-width: 1100px; margin: 40px auto; padding: 3px; border-radius: 20px; 
+    background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
+    background-size: 200% 200%; animation: borderGlow 4s linear infinite;
 }
+.about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
 
+@keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+/* --- GAME PLAYER --- */
+.game-page-title { color: #ffffff !important; font-size: 2.5rem !important; margin: 30px 0; font-weight: bold; text-transform: uppercase; }
+#game-container { width: 100%; max-width: 1100px; height: 75vh; background: #000; border: 3px solid #00aaff; border-radius: 15px; margin: 0 auto; position: relative; overflow: hidden; }
 .play-icon { font-size: 100px; color: white; }
 .play-text { font-weight: bold; font-size: 1.5rem; color: white; margin-top: 10px; }
