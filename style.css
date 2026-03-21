@@ -1,6 +1,8 @@
-/* style.css - Classroom 24k Final Master REPAIR - V4.5 */
+/* style.css - Classroom 24k Final Master REPAIR - V4.6 */
 
-* { box-sizing: border-box; text-decoration: none !important; }
+/* --- RESET & GLOBAL --- */
+* { box-sizing: border-box; }
+a { text-decoration: none !important; } /* Removes underlines globally */
 
 body {
     background-color: #081221; 
@@ -9,18 +11,22 @@ body {
     margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
-/* --- HEADER (With Hover Life) --- */
+/* --- HEADER --- */
 header {
     background-color: #1c426e; 
     display: table; margin: 20px auto; padding: 10px 40px; 
     border-radius: 12px; border: 2px solid #00aaff; cursor: pointer;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
 }
-header:hover { transform: translateY(-3px); box-shadow: 0 0 25px #00aaff; }
+header:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 0 25px #00aaff; 
+    background-color: #24558d;
+}
 header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transform: uppercase; letter-spacing: 4px; }
 
-/* --- NAV (Restored Visuals) --- */
+/* --- NAVIGATION (Visual Restore) --- */
 nav {
     background-color: #0d1b2e; padding: 15px 30px; border-bottom: 2px solid #1c426e; 
     margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
@@ -31,16 +37,17 @@ nav {
     transition: 0.3s; 
     font-size: 1.1rem;
     letter-spacing: 1px;
+    text-decoration: none !important;
 }
 .nav-links a:hover { color: #ffffff !important; text-shadow: 0 0 10px #00aaff; }
 
-/* --- GRID FIX --- */
+/* --- GRID SYSTEM --- */
 .game-grid { 
     display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; 
     justify-content: center; gap: 25px; padding: 30px 0; 
 }
 
-/* --- GAME CARDS (Fixed Zoom & Text) --- */
+/* --- GAME CARDS --- */
 .game-card {
     flex: 0 0 200px; width: 200px; height: 220px; 
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
@@ -56,17 +63,22 @@ nav {
 }
 .game-info h3 { margin: 0; color: #ffffff !important; font-size: 1rem; text-transform: uppercase; }
 
-/* --- IFRAME (Narrowed) --- */
+/* --- IFRAME (Shrunk Length/Width) --- */
 #game-container { 
-    height: 80vh; width: 85%; max-width: 1100px; 
+    height: 80vh; 
+    width: 80%; /* Shrinks length to 80% screen width */
+    max-width: 1100px; 
     background: #000; border: 4px solid #00aaff; 
     border-radius: 20px; margin: 0 auto; position: relative; overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
 }
 
-/* --- BUTTONS (Hard-Coded Color Swap) --- */
+#game-container iframe { width: 100%; height: 100%; border: none; }
+
+/* --- BUTTONS & TRIANGLE (The Color Fix) --- */
 .play-now-btn, .fullscreen-btn {
     display: inline-block; 
-    background: #f0faff !important; 
+    background: #f0faff !important; /* Neon White-Blue */
     color: #081221 !important; 
     padding: 15px 45px; border-radius: 50px; 
     font-weight: 800; text-transform: uppercase; 
@@ -74,9 +86,11 @@ nav {
     box-shadow: 0 0 15px #00aaff;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+    position: relative;
+    z-index: 5;
 }
 
-/* The Fix: Force Color + Background change together */
+/* Hover: Swap background to blue, text to white, and Scale up */
 .play-now-btn:hover, .fullscreen-btn:hover { 
     background: #00aaff !important; 
     color: #ffffff !important; 
@@ -84,17 +98,18 @@ nav {
     box-shadow: 0 0 30px #00aaff;
 }
 
-/* This forces the triangle (div/span) inside the button to also turn white */
+/* Force Triangle and any nested text to turn white on hover */
 .play-now-btn:hover * {
     color: #ffffff !important;
 }
 
 .fullscreen-btn { margin-top: 60px !important; margin-bottom: 60px; }
 
-/* --- ABOUT SECTION (Restored Gradient Border) --- */
+/* --- ABOUT SECTION (Restored Gradient) --- */
 .about-section {
     margin: 60px auto; padding: 4px; border-radius: 20px; 
-    background: linear-gradient(45deg, #00aaff, #1c426e, #0d1b2e); /* Static Gradient */
+    background: linear-gradient(45deg, #00aaff, #1c426e, #0d1b2e, #00aaff);
+    background-size: 200% 200%; /* Keeps it looking sharp */
 }
 .about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
 
@@ -105,7 +120,14 @@ nav {
     width: 50px; height: 50px; background: #1c426e; color: #00aaff;
     border: 2px solid #00aaff; border-radius: 50%; cursor: pointer;
     z-index: 100; font-size: 24px; display: flex; justify-content: center; align-items: center;
+    transition: 0.2s;
 }
 .scroll-btn:hover { background: #00aaff; color: #ffffff; }
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
+
+.carousel-track {
+    display: flex !important; gap: 20px; overflow-x: auto; padding: 15px 0;
+    scroll-behavior: smooth; scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
