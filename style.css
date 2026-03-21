@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR - V3.6 FULL */
+/* style.css - Classroom 24k Final Master REPAIR - V4.0 CLEAN */
 
 * { box-sizing: border-box; }
 
@@ -30,7 +30,7 @@ nav {
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.2s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- WIDER LAYOUT (1480px - Tiny bit wider) --- */
+/* --- WIDER LAYOUT (1480px) --- */
 .featured-banner, .carousel-container, #game-container, .about-section {
     width: 96%; 
     max-width: 1480px !important; 
@@ -40,7 +40,7 @@ nav {
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
-    height: 500px; /* Slightly taller for the wider screen */
+    height: 500px;
     margin: 0 auto 50px auto; border-radius: 20px;
     position: relative; overflow: hidden;
     border: 3px solid #00aaff; display: flex; align-items: flex-end;
@@ -52,14 +52,11 @@ nav {
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
     transition: transform 0.4s ease; z-index: 1;
 }
-.featured-banner:hover::before { transform: scale(1.08); }
+.featured-banner:hover::before { transform: scale(1.05); }
 
 .featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 20%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
 
-.featured-title { color: #ffffff !important; font-size: 3rem; margin: 0; text-decoration: none !important; }
-.featured-desc { color: #ffffff !important; margin: 10px 0 20px 0; text-decoration: none !important; }
-
-/* --- NEON BUTTONS & PULSE ANIMATION (Expanded scale) --- */
+/* --- STATIC NEON BUTTONS (Animations Removed - Hover Only) --- */
 .play-now-btn, .fullscreen-btn {
     display: inline-block; 
     background: #ffffff !important; 
@@ -69,23 +66,23 @@ nav {
     font-weight: bold;
     text-transform: uppercase; 
     border: 2px solid #00aaff;
-    box-shadow: 0 0 10px #00aaff, 0 0 20px #ffffff;
-    transition: 0.3s ease;
-    animation: neonPulse 2s infinite ease-in-out !important;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+    transition: all 0.3s ease-in-out; /* Smooth hover transition */
     cursor: pointer;
     text-decoration: none;
 }
 
+/* Hover Interaction: Breathe + Color Change + Glow */
 .play-now-btn:hover, .fullscreen-btn:hover { 
     background: #00aaff !important; 
     color: #ffffff !important;
-    box-shadow: 0 0 25px #00aaff, 0 0 40px #00aaff;
+    transform: scale(1.1); 
+    box-shadow: 0 0 25px #00aaff, 0 0 45px rgba(0, 170, 255, 0.6);
 }
 
-/* FIX: Fullscreen shifted down significantly from frame */
 .fullscreen-btn {
-    margin-top: 50px !important; 
-    margin-bottom: 60px;
+    margin-top: 45px !important; 
+    margin-bottom: 50px;
 }
 
 /* --- CAROUSELS --- */
@@ -98,10 +95,7 @@ nav {
 .carousel-title { 
     color: #00aaff !important; text-transform: uppercase; 
     margin: 0 0 20px 0; font-size: 1.6rem; letter-spacing: 3px; 
-    text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
 }
-
-.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 
 .carousel-track {
     display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
@@ -110,59 +104,27 @@ nav {
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 
-.scroll-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 50px; height: 50px; background: #1c426e; color: #00aaff;
-    border: 2px solid #00aaff; border-radius: 50%; cursor: pointer;
-    z-index: 100; font-size: 24px; display: flex; justify-content: center; align-items: center;
-}
-.left-btn { left: -25px; }
-.right-btn { right: -25px; }
-
-/* --- GAME CARDS (PERFECT SQUARES / NO OVERLAP) --- */
-.game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; }
-
+/* --- GAME CARDS --- */
 .game-card {
-    flex: 0 0 200px !important; 
-    width: 200px !important; 
-    height: 200px !important; 
+    flex: 0 0 200px !important; width: 200px !important; height: 200px !important; 
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
     text-decoration: none !important; overflow: hidden; position: relative;
-    transition: 0.2s; display: flex; flex-direction: column;
+    transition: 0.3s; display: flex; flex-direction: column;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
-.game-img-container { 
-    width: 100%; 
-    height: 160px; /* Locked height */
-    position: relative; 
-    z-index: 1; 
-    overflow: hidden;
-}
+.game-img-container { width: 100%; height: 160px; position: relative; z-index: 1; overflow: hidden; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
 .game-info { 
-    width: 100%; 
-    height: 40px; /* Locked height - No Collision */
-    z-index: 5;
+    width: 100%; height: 40px; z-index: 5;
     background: #1c426e !important; 
     display: flex; align-items: center; justify-content: center;
     border-top: 2px solid #00aaff;
 }
-.game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.8rem; text-transform: uppercase; white-space: nowrap; }
+.game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.8rem; text-transform: uppercase; }
 
-/* --- ABOUT SECTION --- */
-.about-section {
-    margin: 60px auto; padding: 4px; border-radius: 20px; 
-    background: linear-gradient(45deg, #00aaff, #1c426e, #00aaff, #0d1b2e);
-    background-size: 400% 400%; animation: borderGlow 6s ease infinite;
-}
-.about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
-.about-content h2 { color: #00aaff; text-transform: uppercase; margin-top: 0; }
-
-/* --- GAME PAGE REPAIR --- */
-.game-page-title { color: #ffffff !important; font-size: 2.8rem; margin: 30px 0; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
-
+/* --- GAME CONTAINER (Shrunk to 80vh) --- */
 #game-container { 
     height: 80vh; 
     background: #000; border: 4px solid #00aaff; 
@@ -172,30 +134,12 @@ nav {
 }
 
 #game-container iframe {
-    width: 100% !important;
-    height: 100% !important;
-    border: none !important;
-    display: block;
+    width: 100% !important; height: 100% !important; border: none !important; display: block;
 }
 
-/* --- ANIMATIONS --- */
-@keyframes borderGlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* --- STATIC ABOUT SECTION --- */
+.about-section {
+    margin: 60px auto; padding: 4px; border-radius: 20px; 
+    background: #1c426e; /* Animation removed */
 }
-
-@keyframes neonPulse {
-    0% { 
-        box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; 
-        transform: scale(1); 
-    }
-    50% { 
-        box-shadow: 0 0 25px #00aaff, 0 0 15px #ffffff; 
-        transform: scale(1.1); /* Triangle and button both expand 10% */
-    }
-    100% { 
-        box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; 
-        transform: scale(1); 
-    }
-}
+.about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
