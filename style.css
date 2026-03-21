@@ -1,52 +1,113 @@
-/* style.css - Classroom 24k Master */
+/* style.css - Classroom 24k Final Refined Master */
 
 body {
     background-color: #081221; 
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0; padding: 0; text-align: center;
+    margin: 0; 
+    padding: 0; 
+    text-align: center;
     overflow-x: hidden;
 }
 
-/* --- GAME PAGE SPECIFIC TITLE --- */
+/* --- THE GAME PAGE TITLE --- */
+/* Balanced size: larger than nav, but still clean */
 .game-page-title {
-    color: #ffffff !important; /* Forces text to be white */
-    font-size: 2.5rem; /* Makes it much bigger */
+    color: #ffffff !important;
+    font-size: 2.2rem; 
     text-transform: uppercase;
-    letter-spacing: 4px;
-    margin: 20px 0;
-    text-shadow: 0 0 15px rgba(0, 170, 255, 0.4); /* Subtle glow while staying white */
+    letter-spacing: 3px;
+    margin: 25px 0 15px 0;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 /* --- HEADER & NAV --- */
 header {
-    background-color: #1c426e; width: 60%; max-width: 700px;
-    margin: 15px auto; padding: 8px; border-radius: 8px; 
-    border: 2px solid #00aaff; cursor: pointer;
+    background-color: #1c426e; 
+    width: 60%; 
+    max-width: 700px;
+    margin: 15px auto; 
+    padding: 10px; 
+    border-radius: 10px; 
+    border: 2px solid #00aaff; 
+    cursor: pointer;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
+    transition: 0.3s;
 }
 
-header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
+header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 170, 255, 0.5);
+}
+
+header h1 { 
+    margin: 0; 
+    font-size: 1.4rem; 
+    text-transform: uppercase; 
+    letter-spacing: 3px; 
+    color: white; 
+}
 
 nav {
-    background-color: #0d1b2e; padding: 15px 30px; 
-    border-bottom: 1px solid #1c426e; margin-bottom: 25px;
-    display: flex; align-items: center;
+    background-color: #0d1b2e; 
+    padding: 15px 30px; 
+    border-bottom: 2px solid #1c426e; 
+    margin-bottom: 25px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
 }
 
-.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
-#gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 10px 15px; color: white; width: 200px; }
-.nav-links { display: flex; gap: 35px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
-.nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
-.nav-links a:hover { color: #ffffff; }
+.search-container { 
+    display: flex; 
+    align-items: center; 
+    padding-right: 25px; 
+    border-right: 2px solid #1c426e; 
+}
+
+#gameSearch { 
+    background: #081221; 
+    border: 1px solid #1c426e; 
+    border-radius: 6px; 
+    padding: 8px 12px; 
+    color: white; 
+    width: 200px; 
+    outline: none;
+}
+
+.nav-links { 
+    display: flex; 
+    gap: 30px; 
+    margin-left: 30px; 
+    text-transform: uppercase; 
+    font-weight: bold; 
+}
+
+.nav-links a { 
+    color: #00aaff; 
+    text-decoration: none; 
+    transition: 0.3s; 
+}
+
+.nav-links a:hover { 
+    color: #ffffff; 
+}
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
-    width: 95%; max-width: 1100px; height: 400px;
-    margin: 0 auto 50px auto; border-radius: 20px;
-    position: relative; overflow: hidden;
-    border: 3px solid #00aaff; display: flex; align-items: flex-end;
-    background: #000; cursor: pointer;
+    width: 95%; 
+    max-width: 1100px; 
+    height: 400px;
+    margin: 0 auto 50px auto; 
+    border-radius: 20px;
+    position: relative; 
+    overflow: hidden;
+    border: 3px solid #00aaff; 
+    display: flex; 
+    align-items: flex-end;
+    background: #000; 
+    cursor: pointer;
 }
 
 .featured-banner::before {
@@ -54,79 +115,168 @@ nav {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
-    transition: transform 0.6s ease;
+    transition: transform 0.7s ease;
     z-index: 1;
 }
 
-.featured-banner:hover::before { transform: scale(1.1); }
-
-.featured-overlay { 
-    position: relative; z-index: 2;
-    background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, rgba(8, 18, 33, 0.4) 60%, transparent 100%); 
-    width: 100%; padding: 50px; text-align: left; 
+.featured-banner:hover::before { 
+    transform: scale(1.08); 
 }
 
-.featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; letter-spacing: 2px; }
+.featured-overlay { 
+    position: relative; 
+    z-index: 2;
+    background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, rgba(8, 18, 33, 0.4) 60%, transparent 100%); 
+    width: 100%; 
+    padding: 50px; 
+    text-align: left; 
+}
+
+.featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
 .featured-desc { font-size: 1.2rem; color: white; margin: 10px 0 20px 0; opacity: 0.9; }
 
 .play-now-btn {
-    display: inline-block; background: #00aaff; color: #081221; 
-    padding: 12px 35px; border-radius: 50px; font-weight: bold;
-    text-transform: uppercase; transition: 0.3s ease;
-    position: relative; z-index: 3;
+    display: inline-block; 
+    background: #00aaff; 
+    color: #081221; 
+    padding: 12px 40px; 
+    border-radius: 50px; 
+    font-weight: bold;
+    text-transform: uppercase; 
+    transition: 0.3s ease;
+    position: relative; 
+    z-index: 3;
 }
 
 .play-now-btn:hover {
-    transform: scale(1.2);
-    background: white;
-    box-shadow: 0 0 25px white;
+    transform: scale(1.15);
+    background: #ffffff;
+    box-shadow: 0 0 20px #ffffff;
 }
 
-/* --- CAROUSELS & GRIDS --- */
-.carousel-container { width: 90%; max-width: 1100px; margin: 0 auto 60px auto; text-align: left; position: relative; }
-.carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
-.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
+/* --- CAROUSELS --- */
+.carousel-container { 
+    width: 90%; 
+    max-width: 1100px; 
+    margin: 0 auto 60px auto; 
+    text-align: left; 
+    position: relative; 
+}
+
+.carousel-title { 
+    font-size: 1.4rem; 
+    color: #00aaff; 
+    text-transform: uppercase; 
+    border-left: 4px solid #00aaff; 
+    padding-left: 15px; 
+    margin-bottom: 15px; 
+}
 
 .carousel-track {
-    display: flex; flex-direction: row; flex-wrap: nowrap; gap: 20px; 
-    overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; 
-    scrollbar-width: none; width: 100%;
+    display: flex; 
+    flex-direction: row; 
+    gap: 20px; 
+    overflow-x: auto; 
+    padding: 15px 0; 
+    scroll-behavior: smooth; 
+    scrollbar-width: none; 
 }
+
 .carousel-track::-webkit-scrollbar { display: none; }
 
 .scroll-btn {
-    position: absolute; width: 45px; height: 45px; background: rgba(28, 66, 110, 0.95);
-    color: #00aaff; border: 2px solid #00aaff; border-radius: 50%;
-    cursor: pointer; z-index: 999; display: flex; justify-content: center; 
-    align-items: center; font-size: 1.5rem; transition: 0.3s;
+    position: absolute; 
+    width: 45px; height: 45px; 
+    background: rgba(28, 66, 110, 0.9);
+    color: #00aaff; 
+    border: 2px solid #00aaff; 
+    border-radius: 50%;
+    cursor: pointer; 
+    z-index: 10; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
-.scroll-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; }
+
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
+/* --- GRID & CARDS --- */
 .game-grid {
-    display: flex; flex-wrap: wrap; justify-content: center; 
-    gap: 30px; padding: 40px 0; width: 100%; max-width: 1200px; margin: 0 auto;
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 25px; 
+    padding: 30px 0; 
 }
 
-/* --- UNIVERSAL CARDS --- */
 .game-card {
-    flex: 0 0 200px; height: 200px; background: #0d1b2e;
-    border-radius: 12px; border: 2px solid #1c426e; text-decoration: none;
-    overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+    flex: 0 0 200px; 
+    height: 200px; 
+    background: #0d1b2e;
+    border-radius: 12px; 
+    border: 2px solid #1c426e; 
+    text-decoration: none;
+    overflow: hidden; 
+    transition: 0.3s; 
+    display: flex; 
+    flex-direction: column;
 }
-.game-card:hover { transform: translateY(-5px); border-color: #00aaff; box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3); }
-.game-img-container { width: 100%; height: 150px; overflow: hidden; background: #000; }
-.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
-.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 5px; color: white; }
 
-/* --- ABOUT SECTION & BUTTONS --- */
-.about-section {
-    max-width: 1100px; margin: 40px auto; padding: 3px; 
-    border-radius: 20px; background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
-    background-size: 200% 200%; animation: borderGlow 4s linear infinite;
+.game-card:hover { 
+    transform: translateY(-5px); 
+    border-color: #00aaff; 
 }
-.about-content { background: #081221; padding: 30px; border-radius: 18px; text-align: left; color: white; }
+
+.game-img-container { width: 100%; height: 150px; overflow: hidden; }
+.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; }
+.game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
+
+/* --- GAME PLAYER --- */
+#game-container { 
+    width: 100%; 
+    max-width: 1100px; 
+    height: 75vh; 
+    background: #000; 
+    border: 3px solid #00aaff; 
+    border-radius: 15px; 
+    margin: 0 auto 10px auto; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.fullscreen-btn { 
+    display: inline-block; 
+    background: #1c426e; 
+    color: #ffffff; 
+    border: 2px solid #00aaff; 
+    padding: 15px 40px; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    margin: 20px 0; 
+}
+
+/* --- ABOUT SECTION --- */
+.about-section {
+    max-width: 1100px; 
+    margin: 40px auto; 
+    padding: 2px; 
+    border-radius: 20px; 
+    background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
+    background-size: 200% 200%; 
+    animation: borderGlow 5s linear infinite;
+}
+
+.about-content { 
+    background: #081221; 
+    padding: 35px; 
+    border-radius: 18px; 
+    text-align: left; 
+}
 
 @keyframes borderGlow {
     0% { background-position: 0% 50%; }
