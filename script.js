@@ -31,6 +31,7 @@ function generateNav() {
 // --- CAROUSEL LOGIC ---
 function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
+    if(!wrapper) return;
     const track = wrapper.querySelector('.carousel-track');
     const scrollAmount = 440; 
     track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
@@ -66,7 +67,7 @@ function filterGames() {
     }
 }
 
-// --- GAME PAGE LOGIC ---
+// --- GAME LOADING ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
@@ -74,7 +75,7 @@ function setupGame(gameUrl) {
         <div id="clickableArea" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
             <div id="playButton">
                 <div class="play-icon">▶</div>
-                <div style="font-weight:bold; letter-spacing:2px; color:white; margin-top:10px;">PLAY</div>
+                <div style="font-weight:bold; letter-spacing:2px; color:white;">PLAY</div>
             </div>
         </div>`;
 }
