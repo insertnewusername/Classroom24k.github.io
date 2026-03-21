@@ -32,7 +32,7 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (Updated Redirect + UI Fixes) ---
+// --- 3. SEARCH LOGIC (Redirects + Vanishing UI) ---
 function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
@@ -41,7 +41,7 @@ function filterGames() {
     let cards = document.getElementsByClassName('game-card');
     let noResultsMsg = document.getElementById('noResults');
     
-    // REDIRECT logic: Better handling for sub-pages
+    // REDIRECT logic: Send to index if searching from anywhere else
     const path = window.location.pathname;
     const isHomePage = path.endsWith('index.html') || path.endsWith('/') || path === "";
 
@@ -50,13 +50,12 @@ function filterGames() {
         return;
     }
 
-    // Elements to vanish
     const featuredBanner = document.querySelector('.featured-banner');
     const allCarousels = document.querySelectorAll('.carousel-container');
     const allGamesHeader = document.querySelector('.full-library-section h2');
 
     if (input.length > 0) {
-        // HIDE everything for Search
+        // HIDE UI for Search Mode
         if (featuredBanner) featuredBanner.style.display = "none";
         allCarousels.forEach(c => { c.style.display = "none"; });
         
@@ -65,7 +64,7 @@ function filterGames() {
             allGamesHeader.style.marginTop = "20px";
         }
     } else {
-        // RESTORE everything
+        // RESET UI to Normal Mode
         if (featuredBanner) featuredBanner.style.display = "flex";
         allCarousels.forEach(c => { c.style.display = "block"; });
         if (allGamesHeader) {
@@ -79,7 +78,7 @@ function filterGames() {
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
         if (title.includes(input)) {
-            card.style.display = "flex"; // Matches your square CSS
+            card.style.display = "flex"; 
             visibleCount++;
         } else {
             card.style.display = "none";
@@ -91,9 +90,8 @@ function filterGames() {
     }
 }
 
-// --- 4. CAROUSEL LOGIC (Fixed for Scroll Buttons) ---
+// --- 4. CAROUSEL LOGIC ---
 function scrollCarousel(btn, direction) {
-    // Finds the track relative to the button clicked
     const container = btn.closest('.carousel-container');
     const track = container.querySelector('.carousel-track');
     const scrollAmount = 600; 
@@ -120,11 +118,13 @@ function initCarousels() {
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
+    
+    // Re-applied the clean, no-background look for the play button
     container.innerHTML = `
-        <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton">
-                <div class="play-icon">▶</div>
-                <div class="play-text">PLAY</div>
+        <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:#081221;" onclick="loadIframe('${gameUrl}')">
+            <div id="playButton" style="background:none; animation:none; box-shadow:none;">
+                <div class="play-icon" style="font-size:120px; color:#00aaff; text-shadow: 0 0 20px rgba(0, 170, 255, 0.6);">▶</div>
+                <div class="play-text" style="color:#00aaff; font-size:2rem; letter-spacing:5px; margin-top:10px;">PLAY NOW</div>
             </div>
         </div>`;
 }
@@ -148,15 +148,14 @@ window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
     
-    // Handle search queries passed via URL (for the redirect)
+    // Automatically filter if returning from a search redirect
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
-            // Small timeout ensures the DOM is fully ready before hiding elements
-            setTimeout(filterGames, 200); 
+            setTimeout(filterGames, 150); 
         }
     }
 });
