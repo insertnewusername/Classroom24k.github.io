@@ -114,23 +114,24 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING (Neon Fix) ---
+// --- 5. GAME LOADING (Neon Triangle & Text Repair) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
-    // Uses the .play-now-btn class from your CSS for the neon glow/animation
     container.innerHTML = `
         <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:#081221;" onclick="loadIframe('${gameUrl}')">
-            <div class="play-now-btn" style="font-size:1.5rem; letter-spacing:2px;">
-                CLICK TO PLAY
+            <div id="neonPulseContainer" style="text-align:center;">
+                <div style="font-size:100px; color:#ffffff; text-shadow: 0 0 15px #00aaff, 0 0 30px #ffffff; line-height:1;">▶</div>
+                <div class="play-now-btn" style="margin-top:20px;">
+                    PLAY NOW
+                </div>
             </div>
         </div>`;
 }
 
 function loadIframe(url) {
     const container = document.getElementById('game-container');
-    // Allow standard game permissions
     container.innerHTML = `
         <iframe id="game-frame" 
                 src="${url}" 
@@ -142,6 +143,7 @@ function loadIframe(url) {
 
 function openFullscreen() {
     const elem = document.getElementById("game-container");
+    // Ensure the button in HTML has class="fullscreen-btn" to trigger the CSS animation
     if (elem) {
         if (elem.requestFullscreen) elem.requestFullscreen();
         else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
