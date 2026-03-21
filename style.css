@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k V4.7 Final Master */
+/* style.css - Classroom 24k Final Master REPAIR - V5.0 */
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 a { text-decoration: none !important; }
@@ -10,95 +10,96 @@ body {
     margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
-/* --- HEADER & NAVIGATION --- */
+/* --- HEADER & NAV (Restored) --- */
 header {
     background-color: #1c426e; 
     display: table; margin: 20px auto; padding: 10px 40px; 
     border-radius: 12px; border: 2px solid #00aaff; cursor: pointer;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
-    transition: 0.3s; position: relative; z-index: 100;
+    transition: 0.3s; position: relative; z-index: 1000;
 }
 header:hover { transform: translateY(-3px); box-shadow: 0 0 25px #00aaff; }
-header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transform: uppercase; letter-spacing: 4px; }
 
 nav {
     background-color: #0d1b2e; padding: 15px 30px; border-bottom: 2px solid #1c426e; 
     margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
-    position: relative; z-index: 90;
+    position: sticky; top: 0; z-index: 999; gap: 30px;
 }
-.nav-links { display: flex; gap: 30px; text-transform: uppercase; font-weight: bold; }
-.nav-links a { color: #00aaff !important; transition: 0.3s; font-size: 1.1rem; }
-.nav-links a:hover { color: #ffffff !important; text-shadow: 0 0 10px #00aaff; }
 
-/* --- GRID SYSTEM (No Stacking) --- */
+.search-container { display: flex; align-items: center; border-right: 2px solid #1c426e; padding-right: 20px; }
+#gameSearch { 
+    background: #081221; border: 1px solid #1c426e; border-radius: 6px; 
+    padding: 10px; color: white; width: 220px; outline: none; 
+}
+
+.nav-links { display: flex; gap: 20px; text-transform: uppercase; font-weight: bold; }
+.nav-links a { color: #00aaff !important; transition: 0.2s; }
+.nav-links a:hover { color: #ffffff !important; }
+
+/* --- PERFECT SQUARE GAME CARDS --- */
 .game-grid { 
     display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; 
-    justify-content: center; gap: 25px; padding: 30px 0; 
+    justify-content: center; gap: 20px; padding: 20px; 
 }
 
-/* --- GAME CARDS --- */
 .game-card {
-    flex: 0 0 200px; width: 200px; height: 220px; 
+    flex: 0 0 180px; width: 180px; height: 180px; /* Forced Perfect Square */
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
-    overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+    overflow: hidden; transition: 0.3s; position: relative;
+    display: flex; flex-direction: column;
 }
-.game-card:hover { transform: translateY(-8px); border-color: #00aaff; }
-.game-img-container { width: 100%; height: 160px; overflow: hidden; }
+.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
+
+.game-img-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
+/* Title overlay on square icons */
 .game-info { 
-    width: 100%; height: 60px; background: #1c426e !important; 
-    display: flex; align-items: center; justify-content: center; border-top: 2px solid #00aaff;
+    position: absolute; bottom: 0; width: 100%; height: 40px;
+    background: rgba(28, 66, 110, 0.9); display: flex; align-items: center; 
+    justify-content: center; border-top: 1px solid #00aaff;
 }
-.game-info h3 { margin: 0; color: #ffffff !important; font-size: 1rem; text-transform: uppercase; }
+.game-info h3 { margin: 0; color: #ffffff; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- IFRAME CONTAINER (Shrunk Width) --- */
+/* --- GAME CONTAINER & STACKED OVERLAY --- */
 #game-container { 
     height: 80vh; width: 80%; max-width: 1100px; 
     background: #000; border: 4px solid #00aaff; 
     border-radius: 20px; margin: 0 auto; position: relative; overflow: hidden;
-    z-index: 10;
-}
-#game-container iframe { 
-    width: 100% !important; height: 100% !important; border: none; 
-    display: block; pointer-events: auto !important; 
 }
 
-/* --- NEON BUTTONS --- */
-.play-now-btn, .fullscreen-btn {
-    display: inline-block; 
+#play-overlay {
+    position: absolute; inset: 0; background: rgba(8, 18, 33, 0.9);
+    display: flex; flex-direction: column; /* Stacks Triangle and Button */
+    justify-content: center; align-items: center; z-index: 100;
+}
+
+/* THE SEPARATED TRIANGLE (TOP) */
+.neon-triangle {
+    font-size: 60px; color: #f0faff; margin-bottom: 20px;
+    transition: 0.3s ease; cursor: pointer;
+}
+
+/* THE PLAY NOW BUTTON (BOTTOM) */
+.play-now-btn {
     background: #f0faff !important; color: #081221 !important; 
-    padding: 15px 45px; border-radius: 50px; 
-    font-weight: 800; text-transform: uppercase; 
-    border: 2px solid #00aaff; box-shadow: 0 0 15px #00aaff;
-    transition: all 0.3s ease-in-out; cursor: pointer !important;
-    position: relative; z-index: 50; pointer-events: auto !important;
+    padding: 15px 40px; border-radius: 50px; font-weight: 800;
+    text-transform: uppercase; border: 2px solid #00aaff;
+    box-shadow: 0 0 15px #00aaff; transition: 0.3s; cursor: pointer;
 }
-.play-now-btn:hover, .fullscreen-btn:hover { 
+
+/* Hover State: Both triangle and button turn blue/white together */
+#play-overlay:hover .neon-triangle { color: #00aaff; transform: scale(1.2); }
+#play-overlay:hover .play-now-btn { 
     background: #00aaff !important; color: #ffffff !important; 
-    transform: scale(1.1); box-shadow: 0 0 30px #00aaff;
+    box-shadow: 0 0 30px #00aaff; 
 }
-/* Triangle & Hover Text Fix */
-.play-now-btn:hover * { color: #ffffff !important; }
 
-.fullscreen-btn { margin-top: 60px !important; margin-bottom: 60px; }
+.fullscreen-btn { margin: 40px 0; }
 
-/* --- ABOUT SECTION & CAROUSEL --- */
+/* --- ABOUT SECTION --- */
 .about-section {
-    width: 96%; max-width: 1480px; margin: 60px auto; padding: 4px; border-radius: 20px; 
-    background: linear-gradient(45deg, #00aaff, #1c426e, #0d1b2e);
+    width: 80%; max-width: 1100px; margin: 60px auto; padding: 4px; 
+    border-radius: 20px; background: linear-gradient(45deg, #00aaff, #1c426e, #0d1b2e);
 }
 .about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
-
-.carousel-wrapper { position: relative; display: flex; align-items: center; width: 96%; max-width: 1480px; margin: 0 auto; }
-.scroll-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 50px; height: 50px; background: #1c426e; color: #00aaff;
-    border: 2px solid #00aaff; border-radius: 50%; cursor: pointer;
-    z-index: 100; font-size: 24px; display: flex; justify-content: center; align-items: center;
-}
-.carousel-track {
-    display: flex !important; gap: 20px; overflow-x: auto; padding: 15px 0;
-    scroll-behavior: smooth; scrollbar-width: none; width: 100%;
-}
-.carousel-track::-webkit-scrollbar { display: none; }
