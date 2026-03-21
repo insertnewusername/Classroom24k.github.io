@@ -1,142 +1,78 @@
-/**
- * Classroom 24k - Global Engine V5.7
- * Full Restoration: GA4, Search, Carousel, Navigation, Vertical UI
- */
+/* script.js - Classroom 24k V5.9 Master Restoration */
 
-// ==========================================
-// 1. ANALYTICS ENGINE (GA4)
-// ==========================================
+// 1. GOOGLE ANALYTICS
 (function() {
-    const GA_ID = 'G-XXXXXXXXXX'; // REPLACE WITH YOUR ID
+    const G_ID = 'G-XXXXXXXXXX'; // Replace with yours
     const s = document.createElement('script');
-    s.async = true; s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    s.async = true; s.src = `https://www.googletagmanager.com/gtag/js?id=${G_ID}`;
     document.head.appendChild(s);
-
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', GA_ID);
-
-    window.logAction = (type, name) => {
-        gtag('event', type, { 'item_name': name });
-    };
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date()); gtag('config', G_ID);
 })();
 
-// ==========================================
-// 2. SEARCH & CATEGORY FILTER
-// ==========================================
+// 2. SEARCH ENGINE
 function filterGames() {
-    const input = document.getElementById('gameSearch');
-    if (!input) return;
-    const filter = input.value.toLowerCase();
+    const term = document.getElementById('gameSearch').value.toLowerCase();
     const cards = document.querySelectorAll('.game-card');
-
     cards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        // Maintain flex display to protect the 180px square layout
-        card.style.display = title.includes(filter) ? "flex" : "none";
+        const title = card.querySelector('h3') ? card.querySelector('h3').innerText.toLowerCase() : '';
+        card.style.display = title.includes(term) ? "flex" : "none";
     });
 }
 
-// ==========================================
-// 3. NAVIGATION REDIRECTS (Smooth Scroll)
-// ==========================================
-function initNav() {
-    document.querySelectorAll('.nav-links a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href.startsWith('#')) {
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    window.scrollTo({
-                        top: target.offsetTop - 100, // Offset for sticky nav
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-}
-
-// ==========================================
-// 4. GAME LOADER & VERTICAL UI
-// ==========================================
-function setupGame(url, title = "Game") {
+// 3. GAME LOADER
+function setupGame(url) {
     const container = document.getElementById('game-container');
     if (!container) return;
 
-    if (window.logAction) window.logAction('game_load', title);
-
+    // "Game" text removed as requested
     container.innerHTML = `
         <div id="play-overlay">
             <div class="neon-triangle">▶</div>
             <div class="play-now-btn">PLAY NOW</div>
-            <p style="color:#00aaff; margin-top:25px; font-weight:bold; letter-spacing:2px;">${title.toUpperCase()}</p>
         </div>
-        <iframe src="" id="game-iframe" allow="autoplay; fullscreen; keyboard; gamepad" allowfullscreen></iframe>
+        <iframe src="" id="game-iframe" allowfullscreen></iframe>
     `;
 
-    const start = () => {
+    document.getElementById('play-overlay').onclick = function() {
         const iframe = document.getElementById('game-iframe');
         iframe.src = url;
-        const overlay = document.getElementById('play-overlay');
-        overlay.style.opacity = '0';
-        setTimeout(() => {
-            overlay.remove();
-            iframe.focus();
-        }, 300);
+        this.remove(); // Removes overlay so game is clickable
+        iframe.focus();
     };
-
-    document.getElementById('play-overlay').onclick = start;
 }
 
-// ==========================================
-// 5. CAROUSEL SYSTEM (Scroll & Drag)
-// ==========================================
+// 4. FULLSCREEN (Fixed Aesthetic)
+function toggleFullscreen() {
+    const container = document.getElementById('game-container');
+    if (!document.fullscreenElement) {
+        if (container.requestFullscreen) container.requestFullscreen();
+        else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+// 5. CAROUSEL & INIT
 function scrollCarousel(id, dir) {
     const track = document.getElementById(id);
-    if (!track) return;
-    const amount = dir === 'left' ? -600 : 600;
-    track.scrollBy({ left: amount, behavior: 'smooth' });
+    if(track) track.scrollBy({ left: dir === 'left' ? -600 : 600, behavior: 'smooth' });
 }
 
-function initDrag() {
-    const tracks = document.querySelectorAll('.carousel-track');
-    tracks.forEach(track => {
-        let isDown = false; let startX; let scrollLeft;
-        track.addEventListener('mousedown', (e) => {
-            isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft;
-        });
-        track.addEventListener('mouseleave', () => isDown = false);
-        track.addEventListener('mouseup', () => isDown = false);
-        track.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 2;
-            track.scrollLeft = scrollLeft - walk;
-        });
-    });
-}
-
-// ==========================================
-// 6. INITIALIZATION
-// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
     const search = document.getElementById('gameSearch');
     if (search) search.oninput = filterGames;
 
-    initNav();
-    initDrag();
-
     const fsBtn = document.querySelector('.fullscreen-btn');
-    if (fsBtn) {
-        fsBtn.onclick = () => {
-            const container = document.getElementById('game-container');
-            if (!document.fullscreenElement) container.requestFullscreen();
-            else document.exitFullscreen();
-        };
-    }
-    console.log("Classroom 24k V5.7 Master Restored.");
+    if (fsBtn) fsBtn.onclick = toggleFullscreen;
+
+    // Restore Category Scroll
+    document.querySelectorAll('.carousel-track').forEach(track => {
+        let isDown = false; let startX; let scrollLeft;
+        track.onmousedown = (e) => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; };
+        track.onmouseleave = () => isDown = false;
+        track.onmouseup = () => isDown = false;
+        track.onmousemove = (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX) * 2; track.scrollLeft = scrollLeft - walk; };
+    });
 });
