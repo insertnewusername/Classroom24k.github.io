@@ -63,6 +63,7 @@ function setupGame(gameUrl) {
 
 function loadIframe(url) {
     const container = document.getElementById('game-container');
+    // We keep the container the same, just swap the inside
     container.innerHTML = `<iframe id="game-frame" src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
     
     setTimeout(() => {
@@ -71,13 +72,12 @@ function loadIframe(url) {
     }, 100);
 }
 
-// --- FULLSCREEN LOGIC ---
+// --- UPDATED FULLSCREEN LOGIC ---
+// This now targets the CONTAINER so it works even before Play is clicked
 function openFullscreen() {
-    const elem = document.getElementById("game-frame");
-    if (!elem) {
-        alert("Click PLAY before entering fullscreen!");
-        return;
-    }
+    const elem = document.getElementById("game-container");
+    if (!elem) return;
+    
     if (elem.requestFullscreen) elem.requestFullscreen();
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
     else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
