@@ -96,7 +96,7 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING (Updated UI: Smaller Play Button) ---
+// --- 5. GAME LOADING ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
