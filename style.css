@@ -11,7 +11,6 @@ body {
 }
 
 /* --- THE GAME PAGE TITLE --- */
-/* For use on individual game pages: <h2 class="game-page-title"> */
 .game-page-title {
     color: #ffffff !important;
     font-size: 2.2rem; 
@@ -156,7 +155,7 @@ nav {
     max-width: 1100px; 
     margin: 0 auto 60px auto; 
     text-align: left; 
-    position: relative; /* Base for absolute buttons */
+    position: relative; 
 }
 
 .carousel-title { 
@@ -171,14 +170,14 @@ nav {
 .carousel-wrapper { 
     position: relative; 
     display: flex; 
-    align-items: center; /* Vertically centers buttons to the track */
+    align-items: center; 
     width: 100%; 
 }
 
 .carousel-track {
     display: flex; 
     flex-direction: row; 
-    flex-wrap: nowrap; /* Forces one row */
+    flex-wrap: nowrap; 
     gap: 20px; 
     overflow-x: auto; 
     padding: 15px 0; 
@@ -189,11 +188,10 @@ nav {
 
 .carousel-track::-webkit-scrollbar { display: none; }
 
-/* --- SCROLL BUTTONS --- */
 .scroll-btn {
     position: absolute; 
     top: 50%; 
-    transform: translateY(-50%); /* Perfectly centers on Y-axis */
+    transform: translateY(-50%); 
     width: 45px; 
     height: 45px; 
     background: rgba(28, 66, 110, 0.95);
@@ -247,7 +245,7 @@ nav {
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; }
 .game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- GAME PLAYER --- */
+/* --- GAME PLAYER & START SCREEN --- */
 #game-container { 
     width: 100%; 
     max-width: 1100px; 
@@ -258,23 +256,58 @@ nav {
     margin: 0 auto 10px auto; 
     position: relative; 
     overflow: hidden; 
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.2);
 }
 
+#playButton { 
+    transition: transform 0.3s ease-in-out; 
+    text-align: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#clickableArea:hover #playButton { 
+    transform: scale(1.15); 
+}
+
+.play-icon { 
+    font-size: 100px; /* Big, visible icon */
+    color: white; 
+    text-shadow: 0 0 30px #00aaff; 
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.play-text {
+    font-weight: bold; 
+    font-size: 1.5rem;
+    letter-spacing: 4px; 
+    color: white;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+/* --- FULLSCREEN BUTTON --- */
 .fullscreen-btn { 
     display: inline-block; 
     background: #1c426e; 
     color: #ffffff; 
     border: 2px solid #00aaff; 
-    padding: 15px 40px; 
+    padding: 15px 45px; 
     border-radius: 50px; 
     cursor: pointer; 
     font-weight: bold; 
     text-transform: uppercase; 
     margin: 20px 0; 
-    transition: 0.3s;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.fullscreen-btn:hover { background: #00aaff; color: #081221; transform: scale(1.05); }
+.fullscreen-btn:hover { 
+    background: #00aaff; 
+    color: #081221; 
+    transform: scale(1.1); 
+    box-shadow: 0 0 20px #00aaff;
+}
 
 /* --- ABOUT SECTION --- */
 .about-section {
