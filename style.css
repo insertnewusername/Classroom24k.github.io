@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Full Box & Fullscreen Restored */
+/* style.css - Classroom 24k Master Script */
 
 body {
     background-color: #081221; 
@@ -53,7 +53,7 @@ nav {
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- GAME DISPLAY --- */
+/* --- GAME DISPLAY & PLAY BUTTON --- */
 .game-title-header {
     font-size: 2.2rem; margin: 15px 0 25px 0;
     text-transform: uppercase; letter-spacing: 2px;
@@ -62,7 +62,7 @@ nav {
 #game-container {
     width: 100%; max-width: 1100px; height: 80vh; 
     background: #000; border: 4px solid #00aaff;
-    border-radius: 15px; margin: 0 auto 20px auto;
+    border-radius: 15px; margin: 0 auto 10px auto;
     position: relative; overflow: hidden;
 }
 
@@ -70,6 +70,14 @@ nav {
     width: 100%; height: 100%; display: flex;
     justify-content: center; align-items: center; cursor: pointer;
     background: radial-gradient(circle, #1c426e 0%, #081221 100%);
+}
+
+#playButton { 
+    transition: transform 0.4s ease-in-out; /* THE GROWTH EFFECT */
+}
+
+#clickableArea:hover #playButton { 
+    transform: scale(1.15); /* Grows when you hover the game area */
 }
 
 .play-icon { 
@@ -82,19 +90,48 @@ nav {
     letter-spacing: 4px; margin-top: 10px; text-shadow: 0 0 10px #ffffff;
 }
 
-/* --- FULLSCREEN BUTTON (CRITICAL) --- */
+/* --- FULLSCREEN BUTTON --- */
 .fullscreen-btn {
-    display: inline-block; /* Ensures it's visible */
+    display: inline-block;
     background: #1c426e; color: #ffffff; border: 2px solid #00aaff;
     padding: 15px 45px; border-radius: 50px; cursor: pointer;
     font-size: 1rem; font-weight: bold; text-transform: uppercase;
-    transition: 0.3s; margin: 20px 0 40px 0; outline: none;
+    transition: 0.3s; margin: 20px 0 40px 0;
 }
 
 .fullscreen-btn:hover {
     background: #00aaff; color: #081221;
+    transform: scale(1.05); /* Button also grows slightly */
     box-shadow: 0 0 20px rgba(0, 170, 255, 0.6);
 }
+
+/* --- GAME CARDS (Home/Popular Page) --- */
+.game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+
+.game-card {
+    background: #0d1b2e; width: 180px; height: 180px; 
+    border-radius: 12px; border: 2px solid #1c426e;
+    text-decoration: none; overflow: hidden; 
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    display: flex; flex-direction: column;
+}
+
+.game-card:hover { 
+    transform: translateY(-8px) scale(1.03); /* Card grows and lifts */
+    border-color: #00aaff; 
+}
+
+.game-img-container { 
+    width: 100%; height: 135px; background: #000; overflow: hidden;
+}
+
+.game-img-container img { 
+    width: 100%; height: 100%; 
+    object-fit: cover; /* Fills entire box */
+}
+
+.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; }
+.game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; color: #fff; }
 
 /* --- INFO BOX --- */
 .info-box {
@@ -107,28 +144,3 @@ nav {
     content: ''; position: absolute; top: -2px; bottom: -2px; left: -2px; right: -2px;
     background: linear-gradient(135deg, #00d4ff, #1c426e); border-radius: 16px; z-index: -1;
 }
-
-/* --- GAME CARDS (NO BLACK BORDERS) --- */
-.game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-
-.game-card {
-    background: #0d1b2e; width: 180px; height: 180px; 
-    border-radius: 12px; border: 2px solid #1c426e;
-    text-decoration: none; overflow: hidden; transition: 0.4s;
-    display: flex; flex-direction: column;
-}
-
-.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
-
-.game-img-container { 
-    width: 100%; height: 135px; background: #000; 
-    overflow: hidden;
-}
-
-.game-img-container img { 
-    width: 100%; height: 100%; 
-    object-fit: cover; /* BACK TO COVER: Fills the entire box, no gaps */
-}
-
-.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; }
-.game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; color: #fff; }
