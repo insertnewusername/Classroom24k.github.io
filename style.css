@@ -25,25 +25,34 @@ nav {
 }
 .search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
 #gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 10px; color: white; width: 220px; outline: none; }
+
+/* FIX: Force white text for Nav to prevent Purple */
 .nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
-.nav-links a { color: #00aaff; text-decoration: none; transition: 0.2s; }
-.nav-links a:hover { color: #ffffff; }
+.nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.2s; }
+.nav-links a:hover { color: #ffffff !important; }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
     width: 95%; max-width: 1100px; height: 400px;
     margin: 0 auto 50px auto; border-radius: 20px;
-    position: relative; overflow: hidden;
+    position: relative; overflow: hidden; /* Allows zoom to stay inside */
     border: 3px solid #00aaff; display: flex; align-items: flex-end;
     background: #000; cursor: pointer;
 }
+
+/* FIX: Image Zoom logic moved to pseudo-element for performance */
 .featured-banner::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
     transition: transform 0.4s ease; z-index: 1;
 }
 .featured-banner:hover::before { transform: scale(1.08); }
+
 .featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 20%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
+
+/* FIX: Force White Text for Featured Banner to prevent Purple */
+.featured-title { color: #ffffff !important; font-size: 3rem; margin: 0; text-decoration: none !important; }
+.featured-desc { color: #ffffff !important; margin: 10px 0 20px 0; text-decoration: none !important; }
 
 .play-now-btn {
     display: inline-block; background: #00aaff; color: #081221 !important; 
@@ -83,11 +92,14 @@ nav {
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
-/* --- GAME CARDS (SQUARES) --- */
+/* --- GAME CARDS (STRICT SQUARES) --- */
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; }
 
 .game-card {
-    flex: 0 0 200px; width: 200px; height: 200px; 
+    /* FIX: Force fixed dimensions to prevent Rectangles */
+    flex: 0 0 200px !important; 
+    width: 200px !important; 
+    height: 200px !important; 
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
     text-decoration: none !important; overflow: hidden; position: relative;
     transition: 0.2s; display: block;
@@ -97,14 +109,15 @@ nav {
 .game-img-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 1; }
 .game-img-container img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
 
+/* FIX: Text background width match and No-Overlap */
 .game-info { 
     position: absolute; bottom: 0; left: 0; width: 100%; z-index: 2;
-    background: #1c426e !important; /* Solid background prevents overlap mess */
+    background: #1c426e !important; 
     padding: 10px 0; border-top: 1px solid #00aaff;
 }
 .game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- ABOUT SECTION (GRADIENT RESTORED) --- */
+/* --- ABOUT SECTION --- */
 .about-section {
     max-width: 1100px; margin: 60px auto; padding: 4px; border-radius: 20px; 
     background: linear-gradient(45deg, #00aaff, #1c426e, #00aaff, #0d1b2e);
