@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master */
+/* style.css - Classroom 24k Final Refined Master */
 
 body {
     background-color: #081221; 
@@ -81,17 +81,16 @@ nav {
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; }
 .game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- GAME PLAYER (HOVER GROWTH) --- */
+/* --- GAME PLAYER --- */
 #game-container { width: 100%; max-width: 1100px; height: 75vh; background: #000; border: 3px solid #00aaff; border-radius: 15px; margin: 0 auto 10px auto; position: relative; overflow: hidden; }
 
-/* Grow Play Button on Hover */
+/* Hover effect: Grow and Glow (NO pulsing) */
 .iframe-hover-zone:hover .play-icon, 
 .iframe-hover-zone:hover .play-text {
     filter: drop-shadow(0 0 15px #00aaff);
-    transform: scale(1.1); /* Grow effect */
+    transform: scale(1.1);
 }
 
-/* Base style for icons to allow growth and transition */
 .play-icon, .play-text {
     transition: transform 0.2s ease-out, filter 0.2s ease-out;
     display: block;
@@ -102,7 +101,7 @@ nav {
     padding: 15px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; 
     text-transform: uppercase; margin: 20px 0; transition: 0.3s ease;
 }
-.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px); }
+.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px) scale(1.05); }
 
 /* --- ABOUT SECTION --- */
 .about-section {
