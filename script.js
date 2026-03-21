@@ -32,7 +32,7 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (Redirects + Vanishing UI) ---
+// --- 3. SEARCH LOGIC (Updated Redirect + UI Fixes) ---
 function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
@@ -41,27 +41,31 @@ function filterGames() {
     let cards = document.getElementsByClassName('game-card');
     let noResultsMsg = document.getElementById('noResults');
     
-    // REDIRECT logic: Send to index if searching from anywhere else
-    const currentPage = window.location.pathname.split("/").pop();
-    if (currentPage !== "index.html" && currentPage !== "" && input.length > 0) {
+    // REDIRECT logic: Better handling for sub-pages
+    const path = window.location.pathname;
+    const isHomePage = path.endsWith('index.html') || path.endsWith('/') || path === "";
+
+    if (!isHomePage && input.length > 0) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
     }
 
+    // Elements to vanish
     const featuredBanner = document.querySelector('.featured-banner');
     const allCarousels = document.querySelectorAll('.carousel-container');
     const allGamesHeader = document.querySelector('.full-library-section h2');
 
     if (input.length > 0) {
-        // HIDE UI
+        // HIDE everything for Search
         if (featuredBanner) featuredBanner.style.display = "none";
         allCarousels.forEach(c => { c.style.display = "none"; });
+        
         if (allGamesHeader) {
             allGamesHeader.innerText = "Search Results";
             allGamesHeader.style.marginTop = "20px";
         }
     } else {
-        // RESET UI
+        // RESTORE everything
         if (featuredBanner) featuredBanner.style.display = "flex";
         allCarousels.forEach(c => { c.style.display = "block"; });
         if (allGamesHeader) {
@@ -75,7 +79,7 @@ function filterGames() {
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
         if (title.includes(input)) {
-            card.style.display = "flex"; 
+            card.style.display = "flex"; // Matches your square CSS
             visibleCount++;
         } else {
             card.style.display = "none";
@@ -87,11 +91,13 @@ function filterGames() {
     }
 }
 
-// --- 4. CAROUSEL LOGIC ---
+// --- 4. CAROUSEL LOGIC (Fixed for Scroll Buttons) ---
 function scrollCarousel(btn, direction) {
-    const wrapper = btn.closest('.carousel-wrapper');
-    const track = wrapper.querySelector('.carousel-track');
-    track.scrollBy({ left: direction * 660, behavior: 'smooth' });
+    // Finds the track relative to the button clicked
+    const container = btn.closest('.carousel-container');
+    const track = container.querySelector('.carousel-track');
+    const scrollAmount = 600; 
+    track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
 function initCarousels() {
@@ -101,13 +107,16 @@ function initCarousels() {
             if (e.deltaY !== 0) {
                 const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth && e.deltaY > 0;
                 const isAtStart = track.scrollLeft <= 0 && e.deltaY < 0;
-                if (!isAtEnd && !isAtStart) { e.preventDefault(); track.scrollLeft += e.deltaY; }
+                if (!isAtEnd && !isAtStart) { 
+                    e.preventDefault(); 
+                    track.scrollLeft += e.deltaY; 
+                }
             }
         }, { passive: false });
     });
 }
 
-// --- 5. GAME LOADING ---
+// --- 5. GAME LOADING & PLAYER ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
@@ -127,20 +136,27 @@ function loadIframe(url) {
 
 function openFullscreen() {
     const elem = document.getElementById("game-container");
-    if (elem && elem.requestFullscreen) elem.requestFullscreen();
-    else if (elem && elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    if (elem) {
+        if (elem.requestFullscreen) elem.requestFullscreen();
+        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    }
 }
 
+// --- 6. INITIALIZATION ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
+    
+    // Handle search queries passed via URL (for the redirect)
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
-            setTimeout(filterGames, 150); 
+            // Small timeout ensures the DOM is fully ready before hiding elements
+            setTimeout(filterGames, 200); 
         }
     }
 });
