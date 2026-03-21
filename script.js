@@ -33,7 +33,7 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (With "No Results" and UI Clearing) ---
+// --- 3. SEARCH LOGIC ---
 function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
@@ -42,7 +42,6 @@ function filterGames() {
     let cards = document.getElementsByClassName('game-card');
     let noResultsMsg = document.getElementById('noResults');
     
-    // Redirect if searching from a game page
     const isGamePage = document.getElementById('game-container');
     if (isGamePage && input.length > 0) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
@@ -72,7 +71,6 @@ function filterGames() {
         }
     }
 
-    // Toggle "No Results" message
     if (noResultsMsg) {
         noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
     }
@@ -98,15 +96,17 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING ---
+// --- 5. GAME LOADING (Updated with Neon UI) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
+    
+    // play-icon size increased to 150px with a neon white-blue glow
     container.innerHTML = `
-        <div id="clickableArea" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton">
-                <div class="play-icon">▶</div>
-                <div class="play-text">PLAY</div>
+        <div id="clickableArea" class="iframe-hover-zone" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
+            <div id="playButton" style="text-align:center; transition: 0.3s;">
+                <div class="play-icon" style="font-size:150px; color:#ffffff; text-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff; line-height:1;">▶</div>
+                <div class="play-text" style="color:#ffffff; font-size:2.5rem; letter-spacing:8px; margin-top:20px; font-weight:bold; text-shadow: 0 0 15px #00aaff;">PLAY</div>
             </div>
         </div>`;
 }
@@ -118,10 +118,14 @@ function loadIframe(url) {
 
 function openFullscreen() {
     const elem = document.getElementById("game-container");
-    if (elem && elem.requestFullscreen) elem.requestFullscreen();
-    else if (elem && elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    if (elem) {
+        if (elem.requestFullscreen) elem.requestFullscreen();
+        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
+    }
 }
 
+// --- 6. INITIALIZATION ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
