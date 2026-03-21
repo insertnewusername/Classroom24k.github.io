@@ -1,16 +1,16 @@
-/* style.css - Classroom 24k Master V5.5 */
+/* style.css - Classroom 24k V5.7 Total Restoration */
 
-* { box-sizing: border-box; }
-a { text-decoration: none !important; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+a { text-decoration: none !important; -webkit-tap-highlight-color: transparent; }
 
 body {
     background-color: #081221;
     color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
 }
 
-/* --- STICKY NAV & SEARCH --- */
+/* --- 1. STICKY NAVIGATION & CATEGORIES --- */
 nav {
     background-color: #0d1b2e;
     padding: 15px 5%;
@@ -23,27 +23,35 @@ nav {
     z-index: 2000;
 }
 
+.nav-links { display: flex; gap: 25px; }
+
 .nav-links a {
     color: #00aaff !important;
     font-weight: 800;
-    margin-left: 25px;
     text-transform: uppercase;
+    letter-spacing: 1px;
     transition: 0.3s;
+    font-size: 0.9rem;
 }
+
 .nav-links a:hover { color: #ffffff !important; text-shadow: 0 0 10px #00aaff; }
+
+/* --- 2. SEARCH BAR --- */
+.search-container { display: flex; align-items: center; }
 
 #gameSearch {
     background: #081221;
     border: 2px solid #1c426e;
     border-radius: 8px;
-    padding: 10px 20px;
+    padding: 10px 15px;
     color: white;
-    width: 280px;
+    width: 250px;
     outline: none;
+    transition: 0.3s;
 }
-#gameSearch:focus { border-color: #00aaff; box-shadow: 0 0 15px #00aaff; }
+#gameSearch:focus { border-color: #00aaff; box-shadow: 0 0 15px rgba(0, 170, 255, 0.4); }
 
-/* --- CATEGORY HEADERS --- */
+/* --- 3. CATEGORY HEADERS --- */
 .category-header {
     text-align: left;
     margin: 40px 5% 15px 5%;
@@ -55,52 +63,75 @@ nav {
     padding-left: 15px;
 }
 
-/* --- PERFECT SQUARE CARDS --- */
-.game-card {
-    flex: 0 0 180px; width: 180px; height: 180px;
-    background: #0d1b2e; border: 2px solid #1c426e;
-    border-radius: 15px; overflow: hidden; position: relative;
-    transition: 0.3s ease; cursor: pointer;
+/* --- 4. THE SQUARE GRID (Fixes the "Giant Image" Bug) --- */
+.game-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px 5%;
+    width: 100%;
 }
-.game-card:hover { transform: scale(1.05); border-color: #00aaff; }
 
-.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
+.game-card {
+    position: relative;
+    flex: 0 0 180px !important; /* Forces 180px width */
+    width: 180px !important;
+    height: 180px !important; /* Forces 180px height */
+    background: #0d1b2e;
+    border: 2px solid #1c426e;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card:hover { transform: translateY(-5px); border-color: #00aaff; box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3); }
+
+.game-img-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+.game-img-container img { width: 100% !important; height: 100% !important; object-fit: cover; display: block; }
 
 .game-info {
     position: absolute; bottom: 0; width: 100%; 
     background: rgba(13, 27, 46, 0.95);
-    padding: 8px 0; border-top: 1px solid #00aaff;
+    padding: 8px 0; border-top: 1px solid #00aaff; z-index: 2;
 }
-.game-info h3 { margin: 0; font-size: 0.8rem; text-transform: uppercase; }
+.game-info h3 { margin: 0; font-size: 0.75rem; text-transform: uppercase; color: white; }
 
-/* --- THE STACKED PLAY OVERLAY --- */
+/* --- 5. GAME CONTAINER & VERTICAL OVERLAY --- */
+#game-container {
+    width: 85%; max-width: 1100px; height: 80vh;
+    margin: 30px auto; background: #000; border: 4px solid #00aaff;
+    border-radius: 20px; position: relative; overflow: hidden;
+}
+
 #play-overlay {
     position: absolute; inset: 0; background: rgba(8, 18, 33, 0.95);
-    display: flex; flex-direction: column; 
+    display: flex; flex-direction: column; /* VERTICAL STACK */
     justify-content: center; align-items: center; z-index: 500;
 }
 
-.neon-triangle { 
-    font-size: 100px; 
-    color: #f0faff; 
-    margin-bottom: 20px; 
-    text-shadow: 0 0 30px #00aaff;
-    cursor: pointer;
-    transition: 0.3s;
+.neon-triangle {
+    font-size: 100px; color: #f0faff; margin-bottom: 20px;
+    text-shadow: 0 0 30px #00aaff; cursor: pointer; transition: 0.3s;
 }
-.neon-triangle:hover { transform: scale(1.1); color: #00aaff; }
 
 .play-now-btn {
-    background: #f0faff !important; 
-    color: #081221 !important;
-    padding: 18px 50px; 
-    border-radius: 50px; 
-    font-weight: 900; 
-    border: 2px solid #00aaff;
-    box-shadow: 0 0 20px #00aaff;
-    cursor: pointer;
-    transition: 0.3s;
+    background: #f0faff !important; color: #081221 !important;
+    padding: 18px 55px; border-radius: 50px; font-weight: 900;
+    text-transform: uppercase; border: 2px solid #00aaff;
+    box-shadow: 0 0 20px #00aaff; cursor: pointer; transition: 0.3s;
 }
-.play-now-btn:hover { background: #00aaff !important; color: #fff !important; transform: scale(1.05); }
 
-.game-loading-text { margin-top: 25px; color: #00aaff; font-size: 0.9rem; font-weight: bold; letter-spacing: 2px; }
+#play-overlay:hover .neon-triangle { color: #00aaff; transform: scale(1.1); }
+#play-overlay:hover .play-now-btn { background: #00aaff !important; color: #ffffff !important; box-shadow: 0 0 40px #00aaff; }
+
+/* --- 6. CAROUSEL --- */
+.carousel-wrapper { position: relative; width: 90%; margin: 0 auto; overflow: hidden; }
+.carousel-track {
+    display: flex; gap: 20px; overflow-x: auto; padding: 20px 0;
+    scroll-behavior: smooth; scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
