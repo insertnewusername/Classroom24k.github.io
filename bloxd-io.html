@@ -44,12 +44,9 @@
     <script src="script.js"></script>
     
     <script>
-        // We wrap the URL in the Google Gadget Proxy format
-        const targetUrl = "https://bloxd.io";
-        const proxiedUrl = `https://www.google.com/ig/ifr?url=https://www.google.com/ig/modules/freetext.xml&up_content=${encodeURIComponent(targetUrl)}`;
-        
-        setupGame(proxiedUrl);
-    </script>
+    // Direct link is required because Bloxd.io blocks proxies/iframes from other domains
+    setupGame("https://bloxd.io");
+</script>
 
 </body>
 </html>
