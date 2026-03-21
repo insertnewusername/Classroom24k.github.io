@@ -1,4 +1,4 @@
-// --- LOGIC MASTER ---
+// --- GOOGLE ANALYTICS ---
 (function() {
     var gtagScript = document.createElement('script');
     gtagScript.async = true;
@@ -11,6 +11,7 @@
     window.gtag = gtag;
 })();
 
+// --- UNIVERSAL NAVIGATION ---
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -27,14 +28,36 @@ function generateNav() {
     `;
 }
 
-// Carousel Scroll Logic
+// --- IMPROVED CAROUSEL LOGIC ---
+
+// Button Scrolling
 function scrollCarousel(btn, direction) {
-    const wrapper = btn.parentElement;
+    const wrapper = btn.closest('.carousel-wrapper');
     const track = wrapper.querySelector('.carousel-track');
-    const scrollAmount = 440; // Roughly 2 cards + gap
+    const scrollAmount = 440; 
     track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
+// Mouse Wheel Scrolling (Sideways only)
+function initCarousels() {
+    const tracks = document.querySelectorAll('.carousel-track');
+    tracks.forEach(track => {
+        track.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                // If the track can actually scroll more, stop the page from moving
+                const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth && e.deltaY > 0;
+                const isAtStart = track.scrollLeft <= 0 && e.deltaY < 0;
+
+                if (!isAtEnd && !isAtStart) {
+                    e.preventDefault(); 
+                    track.scrollLeft += e.deltaY;
+                }
+            }
+        }, { passive: false });
+    });
+}
+
+// --- SEARCH LOGIC ---
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
@@ -48,15 +71,15 @@ function filterGames() {
     }
 }
 
-// Fullscreen/Game Logic
+// --- GAME PAGE LOGIC ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     container.innerHTML = `
         <div id="clickableArea" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton">
-                <div class="play-icon" style="font-size:80px; text-shadow: 0 0 20px #00aaff;">▶</div>
-                <div style="font-weight:bold; letter-spacing:2px;">PLAY</div>
+            <div id="playButton" style="transition: transform 0.6s ease-in-out;">
+                <div class="play-icon" style="font-size:80px; text-shadow: 0 0 20px #00aaff; color:white;">▶</div>
+                <div style="font-weight:bold; letter-spacing:2px; color:white; margin-top:10px;">PLAY</div>
             </div>
         </div>`;
 }
@@ -73,8 +96,11 @@ function openFullscreen() {
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
 }
 
+// --- INITIALIZE ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
+    initCarousels();
+    
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
