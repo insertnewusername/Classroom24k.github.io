@@ -1,4 +1,4 @@
-// --- LOGIC MASTER ---
+// --- GOOGLE ANALYTICS ---
 (function() {
     var gtagScript = document.createElement('script');
     gtagScript.async = true;
@@ -11,6 +11,7 @@
     window.gtag = gtag;
 })();
 
+// --- UNIVERSAL NAVIGATION ---
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -27,6 +28,7 @@ function generateNav() {
     `;
 }
 
+// --- CAROUSEL LOGIC ---
 function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
     const track = wrapper.querySelector('.carousel-track');
@@ -50,6 +52,7 @@ function initCarousels() {
     });
 }
 
+// --- SEARCH LOGIC ---
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
@@ -63,13 +66,14 @@ function filterGames() {
     }
 }
 
+// --- GAME PAGE LOGIC ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     container.innerHTML = `
         <div id="clickableArea" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton" style="transition: transform 0.6s ease-in-out;">
-                <div class="play-icon" style="font-size:80px; text-shadow: 0 0 20px #00aaff; color:white;">▶</div>
+            <div id="playButton">
+                <div class="play-icon">▶</div>
                 <div style="font-weight:bold; letter-spacing:2px; color:white; margin-top:10px;">PLAY</div>
             </div>
         </div>`;
@@ -87,6 +91,7 @@ function openFullscreen() {
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
 }
 
+// --- INITIALIZE ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
