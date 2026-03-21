@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR */
+/* style.css - Classroom 24k Final Master */
 
 body {
     background-color: #081221; 
@@ -10,34 +10,36 @@ body {
     overflow-x: hidden;
 }
 
-/* --- HEADER FIX --- */
+/* --- HEADER: Large but centered --- */
 header {
     background-color: #1c426e; 
-    width: 60%; 
+    display: table; /* Centers the box while hugging the text */
+    width: auto;
+    min-width: 400px;
     max-width: 700px;
-    margin: 15px auto; 
-    padding: 10px; 
-    border-radius: 10px; 
+    margin: 20px auto; 
+    padding: 15px 40px; 
+    border-radius: 12px; 
     border: 2px solid #00aaff; 
     cursor: pointer;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
-    transition: 0.3s;
-    display: block; /* Ensures it stays centered and sized correctly */
+    transition: 0.3s ease;
 }
 
 header:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 0 25px rgba(0, 170, 255, 0.5);
 }
 
 header h1 {
-    color: #ffffff !important; /* Force white text */
-    margin: 10px 0;
+    margin: 0;
+    font-size: 2.2rem;
+    color: #ffffff !important;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 }
 
-/* --- UNIVERSAL NAVIGATION --- */
+/* --- NAVIGATION --- */
 nav {
     background-color: #0d1b2e; 
     padding: 15px 30px; 
@@ -59,17 +61,18 @@ nav {
     background: #081221; 
     border: 1px solid #1c426e; 
     border-radius: 6px; 
-    padding: 8px 12px; 
+    padding: 10px 15px; 
     color: white; 
-    width: 200px; 
+    width: 220px; 
     outline: none;
+    font-size: 1rem;
 }
 
 .nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- FEATURED BANNER & TEXT FIXES --- */
+/* --- FEATURED BANNER --- */
 .featured-banner {
     width: 95%; max-width: 1100px; height: 400px;
     margin: 0 auto 50px auto; border-radius: 20px;
@@ -84,7 +87,7 @@ nav {
     transition: transform 0.7s ease; z-index: 1;
 }
 
-.featured-banner:hover::before { transform: scale(1.08); }
+.featured-banner:hover::before { transform: scale(1.05); }
 
 .featured-overlay { 
     position: relative; z-index: 2;
@@ -92,85 +95,67 @@ nav {
     width: 100%; padding: 50px; text-align: left; 
 }
 
-.featured-title { 
-    color: #ffffff !important; /* Fix purple/red link issues */
-    font-size: 2.5rem; 
-    margin: 0; 
-}
+.featured-title { color: #ffffff !important; font-size: 3rem; margin: 0; }
+.featured-desc { color: #ffffff !important; margin: 10px 0 20px 0; font-size: 1.1rem; }
 
-.featured-desc { 
-    color: #ffffff !important; 
-    margin: 10px 0 20px 0; 
-}
-
-/* --- PLAY BUTTON GROW ANIMATIONS --- */
-.play-now-btn {
+/* --- BREATHING BUTTONS --- */
+.play-now-btn, #playButton {
     display: inline-block; background: #00aaff; color: #081221 !important; 
-    padding: 12px 40px; border-radius: 50px; font-weight: bold;
-    text-transform: uppercase; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    position: relative; z-index: 3;
+    padding: 12px 45px; border-radius: 50px; font-weight: bold;
+    text-transform: uppercase; transition: all 0.4s ease;
+    animation: breathe 3s ease-in-out infinite;
 }
 
-.play-now-btn:hover {
-    transform: scale(1.1); /* Restored GROW effect */
+.play-now-btn:hover, #clickableArea:hover #playButton {
+    transform: scale(1.1) translateY(-2px);
     background: #ffffff;
+    box-shadow: 0 0 25px #ffffff;
+    animation: none; /* Stop breathing on hover for stability */
 }
 
-/* --- CAROUSEL & GRID TEXT FIXES --- */
+@keyframes breathe {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 170, 255, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(0, 170, 255, 0.7); }
+}
+
+/* --- CAROUSEL & GAME CARDS --- */
 .carousel-container { width: 90%; max-width: 1100px; margin: 0 auto 60px auto; text-align: left; position: relative; }
-.carousel-title { color: #00aaff !important; text-transform: uppercase; margin-bottom: 15px; }
+.carousel-title { color: #00aaff !important; text-transform: uppercase; margin-bottom: 15px; font-size: 1.5rem; }
 
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; width: 100%; }
 
 .game-card {
-    flex: 0 0 200px; height: 200px; background: #0d1b2e;
+    flex: 0 0 200px; width: 200px; height: 260px; background: #0d1b2e;
     border-radius: 12px; border: 2px solid #1c426e; text-decoration: none !important;
     overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
 }
 
-.game-card:hover { transform: translateY(-5px) scale(1.05); border-color: #00aaff; }
+.game-card:hover { transform: translateY(-8px) scale(1.03); border-color: #00aaff; }
 
-.game-info { background: #1c426e; padding: 10px; flex-grow: 1; display: flex; align-items: center; justify-content: center; }
-
-.game-info h3 { 
-    margin: 0; 
-    color: #ffffff !important; /* Restored white game titles */
-    font-size: 0.9rem; 
-    text-transform: uppercase; 
+/* FIX: Giant Image Zoom */
+.game-img-container { width: 100%; height: 180px; overflow: hidden; background: #000; }
+.game-img-container img { 
+    width: 100% !important; height: 100% !important; 
+    object-fit: cover !important; display: block; 
 }
 
-/* --- GAME PLAYER & START SCREEN --- */
+.game-info { background: #1c426e; flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 10px; }
+.game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.9rem; text-transform: uppercase; }
+
+/* --- GAME PLAYER --- */
 #game-container { 
     width: 100%; max-width: 1100px; height: 75vh; background: #000; 
     border: 3px solid #00aaff; border-radius: 15px; margin: 0 auto 10px auto; 
     position: relative; overflow: hidden; 
 }
 
-#playButton {
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#clickableArea:hover #playButton {
-    transform: scale(1.2); /* Restored START screen grow effect */
-}
-
 .play-icon { font-size: 100px; color: white; text-shadow: 0 0 30px #00aaff; line-height: 1; }
-.play-text { font-weight: bold; font-size: 1.5rem; letter-spacing: 4px; color: white; text-shadow: 0 0 10px #00aaff; }
+.play-text { font-weight: bold; font-size: 1.5rem; letter-spacing: 4px; color: white; text-shadow: 0 0 10px #00aaff; margin-top: 15px;}
 
-/* --- FULLSCREEN & ABOUT --- */
 .fullscreen-btn { 
     display: inline-block; background: #1c426e; color: #ffffff; 
     border: 2px solid #00aaff; padding: 15px 45px; border-radius: 50px; 
     cursor: pointer; font-weight: bold; text-transform: uppercase; 
     margin: 20px 0; transition: 0.3s ease;
 }
-.fullscreen-btn:hover { background: #153458; transform: scale(1.05); box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3); }
-
-.about-section {
-    max-width: 1100px; margin: 40px auto; padding: 2px; border-radius: 20px; 
-    background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
-    background-size: 200% 200%; animation: borderGlow 5s linear infinite;
-}
-.about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
-
-@keyframes borderGlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.fullscreen-btn:hover { background: #153458; transform: scale(1.05); }
