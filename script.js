@@ -13,7 +13,7 @@
     window.gtag = gtag;
 })();
 
-// --- UNIVERSAL NAVIGATION GENERATOR ---
+// --- UNIVERSAL NAVIGATION ---
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -31,12 +31,11 @@ function generateNav() {
     `;
 }
 
-// --- SEARCH LOGIC (Only triggers on Enter) ---
+// --- SEARCH LOGIC ---
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
     
-    // If not on home/popular page, redirect to index with the search query
     if (cards.length === 0) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
@@ -48,7 +47,7 @@ function filterGames() {
     }
 }
 
-// --- GAME LOADING LOGIC ---
+// --- GAME LOADING ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
@@ -66,7 +65,6 @@ function loadIframe(url) {
     const container = document.getElementById('game-container');
     container.innerHTML = `<iframe id="game-frame" src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
     
-    // Focus the iframe so controls and Esc work immediately
     setTimeout(() => {
         const frame = document.getElementById('game-frame');
         if(frame) frame.focus();
@@ -77,7 +75,7 @@ function loadIframe(url) {
 function openFullscreen() {
     const elem = document.getElementById("game-frame");
     if (!elem) {
-        alert("Please click PLAY before entering fullscreen!");
+        alert("Click PLAY before entering fullscreen!");
         return;
     }
     if (elem.requestFullscreen) elem.requestFullscreen();
@@ -85,11 +83,8 @@ function openFullscreen() {
     else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
 
-// --- PAGE LOAD INITIALIZATION ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
-    
-    // Check for search query in URL (used for cross-page searching)
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
