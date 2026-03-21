@@ -11,7 +11,6 @@
 
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag; // Make globally accessible
     gtag('js', new Date());
     gtag('config', 'G-2D22NMRV2Z');
 })();
@@ -22,7 +21,7 @@ function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
     
-    // Using your V2.0 styling logic for the nav-links
+    // Injects the search bar and the category redirects
     nav.innerHTML = `
         <div class="search-container">
             <input type="text" id="gameSearch" placeholder="Search games..." oninput="filterGames()">
@@ -41,11 +40,11 @@ function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
     if(!wrapper) return;
     const track = wrapper.querySelector('.carousel-track');
-    // Scroll by 660px (roughly 3 cards: 200px + 20px gap)
+    // Scroll by roughly 3 cards (200px + 20px gap = 660px)
     track.scrollBy({ left: direction * 660, behavior: 'smooth' });
 }
 
-// Support for mouse scroll wheels and mobile touch
+// Horizontal scroll support for mice with scroll wheels
 function initCarousels() {
     const tracks = document.querySelectorAll('.carousel-track');
     tracks.forEach(track => {
@@ -86,14 +85,14 @@ function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
-    // Using the play-icon and play-text classes for the vertical stack
+    // Vertical stack: Triangle icon above the Play text
     container.innerHTML = `
         <div id="clickableArea" 
              style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" 
              onclick="loadIframe('${gameUrl}')">
             <div id="playButton" style="text-align:center;">
-                <div class="play-icon" style="font-size:80px; color:#f0faff; text-shadow: 0 0 20px #00aaff; margin-bottom:15px;">▶</div>
-                <div class="play-text" style="font-weight:bold; letter-spacing:2px; color:white; font-size:1.2rem; border:2px solid #00aaff; padding:10px 30px; border-radius:50px; box-shadow: 0 0 15px #00aaff;">PLAY</div>
+                <div class="play-icon" style="font-size:80px; color:#f0faff; text-shadow: 0 0 20px #00aaff; margin-bottom:10px;">▶</div>
+                <div class="play-text" style="font-weight:bold; letter-spacing:2px; color:white; border:2px solid #00aaff; padding:10px 35px; border-radius:50px; box-shadow: 0 0 15px #00aaff;">PLAY</div>
             </div>
         </div>`;
 }
@@ -114,13 +113,9 @@ function loadIframe(url) {
 function openFullscreen() {
     const elem = document.getElementById("game-container");
     if (!elem) return;
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-    }
+    if (elem.requestFullscreen) elem.requestFullscreen();
+    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
 
 // --- 7. INITIALIZE ON LOAD ---
