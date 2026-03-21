@@ -1,4 +1,19 @@
-// --- UNIVERSAL NAVIGATION ---
+// --- GOOGLE ANALYTICS MASTER TRACKER ---
+(function() {
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-2D22NMRV2Z";
+    document.head.appendChild(gtagScript);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2D22NMRV2Z');
+    
+    window.gtag = gtag;
+})();
+
+// --- UNIVERSAL NAVIGATION GENERATOR ---
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -21,7 +36,7 @@ function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
     
-    // Redirect logic for searching from game pages back to home
+    // If not on home/popular page, redirect to index with the search query
     if (cards.length === 0) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
@@ -33,7 +48,7 @@ function filterGames() {
     }
 }
 
-// --- GAME LOADING ---
+// --- GAME LOADING LOGIC ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
@@ -51,7 +66,7 @@ function loadIframe(url) {
     const container = document.getElementById('game-container');
     container.innerHTML = `<iframe id="game-frame" src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
     
-    // Focus the iframe so controls work immediately
+    // Focus the iframe so controls and Esc work immediately
     setTimeout(() => {
         const frame = document.getElementById('game-frame');
         if(frame) frame.focus();
@@ -70,13 +85,18 @@ function openFullscreen() {
     else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
 
-// Check for search query on page load (Helper for search across pages)
+// --- PAGE LOAD INITIALIZATION ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
+    
+    // Check for search query in URL (used for cross-page searching)
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
-        document.getElementById('gameSearch').value = searchVal;
-        filterGames();
+        const searchInput = document.getElementById('gameSearch');
+        if (searchInput) {
+            searchInput.value = searchVal;
+            filterGames();
+        }
     }
 });
