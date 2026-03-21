@@ -28,6 +28,7 @@ function generateNav() {
             <a href="popular.html">Popular</a>
             <a href="driving.html">Driving</a>
             <a href="multiplayer.html">Multiplayer</a>
+            <a href="sports.html">Sports</a>
         </div>
     `;
 }
