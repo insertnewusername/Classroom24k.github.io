@@ -15,7 +15,7 @@
     <nav></nav>
 
     <div class="container">
-        <h1 class="game-title-header">Rocket Soccer Derby</h1>
+        <h2 style="text-transform: uppercase; color: #00aaff; margin-top: 20px;">Rocket Soccer Derby</h2>
 
         <div id="game-container"></div>
 
@@ -23,27 +23,29 @@
             ⛶ Fullscreen Mode
         </button>
 
-        <div class="info-box">
-            <h2>About the Game</h2>
-            <p>
-                Experience high-octane physics mayhem! Drive your car, smash into the ball, 
-                and score goals against your opponents. Use your nitro boost wisely to score even more points.
-            </p>
-            
-            <h3>Controls</h3>
-            <ul style="list-style: none; padding: 0;">
-                <li><strong>WASD / Arrow Keys:</strong> Drive & Steer</li>
-                <li><strong>Shift:</strong> Nitro Boost</li>
-                <li><strong>R:</strong> Reset Position</li>
-                <li><strong>Esc:</strong> Exit Fullscreen</li>
-            </ul>
+        <div class="about-section">
+            <div class="about-content">
+                <h2>About the Game</h2>
+                <p>
+                    Experience high-octane physics mayhem! Drive your car, smash into the ball, 
+                    and score goals against your opponents. Use your nitro boost wisely to score even more points.
+                </p>
+                
+                <h3 style="color: #00aaff; margin-top: 20px;">Controls</h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li><strong>WASD / Arrow Keys:</strong> Drive & Steer</li>
+                    <li><strong>Shift:</strong> Nitro Boost</li>
+                    <li><strong>R:</strong> Reset Position</li>
+                    <li><strong>Esc:</strong> Exit Fullscreen</li>
+                </ul>
+            </div>
         </div>
     </div>
 
     <script src="script.js"></script>
     
     <script>
-        // Use your hosted game URL here
+        // Setup the game with your URL
         setupGame("https://rocketsoccerderby.gitlab.io/file/");
     </script>
 
