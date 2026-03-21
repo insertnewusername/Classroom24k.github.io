@@ -96,17 +96,16 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING (Updated with Neon UI) ---
+// --- 5. GAME LOADING (Updated UI: Smaller, Static Neon) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
-    // play-icon size increased to 150px with a neon white-blue glow
     container.innerHTML = `
         <div id="clickableArea" class="iframe-hover-zone" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton" style="text-align:center; transition: 0.3s;">
-                <div class="play-icon" style="font-size:150px; color:#ffffff; text-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff; line-height:1;">▶</div>
-                <div class="play-text" style="color:#ffffff; font-size:2.5rem; letter-spacing:8px; margin-top:20px; font-weight:bold; text-shadow: 0 0 15px #00aaff;">PLAY</div>
+            <div id="playButton" style="text-align:center;">
+                <div class="play-icon" style="font-size:100px; color:#ffffff; text-shadow: 0 0 15px #00aaff; line-height:1;">▶</div>
+                <div class="play-text" style="color:#ffffff; font-size:1.8rem; letter-spacing:6px; margin-top:10px; font-weight:bold; text-shadow: 0 0 10px #00aaff;">PLAY</div>
             </div>
         </div>`;
 }
@@ -121,7 +120,6 @@ function openFullscreen() {
     if (elem) {
         if (elem.requestFullscreen) elem.requestFullscreen();
         else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
     }
 }
 
