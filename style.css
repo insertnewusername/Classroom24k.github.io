@@ -1,12 +1,10 @@
-/* style.css - Classroom 24k Refined Edition */
+/* style.css - Classroom 24k Final Refined */
 
 body {
     background-color: #081221; 
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+    margin: 0; padding: 0; text-align: center;
 }
 
 /* --- SLIM HEADER --- */
@@ -25,15 +23,14 @@ header h1 {
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
 }
 
-/* --- NAVIGATION & SEARCH LEFT --- */
+/* --- NAV WITH LEFT SEARCH --- */
 nav {
     background-color: #0d1b2e; 
-    padding: 10px 20px;
+    padding: 10px 25px;
     border-bottom: 1px solid #1c426e;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 20px;
 }
 
 .search-container {
@@ -54,11 +51,10 @@ nav {
     width: 160px;
 }
 
-#gameSearch:focus { border-color: #00aaff; }
-
 .nav-links {
     display: flex;
-    gap: 20px;
+    gap: 25px;
+    margin-left: 20px;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 0.8rem;
@@ -67,16 +63,25 @@ nav {
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- GAME PAGE TITLE --- */
-.game-title-header {
-    font-size: 2rem;
-    margin: 10px 0 20px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #ffffff;
+/* --- WHITE NEON PLAY BUTTON --- */
+.play-icon { 
+    font-size: 100px; color: #ffffff; 
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #00aaff, 0 0 40px #00aaff;
+}
+.play-text { 
+    font-size: 24px; color: #ffffff; font-weight: bold; 
+    letter-spacing: 4px; margin-top: 10px; 
+    text-shadow: 0 0 10px #ffffff;
 }
 
-/* --- SQUARE GRID --- */
+/* --- GAME PAGE TITLE --- */
+.game-title-header {
+    font-size: 2.2rem; margin: 15px 0 25px 0;
+    text-transform: uppercase; letter-spacing: 2px;
+}
+
+/* --- CONTAINERS & GRID --- */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 .game-card {
     background: #0d1b2e; width: 180px; height: 180px; 
@@ -84,18 +89,10 @@ nav {
     text-decoration: none; overflow: hidden; transition: 0.4s;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
+.game-img-container { width: 100%; height: 135px; background: #000; }
+.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
+.game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; color: #fff; padding: 10px; }
 
-/* --- WHITE NEON PLAY BUTTON --- */
-.play-icon { 
-    font-size: 100px; color: #ffffff; 
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #00aaff, 0 0 30px #00aaff;
-}
-.play-text { 
-    font-size: 24px; color: #ffffff; font-weight: bold; 
-    margin-top: 10px; text-shadow: 0 0 10px #ffffff;
-}
-
-/* --- FRAME & BOX --- */
 #game-container {
     width: 100%; max-width: 1100px; height: 80vh; 
     background: #000; border: 4px solid #00aaff;
@@ -110,6 +107,7 @@ nav {
 #playButton { transition: transform 0.7s ease-in-out; }
 #clickableArea:hover #playButton { transform: scale(1.1); }
 
+/* --- INFO BOX --- */
 .info-box {
     background: #0d1b2e; padding: 30px; border-radius: 15px;
     text-align: left; max-width: 900px; margin: 0 auto 60px auto;
