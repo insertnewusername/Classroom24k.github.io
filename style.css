@@ -1,105 +1,82 @@
-/* style.css - Classroom 24k Final Master REPAIR - V5.0 */
+/* style.css - Classroom 24k V5.4 Master */
 
-* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+* { box-sizing: border-box; }
 a { text-decoration: none !important; }
 
 body {
-    background-color: #081221; 
+    background-color: #081221;
     color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0; padding: 0; text-align: center; overflow-x: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0; padding: 0;
 }
 
-/* --- HEADER & NAV (Restored) --- */
-header {
-    background-color: #1c426e; 
-    display: table; margin: 20px auto; padding: 10px 40px; 
-    border-radius: 12px; border: 2px solid #00aaff; cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
-    transition: 0.3s; position: relative; z-index: 1000;
-}
-header:hover { transform: translateY(-3px); box-shadow: 0 0 25px #00aaff; }
-
+/* --- NAV & SEARCH --- */
 nav {
-    background-color: #0d1b2e; padding: 15px 30px; border-bottom: 2px solid #1c426e; 
-    margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
-    position: sticky; top: 0; z-index: 999; gap: 30px;
+    background-color: #0d1b2e;
+    padding: 15px 5%;
+    border-bottom: 2px solid #1c426e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.search-container { display: flex; align-items: center; border-right: 2px solid #1c426e; padding-right: 20px; }
-#gameSearch { 
-    background: #081221; border: 1px solid #1c426e; border-radius: 6px; 
-    padding: 10px; color: white; width: 220px; outline: none; 
+.nav-links a {
+    color: #00aaff !important;
+    font-weight: bold;
+    margin-left: 25px;
+    text-transform: uppercase;
+    transition: 0.3s;
 }
 
-.nav-links { display: flex; gap: 20px; text-transform: uppercase; font-weight: bold; }
-.nav-links a { color: #00aaff !important; transition: 0.2s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- PERFECT SQUARE GAME CARDS --- */
-.game-grid { 
-    display: flex !important; flex-direction: row !important; flex-wrap: wrap !important; 
-    justify-content: center; gap: 20px; padding: 20px; 
+#gameSearch {
+    background: #081221;
+    border: 1px solid #1c426e;
+    border-radius: 6px;
+    padding: 8px 15px;
+    color: white;
+    outline: none;
 }
 
+/* --- CATEGORY HEADERS --- */
+.category-header {
+    text-align: left;
+    margin: 40px 5% 10px 5%;
+    color: #00aaff;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- PERFECT SQUARE CARDS --- */
 .game-card {
-    flex: 0 0 180px; width: 180px; height: 180px; /* Forced Perfect Square */
-    background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
-    overflow: hidden; transition: 0.3s; position: relative;
-    display: flex; flex-direction: column;
+    flex: 0 0 180px; width: 180px; height: 180px;
+    background: #0d1b2e; border: 2px solid #1c426e;
+    border-radius: 12px; overflow: hidden; position: relative;
 }
-.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
-.game-img-container { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Title overlay on square icons */
-.game-info { 
-    position: absolute; bottom: 0; width: 100%; height: 40px;
-    background: rgba(28, 66, 110, 0.9); display: flex; align-items: center; 
-    justify-content: center; border-top: 1px solid #00aaff;
-}
-.game-info h3 { margin: 0; color: #ffffff; font-size: 0.85rem; text-transform: uppercase; }
-
-/* --- GAME CONTAINER & STACKED OVERLAY --- */
-#game-container { 
-    height: 80vh; width: 80%; max-width: 1100px; 
-    background: #000; border: 4px solid #00aaff; 
-    border-radius: 20px; margin: 0 auto; position: relative; overflow: hidden;
+.game-info {
+    position: absolute; bottom: 0; width: 100%; background: rgba(13, 27, 46, 0.9);
+    padding: 5px 0; border-top: 1px solid #00aaff;
 }
 
+/* --- THE STACKED PLAY OVERLAY --- */
 #play-overlay {
     position: absolute; inset: 0; background: rgba(8, 18, 33, 0.9);
-    display: flex; flex-direction: column; /* Stacks Triangle and Button */
-    justify-content: center; align-items: center; z-index: 100;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
 
-/* THE SEPARATED TRIANGLE (TOP) */
-.neon-triangle {
-    font-size: 60px; color: #f0faff; margin-bottom: 20px;
-    transition: 0.3s ease; cursor: pointer;
-}
-
-/* THE PLAY NOW BUTTON (BOTTOM) */
+.neon-triangle { font-size: 80px; color: #f0faff; margin-bottom: 20px; }
 .play-now-btn {
-    background: #f0faff !important; color: #081221 !important; 
-    padding: 15px 40px; border-radius: 50px; font-weight: 800;
-    text-transform: uppercase; border: 2px solid #00aaff;
-    box-shadow: 0 0 15px #00aaff; transition: 0.3s; cursor: pointer;
+    background: #f0faff !important; color: #081221 !important;
+    padding: 15px 40px; border-radius: 50px; font-weight: 800; border: 2px solid #00aaff;
 }
 
-/* Hover State: Both triangle and button turn blue/white together */
-#play-overlay:hover .neon-triangle { color: #00aaff; transform: scale(1.2); }
-#play-overlay:hover .play-now-btn { 
-    background: #00aaff !important; color: #ffffff !important; 
-    box-shadow: 0 0 30px #00aaff; 
-}
-
-.fullscreen-btn { margin: 40px 0; }
-
-/* --- ABOUT SECTION --- */
-.about-section {
-    width: 80%; max-width: 1100px; margin: 60px auto; padding: 4px; 
-    border-radius: 20px; background: linear-gradient(45deg, #00aaff, #1c426e, #0d1b2e);
-}
-.about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
+#play-overlay:hover .neon-triangle { color: #00aaff; transform: scale(1.1); }
+#play-overlay:hover .play-now-btn { background: #00aaff !important; color: #ffffff !important; }
