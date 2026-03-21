@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Refined Master */
+/* style.css - Classroom 24k Final Master */
 
 body {
     background-color: #081221; 
@@ -11,7 +11,7 @@ body {
 }
 
 /* --- THE GAME PAGE TITLE --- */
-/* Balanced size: larger than nav, but still clean */
+/* For use on individual game pages: <h2 class="game-page-title"> */
 .game-page-title {
     color: #ffffff !important;
     font-size: 2.2rem; 
@@ -22,7 +22,7 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
-/* --- HEADER & NAV --- */
+/* --- HEADER & NAVIGATION --- */
 header {
     background-color: #1c426e; 
     width: 60%; 
@@ -90,9 +90,7 @@ nav {
     transition: 0.3s; 
 }
 
-.nav-links a:hover { 
-    color: #ffffff; 
-}
+.nav-links a:hover { color: #ffffff; }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
@@ -119,9 +117,7 @@ nav {
     z-index: 1;
 }
 
-.featured-banner:hover::before { 
-    transform: scale(1.08); 
-}
+.featured-banner:hover::before { transform: scale(1.08); }
 
 .featured-overlay { 
     position: relative; 
@@ -160,7 +156,7 @@ nav {
     max-width: 1100px; 
     margin: 0 auto 60px auto; 
     text-align: left; 
-    position: relative; 
+    position: relative; /* Base for absolute buttons */
 }
 
 .carousel-title { 
@@ -172,22 +168,35 @@ nav {
     margin-bottom: 15px; 
 }
 
+.carousel-wrapper { 
+    position: relative; 
+    display: flex; 
+    align-items: center; /* Vertically centers buttons to the track */
+    width: 100%; 
+}
+
 .carousel-track {
     display: flex; 
     flex-direction: row; 
+    flex-wrap: nowrap; /* Forces one row */
     gap: 20px; 
     overflow-x: auto; 
     padding: 15px 0; 
     scroll-behavior: smooth; 
     scrollbar-width: none; 
+    width: 100%;
 }
 
 .carousel-track::-webkit-scrollbar { display: none; }
 
+/* --- SCROLL BUTTONS --- */
 .scroll-btn {
     position: absolute; 
-    width: 45px; height: 45px; 
-    background: rgba(28, 66, 110, 0.9);
+    top: 50%; 
+    transform: translateY(-50%); /* Perfectly centers on Y-axis */
+    width: 45px; 
+    height: 45px; 
+    background: rgba(28, 66, 110, 0.95);
     color: #00aaff; 
     border: 2px solid #00aaff; 
     border-radius: 50%;
@@ -196,8 +205,11 @@ nav {
     display: flex; 
     justify-content: center; 
     align-items: center; 
+    font-size: 1.5rem;
+    transition: 0.3s;
 }
 
+.scroll-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 15px #00aaff; }
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
@@ -208,6 +220,7 @@ nav {
     justify-content: center; 
     gap: 25px; 
     padding: 30px 0; 
+    width: 100%;
 }
 
 .game-card {
@@ -228,7 +241,7 @@ nav {
     border-color: #00aaff; 
 }
 
-.game-img-container { width: 100%; height: 150px; overflow: hidden; }
+.game-img-container { width: 100%; height: 150px; overflow: hidden; background: #000; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; }
@@ -258,7 +271,10 @@ nav {
     font-weight: bold; 
     text-transform: uppercase; 
     margin: 20px 0; 
+    transition: 0.3s;
 }
+
+.fullscreen-btn:hover { background: #00aaff; color: #081221; transform: scale(1.05); }
 
 /* --- ABOUT SECTION --- */
 .about-section {
