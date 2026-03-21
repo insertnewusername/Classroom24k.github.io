@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR - V4.3 */
+/* style.css - Classroom 24k Final Master REPAIR - V4.4 */
 
 * { box-sizing: border-box; }
 
@@ -17,11 +17,9 @@ header {
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
     transition: all 0.3s ease;
 }
-/* Re-added hover so users know it's a link */
 header:hover {
     transform: translateY(-3px);
     box-shadow: 0 0 25px #00aaff;
-    background-color: #24558d;
 }
 header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transform: uppercase; letter-spacing: 4px; }
 
@@ -30,7 +28,7 @@ nav {
     margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
 }
 
-/* --- GRID FIX (Preventing Vertical Stacking) --- */
+/* --- GRID FIX (Horizontal Row) --- */
 .game-grid { 
     display: flex !important; 
     flex-direction: row !important; 
@@ -40,7 +38,7 @@ nav {
     padding: 30px 0; 
 }
 
-/* --- GAME CARDS (Bigger Titles) --- */
+/* --- GAME CARDS --- */
 .game-card {
     flex: 0 0 200px; width: 200px; height: 220px; 
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
@@ -49,13 +47,14 @@ nav {
 }
 .game-card:hover { transform: translateY(-8px); border-color: #00aaff; }
 
+.game-img-container { width: 100%; height: 160px; overflow: hidden; position: relative; }
+.game-img-container img { width: 100%; height: 100%; object-fit: cover; } /* Fixed Zoom */
+
 .game-info { 
     width: 100%; height: 60px; background: #1c426e !important; 
     display: flex; align-items: center; justify-content: center; border-top: 2px solid #00aaff;
 }
-.game-info h3 { 
-    margin: 0; color: #ffffff !important; font-size: 1.1rem; text-transform: uppercase; 
-}
+.game-info h3 { margin: 0; color: #ffffff !important; font-size: 1rem; text-transform: uppercase; }
 
 /* --- IFRAME (Shrunk Width) --- */
 #game-container { 
@@ -68,7 +67,7 @@ nav {
 .play-now-btn, .fullscreen-btn {
     display: inline-block; 
     background: #f0faff !important; /* Neon White-Blue Base */
-    color: #081221 !important; 
+    color: #081221 !important; /* Dark text on white-blue */
     padding: 15px 45px; 
     border-radius: 50px; 
     font-weight: 800;
@@ -78,11 +77,9 @@ nav {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     text-decoration: none;
-    position: relative;
-    z-index: 10;
 }
 
-/* Fix: Text turns white on dark blue hover so it stays visible */
+/* Hover: Scale + Text turns White + Background turns Blue */
 .play-now-btn:hover, .fullscreen-btn:hover { 
     background: #00aaff !important; 
     color: #ffffff !important; 
@@ -90,14 +87,14 @@ nav {
     box-shadow: 0 0 30px #00aaff;
 }
 
-/* Targets the triangle inside the button for color sync */
-.play-now-btn:hover div {
+/* Fixed the Triangle Color Change */
+.play-now-btn:hover div, .play-now-btn:hover span {
     color: #ffffff !important;
 }
 
 .fullscreen-btn { margin-top: 60px !important; margin-bottom: 60px; }
 
-/* --- CAROUSEL ARROWS (Re-Oriented) --- */
+/* --- CAROUSEL REPAIR --- */
 .carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 
 .scroll-btn {
@@ -111,7 +108,8 @@ nav {
 .right-btn { right: -25px; }
 
 .carousel-track {
-    display: flex; gap: 20px; overflow-x: auto; padding: 15px 0;
+    display: flex !important; flex-direction: row !important;
+    gap: 20px; overflow-x: auto; padding: 15px 0;
     scroll-behavior: smooth; scrollbar-width: none;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
