@@ -33,8 +33,7 @@ function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
     if(!wrapper) return;
     const track = wrapper.querySelector('.carousel-track');
-    const scrollAmount = 440; 
-    track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    track.scrollBy({ left: direction * 440, behavior: 'smooth' });
 }
 
 function initCarousels() {
