@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR - V3.0 FULL */
+/* style.css - Classroom 24k Final Master REPAIR - V3.5 FULL */
 
 * { box-sizing: border-box; }
 
@@ -30,17 +30,17 @@ nav {
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.2s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- WIDER LAYOUT UPDATES --- */
+/* --- WIDER LAYOUT (1450px) --- */
 .featured-banner, .carousel-container, #game-container, .about-section {
-    width: 95%; 
-    max-width: 1400px !important; /* Increased from 1100px */
+    width: 96%; 
+    max-width: 1450px !important; 
     margin-left: auto; 
     margin-right: auto;
 }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
-    height: 450px;
+    height: 480px;
     margin: 0 auto 50px auto; border-radius: 20px;
     position: relative; overflow: hidden;
     border: 3px solid #00aaff; display: flex; align-items: flex-end;
@@ -59,7 +59,7 @@ nav {
 .featured-title { color: #ffffff !important; font-size: 3rem; margin: 0; text-decoration: none !important; }
 .featured-desc { color: #ffffff !important; margin: 10px 0 20px 0; text-decoration: none !important; }
 
-/* --- NEON BUTTONS (REPAIRED NEON) --- */
+/* --- NEON BUTTONS & PULSE ANIMATION --- */
 .play-now-btn, .fullscreen-btn {
     display: inline-block; 
     background: #ffffff !important; 
@@ -71,15 +71,21 @@ nav {
     border: 2px solid #00aaff;
     box-shadow: 0 0 10px #00aaff, 0 0 20px #ffffff;
     transition: 0.3s ease;
-    animation: neonPulse 2s infinite !important;
+    animation: neonPulse 2s infinite ease-in-out !important;
     cursor: pointer;
     text-decoration: none;
 }
+
 .play-now-btn:hover, .fullscreen-btn:hover { 
     background: #00aaff !important; 
     color: #ffffff !important;
-    transform: scale(1.05); 
     box-shadow: 0 0 25px #00aaff, 0 0 40px #00aaff;
+}
+
+/* FIX: Fullscreen spacing from frame */
+.fullscreen-btn {
+    margin-top: 35px !important; 
+    margin-bottom: 40px;
 }
 
 /* --- CAROUSELS --- */
@@ -113,7 +119,7 @@ nav {
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
-/* --- GAME CARDS (STRICT SQUARES + COLLISION FIX) --- */
+/* --- GAME CARDS (PERFECT SQUARES / NO OVERLAP) --- */
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; padding: 30px 0; }
 
 .game-card {
@@ -126,10 +132,9 @@ nav {
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
-/* FIX: Image takes top 160px, info takes bottom 40px */
 .game-img-container { 
     width: 100%; 
-    height: 160px; /* Fixed height */
+    height: 160px; /* Locked height for image */
     position: relative; 
     z-index: 1; 
     overflow: hidden;
@@ -138,11 +143,11 @@ nav {
 
 .game-info { 
     width: 100%; 
-    height: 40px; /* Fixed height */
+    height: 40px; /* Locked height for text - No Collision */
     z-index: 5;
     background: #1c426e !important; 
     display: flex; align-items: center; justify-content: center;
-    border-top: 1px solid #00aaff;
+    border-top: 2px solid #00aaff;
 }
 .game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.8rem; text-transform: uppercase; white-space: nowrap; }
 
@@ -181,7 +186,16 @@ nav {
 }
 
 @keyframes neonPulse {
-    0% { box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; transform: scale(1); }
-    50% { box-shadow: 0 0 25px #00aaff, 0 0 15px #ffffff; transform: scale(1.02); }
-    100% { box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; transform: scale(1); }
+    0% { 
+        box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; 
+        transform: scale(1); 
+    }
+    50% { 
+        box-shadow: 0 0 25px #00aaff, 0 0 15px #ffffff; 
+        transform: scale(1.08); /* This handles the triangle & button growth */
+    }
+    100% { 
+        box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; 
+        transform: scale(1); 
+    }
 }
