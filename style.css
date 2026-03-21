@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR - V4.1 CLEAN */
+/* style.css - Classroom 24k Final Master REPAIR - V4.3 */
 
 * { box-sizing: border-box; }
 
@@ -9,13 +9,19 @@ body {
     margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
-/* --- HEADER & NAV --- */
+/* --- HEADER (Restored Interaction) --- */
 header {
     background-color: #1c426e; 
     display: table; margin: 20px auto; padding: 10px 40px; 
     border-radius: 12px; border: 2px solid #00aaff; cursor: pointer;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
-    transition: 0.2s ease;
+    transition: all 0.3s ease;
+}
+/* Re-added hover so users know it's a link */
+header:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px #00aaff;
+    background-color: #24558d;
 }
 header h1 { margin: 0; font-size: 2.2rem; color: #ffffff !important; text-transform: uppercase; letter-spacing: 4px; }
 
@@ -23,108 +29,89 @@ nav {
     background-color: #0d1b2e; padding: 15px 30px; border-bottom: 2px solid #1c426e; 
     margin-bottom: 25px; display: flex; align-items: center; justify-content: center;
 }
-.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
-#gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 10px; color: white; width: 220px; outline: none; }
 
-.nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
-.nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.2s; }
-.nav-links a:hover { color: #ffffff !important; }
-
-/* --- LAYOUT WIDTHS --- */
-.featured-banner, .carousel-container, .about-section {
-    width: 96%; 
-    max-width: 1480px !important; 
-    margin: 0 auto;
+/* --- GRID FIX (Preventing Vertical Stacking) --- */
+.game-grid { 
+    display: flex !important; 
+    flex-direction: row !important; 
+    flex-wrap: wrap !important; 
+    justify-content: center; 
+    gap: 25px; 
+    padding: 30px 0; 
 }
 
-/* --- GAME CONTAINER (SHRUNK WIDTH, FIXED HEIGHT) --- */
+/* --- GAME CARDS (Bigger Titles) --- */
+.game-card {
+    flex: 0 0 200px; width: 200px; height: 220px; 
+    background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
+    text-decoration: none !important; overflow: hidden;
+    transition: 0.3s; display: flex; flex-direction: column;
+}
+.game-card:hover { transform: translateY(-8px); border-color: #00aaff; }
+
+.game-info { 
+    width: 100%; height: 60px; background: #1c426e !important; 
+    display: flex; align-items: center; justify-content: center; border-top: 2px solid #00aaff;
+}
+.game-info h3 { 
+    margin: 0; color: #ffffff !important; font-size: 1.1rem; text-transform: uppercase; 
+}
+
+/* --- IFRAME (Shrunk Width) --- */
 #game-container { 
-    height: 80vh; 
-    width: 80%; /* Shrinks the length (horizontal) to 80% screen width */
-    max-width: 1100px; /* Prevents it from being too stretched on large monitors */
+    height: 80vh; width: 85%; max-width: 1100px; 
     background: #000; border: 4px solid #00aaff; 
-    border-radius: 20px; margin: 0 auto; position: relative;
-    overflow: hidden; 
-    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
+    border-radius: 20px; margin: 0 auto; position: relative; overflow: hidden;
 }
 
-#game-container iframe {
-    width: 100% !important; height: 100% !important; border: none !important; display: block;
-}
-
-/* --- NEON WHITE-BLUE BUTTONS (Hover Logic) --- */
+/* --- BUTTONS (Fixed disappearing text/color swap) --- */
 .play-now-btn, .fullscreen-btn {
     display: inline-block; 
     background: #f0faff !important; /* Neon White-Blue Base */
     color: #081221 !important; 
-    padding: 12px 45px; 
+    padding: 15px 45px; 
     border-radius: 50px; 
-    font-weight: bold;
+    font-weight: 800;
     text-transform: uppercase; 
     border: 2px solid #00aaff;
-    box-shadow: 0 0 15px #00aaff, 0 0 5px #ffffff;
+    box-shadow: 0 0 15px #00aaff;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     text-decoration: none;
+    position: relative;
+    z-index: 10;
 }
 
-/* Container hover: Scale and swap to Electric Blue */
+/* Fix: Text turns white on dark blue hover so it stays visible */
 .play-now-btn:hover, .fullscreen-btn:hover { 
     background: #00aaff !important; 
-    color: #ffffff !important;
+    color: #ffffff !important; 
     transform: scale(1.1); 
-    box-shadow: 0 0 30px #00aaff, 0 0 10px #ffffff;
+    box-shadow: 0 0 30px #00aaff;
 }
 
-/* Ensure the Triangle inside the Play Now button changes color too */
+/* Targets the triangle inside the button for color sync */
 .play-now-btn:hover div {
-    color: #ffffff !important; /* Changes from current color to white on hover */
-    text-shadow: 0 0 10px #ffffff;
+    color: #ffffff !important;
 }
 
-.fullscreen-btn {
-    margin-top: 55px !important; /* Shifted further down from the frame */
-    margin-bottom: 60px;
-}
+.fullscreen-btn { margin-top: 60px !important; margin-bottom: 60px; }
 
-/* --- CAROUSELS --- */
-.carousel-container { 
-    margin-bottom: 60px; text-align: left; position: relative;
-    border: 1px solid rgba(0, 170, 255, 0.3); 
-    padding: 25px; border-radius: 15px; background: rgba(13, 27, 46, 0.5);
-}
+/* --- CAROUSEL ARROWS (Re-Oriented) --- */
+.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 
-/* --- GAME CARDS (LARGER TITLES) --- */
-.game-card {
-    flex: 0 0 200px !important; width: 200px !important; height: 215px !important; /* Height increased for bigger text */
-    background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
-    text-decoration: none !important; overflow: hidden; position: relative;
-    transition: 0.3s; display: flex; flex-direction: column;
+.scroll-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 50px; height: 50px; background: #1c426e; color: #00aaff;
+    border: 2px solid #00aaff; border-radius: 50%; cursor: pointer;
+    z-index: 100; font-size: 24px; display: flex; justify-content: center; align-items: center;
 }
-.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
+.scroll-btn:hover { background: #00aaff; color: #ffffff; }
+.left-btn { left: -25px; }
+.right-btn { right: -25px; }
 
-.game-img-container { width: 100%; height: 160px; position: relative; z-index: 1; overflow: hidden; }
-.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
-
-.game-info { 
-    width: 100%; height: 55px; /* Taller info box */
-    z-index: 5; background: #1c426e !important; 
-    display: flex; align-items: center; justify-content: center;
-    border-top: 2px solid #00aaff;
+.carousel-track {
+    display: flex; gap: 20px; overflow-x: auto; padding: 15px 0;
+    scroll-behavior: smooth; scrollbar-width: none;
 }
-.game-info h3 { 
-    margin: 0; color: #ffffff !important; 
-    font-size: 1.1rem; /* Larger Title Size */
-    text-transform: uppercase;
-    padding: 0 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* --- STATIC ABOUT SECTION --- */
-.about-section {
-    margin: 60px auto; padding: 4px; border-radius: 20px; 
-    background: #1c426e; 
-}
-.about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
+.carousel-track::-webkit-scrollbar { display: none; }
