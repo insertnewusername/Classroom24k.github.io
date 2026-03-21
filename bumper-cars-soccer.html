@@ -2,24 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bumper Cars Soccer | Classroom 24k</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header onclick="location.href='index.html'"><h1>Classroom 24k</h1></header>
+
+    <header onclick="location.href='index.html'">
+        <h1>Classroom 24k</h1>
+    </header>
+
     <nav></nav>
 
     <div class="container">
         <h1 class="game-title-header">Bumper Cars Soccer</h1>
 
         <div id="game-container"></div>
+
+        <button class="fullscreen-btn" onclick="openFullscreen()">
+            ⛶ Fullscreen Mode
+        </button>
+
         <div class="info-box">
-            <h2>About</h2>
-            <p>High speed bumper car soccer mayhem.</p>
+            <h2>About the Game</h2>
+            <p>
+                Experience high-octane physics mayhem! Drive your bumper car, smash into the ball, 
+                and score goals against your opponents. Use your nitro boost wisely to dominate the arena.
+            </p>
+            
+            <h3>Controls</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><strong>WASD / Arrow Keys:</strong> Drive & Steer</li>
+                <li><strong>Spacebar:</strong> Nitro Boost</li>
+                <li><strong>R:</strong> Reset Position</li>
+                <li><strong>Esc:</strong> Exit Fullscreen</li>
+            </ul>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <script>setupGame("https://abinbins.github.io/a2/bumper-cars-soccer/");</script>
+    
+    <script>
+        // Use your hosted game URL here
+        setupGame("https://abinbins.github.io/a2/bumper-cars-soccer/");
+    </script>
+
 </body>
 </html>
