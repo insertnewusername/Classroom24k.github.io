@@ -287,7 +287,7 @@ nav {
     text-shadow: 0 0 10px #00aaff;
 }
 
-/* --- FULLSCREEN BUTTON --- */
+/* --- FULLSCREEN BUTTON (Refined Hover) --- */
 .fullscreen-btn { 
     display: inline-block; 
     background: #1c426e; 
@@ -299,14 +299,18 @@ nav {
     font-weight: bold; 
     text-transform: uppercase; 
     margin: 20px 0; 
-    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.3s ease; /* Smooth transition for everything */
 }
 
 .fullscreen-btn:hover { 
-    background: #00aaff; 
-    color: #081221; 
-    transform: scale(1.1); 
-    box-shadow: 0 0 20px #00aaff;
+    /* Changed from bright #00aaff to a richer, calmer blue */
+    background: #153458; 
+    border-color: #0088cc;
+    color: #ffffff;
+    transform: translateY(-2px); /* Slight lift instead of scaling big */
+    
+    /* Softened the glow: reduced spread and added transparency */
+    box-shadow: 0 5px 15px rgba(0, 170, 255, 0.3); 
 }
 
 /* --- ABOUT SECTION --- */
