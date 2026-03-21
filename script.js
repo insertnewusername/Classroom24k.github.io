@@ -8,7 +8,6 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-2D22NMRV2Z');
-    window.gtag = gtag;
 })();
 
 // --- UNIVERSAL NAVIGATION ---
