@@ -30,68 +30,55 @@ nav {
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- FEATURED BANNER (HOME ONLY) --- */
+/* --- FEATURED BANNER --- */
 .featured-banner {
     width: 95%; max-width: 1100px; height: 400px;
     margin: 0 auto 50px auto; border-radius: 20px;
     position: relative; overflow: hidden;
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
     border: 3px solid #00aaff; display: flex; align-items: flex-end;
-    transition: transform 0.3s ease;
 }
-.featured-banner:hover { transform: scale(1.01); }
 .featured-overlay { 
     background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, rgba(8, 18, 33, 0.4) 60%, transparent 100%); 
     width: 100%; padding: 50px; text-align: left; 
 }
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; letter-spacing: 2px; }
-.featured-desc { font-size: 1.2rem; color: white; margin: 10px 0 20px 0; opacity: 0.9; }
+.featured-desc { font-size: 1.2rem; color: white; margin: 10px 0 20px 0; }
 .play-now-btn {
     display: inline-block; background: #00aaff; color: #081221; 
     padding: 12px 35px; border-radius: 50px; font-weight: bold;
     text-transform: uppercase; transition: 0.3s;
 }
-.play-now-btn:hover { background: white; transform: scale(1.05); }
 
-/* --- CAROUSEL SYSTEM (HOME PAGE) --- */
+/* --- CAROUSEL SYSTEM (Home Page) --- */
 .carousel-container { width: 90%; max-width: 1100px; margin: 0 auto 60px auto; text-align: left; position: relative; }
 .carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
 .carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
-
 .carousel-track {
     display: flex; flex-direction: row; flex-wrap: nowrap; gap: 20px; 
     overflow-x: auto; padding: 20px 0; scroll-behavior: smooth; 
     scrollbar-width: none; width: 100%; touch-action: pan-x;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
-
 .scroll-btn {
     position: absolute; width: 45px; height: 45px; background: rgba(28, 66, 110, 0.95);
     color: #00aaff; border: 2px solid #00aaff; border-radius: 50%;
     cursor: pointer; z-index: 999; display: flex; justify-content: center; 
-    align-items: center; font-size: 1.5rem; transition: 0.3s; pointer-events: all;
+    align-items: center; font-size: 1.5rem; transition: 0.3s;
 }
 .scroll-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; }
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
-/* --- GRID SYSTEM (MULTIPLAYER/CATEGORY PAGES) --- */
+/* --- GRID SYSTEM (Category Pages) --- */
 .game-grid {
-    display: flex;
-    flex-wrap: wrap;       /* Allows wrapping to new rows */
-    justify-content: center; 
-    gap: 30px;            /* Mandatory space between tiles */
-    padding: 20px 0;
-    width: 95%;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex; flex-wrap: wrap; justify-content: center; 
+    gap: 30px; padding: 20px 0; width: 95%; max-width: 1200px; margin: 0 auto;
 }
 
-/* --- UNIVERSAL GAME CARDS --- */
+/* --- GAME CARDS --- */
 .game-card {
-    flex: 0 0 200px; /* Width remains 200px */
-    height: 200px; 
-    background: #0d1b2e;
+    flex: 0 0 200px; height: 200px; background: #0d1b2e;
     border-radius: 12px; border: 2px solid #1c426e; text-decoration: none;
     overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
 }
@@ -109,13 +96,30 @@ nav {
 }
 #game-container:fullscreen { width: 100vw; height: 100vh; border: none; border-radius: 0; }
 
+/* Breathing Play Button */
 #playButton { transition: transform 0.3s ease-in-out; text-align: center; }
 #clickableArea:hover #playButton { transform: scale(1.15); }
 .play-icon { font-size: 80px; text-shadow: 0 0 20px #00aaff; color: white; margin-bottom: 10px; }
 
+/* Pill Fullscreen Button */
 .fullscreen-btn { 
     display: inline-block; background: #1c426e; color: #ffffff; 
     border: 2px solid #00aaff; padding: 15px 45px; border-radius: 50px; 
     cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; margin: 20px 0; 
 }
 .fullscreen-btn:hover { background: #00aaff; color: #081221; transform: scale(1.05); }
+
+/* --- ABOUT SECTION GRADIENT BORDER --- */
+.about-section {
+    max-width: 1100px; margin: 40px auto; padding: 3px; 
+    border-radius: 20px; background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
+    background-size: 200% 200%; animation: borderGlow 4s linear infinite;
+}
+.about-content { background: #081221; padding: 30px; border-radius: 18px; text-align: left; color: white; }
+.about-content h2 { color: #00aaff; margin-top: 0; text-transform: uppercase; }
+
+@keyframes borderGlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
