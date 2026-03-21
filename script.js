@@ -32,7 +32,7 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (Redirects + Vanishing UI) ---
+// --- 3. SEARCH LOGIC (Redirects + UI Filtering) ---
 function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
@@ -41,7 +41,7 @@ function filterGames() {
     let cards = document.getElementsByClassName('game-card');
     let noResultsMsg = document.getElementById('noResults');
     
-    // REDIRECT logic: Send to index if searching from anywhere else
+    // REDIRECT: If searching from popular.html or a game page, jump to index
     const path = window.location.pathname;
     const isHomePage = path.endsWith('index.html') || path.endsWith('/') || path === "";
 
@@ -50,12 +50,13 @@ function filterGames() {
         return;
     }
 
+    // UI Elements to toggle
     const featuredBanner = document.querySelector('.featured-banner');
     const allCarousels = document.querySelectorAll('.carousel-container');
     const allGamesHeader = document.querySelector('.full-library-section h2');
 
     if (input.length > 0) {
-        // HIDE UI for Search Mode
+        // Hide regular layout for search results
         if (featuredBanner) featuredBanner.style.display = "none";
         allCarousels.forEach(c => { c.style.display = "none"; });
         
@@ -64,7 +65,7 @@ function filterGames() {
             allGamesHeader.style.marginTop = "20px";
         }
     } else {
-        // RESET UI to Normal Mode
+        // Restore regular layout
         if (featuredBanner) featuredBanner.style.display = "flex";
         allCarousels.forEach(c => { c.style.display = "block"; });
         if (allGamesHeader) {
@@ -90,11 +91,12 @@ function filterGames() {
     }
 }
 
-// --- 4. CAROUSEL LOGIC ---
+// --- 4. CAROUSEL LOGIC (Arrows + Wheel) ---
 function scrollCarousel(btn, direction) {
     const container = btn.closest('.carousel-container');
     const track = container.querySelector('.carousel-track');
-    const scrollAmount = 600; 
+    // Scroll by roughly 3 cards (200px + 20px gap) * 3 = 660px
+    const scrollAmount = 660; 
     track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
@@ -105,6 +107,7 @@ function initCarousels() {
             if (e.deltaY !== 0) {
                 const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth && e.deltaY > 0;
                 const isAtStart = track.scrollLeft <= 0 && e.deltaY < 0;
+                // Only prevent default if we aren't at the very start/end of the track
                 if (!isAtEnd && !isAtStart) { 
                     e.preventDefault(); 
                     track.scrollLeft += e.deltaY; 
@@ -114,19 +117,25 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING & PLAYER ---
+// --- 5. GAME LOADING (Clean Play Button, No Hover Box) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
-    // Re-applied the clean, no-background look for the play button
+    // Clear the container and add the "Play Now" overlay
     container.innerHTML = `
         <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:#081221;" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton" style="background:none; animation:none; box-shadow:none;">
-                <div class="play-icon" style="font-size:120px; color:#00aaff; text-shadow: 0 0 20px rgba(0, 170, 255, 0.6);">▶</div>
-                <div class="play-text" style="color:#00aaff; font-size:2rem; letter-spacing:5px; margin-top:10px;">PLAY NOW</div>
+            <div id="playButton" style="transition: transform 0.2s ease; pointer-events: none;">
+                <div class="play-icon" style="font-size:120px; color:#00aaff; text-shadow: 0 0 25px rgba(0, 170, 255, 0.6);">▶</div>
+                <div class="play-text" style="color:#00aaff; font-size:2rem; letter-spacing:5px; margin-top:10px; font-weight:bold;">PLAY NOW</div>
             </div>
         </div>`;
+    
+    // Manual hover listener to ensure a snappy scale without blue boxes
+    const area = document.getElementById('clickableArea');
+    const btn = document.getElementById('playButton');
+    area.onmouseenter = () => btn.style.transform = "scale(1.1)";
+    area.onmouseleave = () => btn.style.transform = "scale(1)";
 }
 
 function loadIframe(url) {
@@ -148,13 +157,14 @@ window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
     
-    // Automatically filter if returning from a search redirect
+    // Handle cross-page search parameters
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
+            // Small delay to ensure all carousels/cards are rendered before filtering
             setTimeout(filterGames, 150); 
         }
     }
