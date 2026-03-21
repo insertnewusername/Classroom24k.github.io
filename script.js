@@ -25,7 +25,7 @@ function generateNav() {
         <div class="nav-links">
             <a href="popular.html">Popular</a>
             <a href="index.html">Driving</a>
-            <a href="index.html">Multiplayer</a>
+            <a href="multiplayer.html">Multiplayer</a>
             <a href="index.html">Sport</a>
         </div>
     `;
