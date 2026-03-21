@@ -32,7 +32,7 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (Enter to trigger, hides UI) ---
+// --- 3. SEARCH LOGIC (Redirects + Vanishing UI) ---
 function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
@@ -41,29 +41,27 @@ function filterGames() {
     let cards = document.getElementsByClassName('game-card');
     let noResultsMsg = document.getElementById('noResults');
     
-    // Redirect if searching from a game page
-    const isGamePage = document.getElementById('game-container');
-    if (isGamePage) {
+    // REDIRECT logic: Send to index if searching from anywhere else
+    const currentPage = window.location.pathname.split("/").pop();
+    if (currentPage !== "index.html" && currentPage !== "" && input.length > 0) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
     }
 
-    // Elements to vanish
     const featuredBanner = document.querySelector('.featured-banner');
     const allCarousels = document.querySelectorAll('.carousel-container');
     const allGamesHeader = document.querySelector('.full-library-section h2');
 
     if (input.length > 0) {
-        // HIDE banner and all carousels
+        // HIDE UI
         if (featuredBanner) featuredBanner.style.display = "none";
         allCarousels.forEach(c => { c.style.display = "none"; });
-        
         if (allGamesHeader) {
             allGamesHeader.innerText = "Search Results";
             allGamesHeader.style.marginTop = "20px";
         }
     } else {
-        // RESET UI if search is empty
+        // RESET UI
         if (featuredBanner) featuredBanner.style.display = "flex";
         allCarousels.forEach(c => { c.style.display = "block"; });
         if (allGamesHeader) {
@@ -77,7 +75,7 @@ function filterGames() {
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
         if (title.includes(input)) {
-            card.style.display = "flex"; // Changed to flex to match your CSS
+            card.style.display = "flex"; 
             visibleCount++;
         } else {
             card.style.display = "none";
@@ -89,7 +87,7 @@ function filterGames() {
     }
 }
 
-// --- 4. CAROUSEL & UTILS ---
+// --- 4. CAROUSEL LOGIC ---
 function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
     const track = wrapper.querySelector('.carousel-track');
@@ -109,12 +107,12 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING & FULLSCREEN ---
+// --- 5. GAME LOADING ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     container.innerHTML = `
-        <div id="clickableArea" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
+        <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
             <div id="playButton">
                 <div class="play-icon">▶</div>
                 <div class="play-text">PLAY</div>
@@ -142,7 +140,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
-            setTimeout(filterGames, 150); // Slight delay for smoother loading
+            setTimeout(filterGames, 150); 
         }
     }
 });
