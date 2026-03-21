@@ -96,7 +96,7 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING (Updated UI: Smaller, Static Neon) ---
+// --- 5. GAME LOADING (Updated UI: Smaller Play Button) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
