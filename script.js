@@ -21,7 +21,6 @@ function generateNav() {
     nav.innerHTML = `
         <div class="search-container">
             <input type="text" id="gameSearch" placeholder="Search" 
-                   oninput="filterGames()" 
                    onkeydown="if(event.key==='Enter') filterGames()">
         </div>
         <div class="nav-links">
@@ -33,7 +32,7 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (Hides Banner & Carousels) ---
+// --- 3. SEARCH LOGIC (Triggers on Enter) ---
 function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
@@ -44,26 +43,34 @@ function filterGames() {
     
     // Redirect if searching from a game page
     const isGamePage = document.getElementById('game-container');
-    if (isGamePage && input.length > 0) {
+    if (isGamePage) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
     }
 
-    // TARGET EVERYTHING TO HIDE
+    // Elements to vanish
     const featuredBanner = document.querySelector('.featured-banner');
-    const trendingSection = document.querySelector('.carousel-container');
+    const allCarousels = document.querySelectorAll('.carousel-container');
     const allGamesHeader = document.querySelector('.full-library-section h2');
 
     if (input.length > 0) {
-        // HIDE ALL HEADERS AND BANNERS
+        // VANISH the banner and all carousels
         if (featuredBanner) featuredBanner.style.display = "none";
-        if (trendingSection) trendingSection.style.display = "none";
-        if (allGamesHeader) allGamesHeader.innerText = "Search Results"; // Rename header
+        allCarousels.forEach(c => c.style.display = "none");
+        
+        // Change the main header to show we are in search mode
+        if (allGamesHeader) {
+            allGamesHeader.innerText = "Search Results";
+            allGamesHeader.style.marginTop = "20px"; // Move it up since banner is gone
+        }
     } else {
-        // SHOW EVERYTHING AGAIN
+        // RESET if search is cleared
         if (featuredBanner) featuredBanner.style.display = "";
-        if (trendingSection) trendingSection.style.display = "";
-        if (allGamesHeader) allGamesHeader.innerText = "All Games"; // Reset header
+        allCarousels.forEach(c => c.style.display = "");
+        if (allGamesHeader) {
+            allGamesHeader.innerText = "All Games";
+            allGamesHeader.style.marginTop = "80px";
+        }
         if (noResultsMsg) noResultsMsg.style.display = "none";
     }
 
@@ -78,7 +85,6 @@ function filterGames() {
         }
     }
 
-    // Show "No Results" if nothing matches
     if (noResultsMsg) {
         noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
     }
@@ -104,7 +110,7 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING & FULLSCREEN ---
+// --- 5. GAME LOADING ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
