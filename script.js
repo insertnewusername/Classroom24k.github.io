@@ -1,4 +1,8 @@
-// --- GOOGLE ANALYTICS ---
+/**
+ * script.js - Classroom 24k Final Merged Master
+ */
+
+// --- 1. GOOGLE ANALYTICS ---
 (function() {
     var gtagScript = document.createElement('script');
     gtagScript.async = true;
@@ -10,7 +14,8 @@
     gtag('config', 'G-2D22NMRV2Z');
 })();
 
-// --- UNIVERSAL NAVIGATION ---
+// --- 2. UNIVERSAL NAVIGATION ---
+// Automatically fills <nav></nav> on every page
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -27,14 +32,16 @@ function generateNav() {
     `;
 }
 
-// --- CAROUSEL LOGIC ---
+// --- 3. CAROUSEL LOGIC ---
 function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
     if(!wrapper) return;
     const track = wrapper.querySelector('.carousel-track');
-    track.scrollBy({ left: direction * 440, behavior: 'smooth' });
+    // Scroll by roughly 3 cards (200px + 20px gap)
+    track.scrollBy({ left: direction * 660, behavior: 'smooth' });
 }
 
+// Horizontal scroll support for mice with scroll wheels
 function initCarousels() {
     const tracks = document.querySelectorAll('.carousel-track');
     tracks.forEach(track => {
@@ -51,53 +58,77 @@ function initCarousels() {
     });
 }
 
-// --- SEARCH LOGIC ---
+// --- 4. SEARCH LOGIC ---
 function filterGames() {
-    let input = document.getElementById('gameSearch').value.toLowerCase();
+    let inputField = document.getElementById('gameSearch');
+    if (!inputField) return;
+    
+    let input = inputField.value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
+    
+    // If on a subpage (no cards found), redirect to home with search query
     if (cards.length === 0) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
     }
+    
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
         card.style.display = title.includes(input) ? "" : "none";
     }
 }
 
-// --- GAME LOADING ---
+// --- 5. GAME LOADING (Improved Neon Style) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
+    
+    // Using the new play-icon and play-text classes from your CSS
     container.innerHTML = `
-        <div id="clickableArea" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
+        <div id="clickableArea" 
+             style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" 
+             onclick="loadIframe('${gameUrl}')">
             <div id="playButton">
                 <div class="play-icon">▶</div>
-                <div style="font-weight:bold; letter-spacing:2px; color:white;">PLAY</div>
+                <div class="play-text">PLAY</div>
             </div>
         </div>`;
 }
 
 function loadIframe(url) {
     const container = document.getElementById('game-container');
-    container.innerHTML = `<iframe id="game-frame" src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
+    container.innerHTML = `
+        <iframe id="game-frame" 
+                src="${url}" 
+                style="width:100%; height:100%; border:none;" 
+                allowfullscreen="true" 
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true">
+        </iframe>`;
 }
 
+// --- 6. FULLSCREEN ---
 function openFullscreen() {
     const elem = document.getElementById("game-container");
     if (!elem) return;
     if (elem.requestFullscreen) elem.requestFullscreen();
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
 
-// --- INITIALIZE ---
+// --- 7. INITIALIZE ON LOAD ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
+    
+    // Check if we arrived from a search redirect
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
         const input = document.getElementById('gameSearch');
-        if (input) { input.value = searchVal; filterGames(); }
+        if (input) { 
+            input.value = searchVal; 
+            filterGames(); 
+        }
     }
 });
