@@ -1,110 +1,87 @@
-/* script.js - Classroom 24k V4.8 Master */
+/* script.js - Classroom 24k V5.4 Master */
 
-// --- 1. GOOGLE ANALYTICS (Auto-Config) ---
+// 1. ANALYTICS
 (function() {
-    var GA_ID = 'G-XXXXXXXXXX'; // <-- CHANGE THIS ONCE
-    var gaScript = document.createElement('script');
-    gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
-    document.head.appendChild(gaScript);
-
+    var ID = 'G-XXXXXXXXXX'; // Replace with yours
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
+    document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', GA_ID);
-
-    // Helper for tracking specific game plays
-    window.trackGame = function(name) {
-        gtag('event', 'play_game', { 'game_name': name });
-    };
+    gtag('js', new Date()); gtag('config', ID);
 })();
 
-// --- 2. GAME LOADING & PLAY OVERLAY ---
-function setupGame(url, gameName = "Game") {
-    const container = document.getElementById('game-container');
-    if(!container) return;
-
-    // Track which game is being loaded
-    if(window.trackGame) window.trackGame(gameName);
-
-    container.innerHTML = `
-        <div id="play-overlay" style="
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(8, 18, 33, 0.85); display: flex; 
-            justify-content: center; align-items: center; z-index: 50; cursor: default;">
-            
-            <div class="play-now-btn" id="start-game-trigger">
-                <span class="neon-triangle" style="margin-right: 12px;">▶</span> PLAY NOW
-            </div>
-        </div>
-        <iframe src="" id="game-iframe" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe>
-    `;
-
-    document.getElementById('start-game-trigger').addEventListener('click', function(e) {
-        e.preventDefault();
-        const iframe = document.getElementById('game-iframe');
-        const overlay = document.getElementById('play-overlay');
-        
-        iframe.src = url;
-        
-        // Use a slight fade out for polish, then REMOVE from DOM
-        overlay.style.transition = "opacity 0.3s";
-        overlay.style.opacity = "0";
-        setTimeout(() => { 
-            overlay.remove(); 
-            iframe.focus(); // Vital for keyboard controls!
-        }, 300);
-    });
-}
-
-// --- 3. FULLSCREEN FUNCTIONALITY ---
-function toggleFullscreen() {
-    const elem = document.getElementById('game-container');
-    if (!elem) return;
-
-    if (!document.fullscreenElement) {
-        if (elem.requestFullscreen) { elem.requestFullscreen(); }
-        else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
-        else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); }
-    } else {
-        document.exitFullscreen();
-    }
-}
-
-// --- 4. CAROUSEL SCROLLING ---
-function scrollCarousel(trackId, direction) {
-    const track = document.getElementById(trackId);
-    if (!track) return;
-
-    const scrollAmount = 450; // Matches card width + gap
-    track.scrollBy({ 
-        left: direction === 'left' ? -scrollAmount : scrollAmount, 
-        behavior: 'smooth' 
-    });
-}
-
-// --- 5. SEARCH & FILTERING ---
+// 2. SEARCH ENGINE (Works across all pages)
 function filterGames() {
-    const input = document.getElementById('gameSearch').value.toLowerCase();
+    const input = document.getElementById('gameSearch');
+    if (!input) return;
+    const term = input.value.toLowerCase();
     const cards = document.querySelectorAll('.game-card');
 
     cards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        card.style.display = title.includes(input) ? "flex" : "none";
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        // Uses flex to keep the square grid intact
+        card.style.display = title.includes(term) ? "flex" : "none";
     });
 }
 
-// --- 6. INITIALIZATION ---
-document.addEventListener('DOMContentLoaded', () => {
-    const searchBar = document.getElementById('gameSearch');
-    if (searchBar) {
-        searchBar.addEventListener('input', filterGames); // 'input' is smoother than 'keyup'
-    }
+// 3. CATEGORY REDIRECTS (Smooth Scroll / Navigation)
+function setupNavigation() {
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            // If it's an anchor link (starts with #)
+            if (targetId.startsWith('#')) {
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+            // If it's a real page link (like index.html), let it click normally
+        });
+    });
+}
 
-    const fsBtn = document.querySelector('.fullscreen-btn');
-    if (fsBtn) {
-        fsBtn.addEventListener('click', toggleFullscreen);
-    }
+// 4. GAME LOADER (The Vertical Stack Overlay)
+function setupGame(url, title = "Game") {
+    const container = document.getElementById('game-container');
+    if (!container) return;
+
+    container.innerHTML = `
+        <div id="play-overlay">
+            <div class="neon-triangle">▶</div>
+            <div class="play-now-btn">PLAY NOW</div>
+            <p style="color:#00aaff; margin-top:20px; font-weight:bold; letter-spacing:1px;">${title.toUpperCase()}</p>
+        </div>
+        <iframe src="" id="game-iframe" allowfullscreen></iframe>
+    `;
+
+    document.getElementById('play-overlay').onclick = () => {
+        const iframe = document.getElementById('game-iframe');
+        iframe.src = url;
+        document.getElementById('play-overlay').remove();
+        iframe.focus();
+    };
+}
+
+// 5. CAROUSEL & INITIALIZE
+function scrollCarousel(id, dir) {
+    const t = document.getElementById(id);
+    if (t) t.scrollBy({ left: dir === 'left' ? -500 : 500, behavior: 'smooth' });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sb = document.getElementById('gameSearch');
+    if (sb) sb.oninput = filterGames;
     
-    console.log("Classroom 24k V4.8: Engine Online");
+    setupNavigation();
+    
+    const fs = document.querySelector('.fullscreen-btn');
+    if (fs) fs.onclick = () => {
+        const el = document.getElementById('game-container');
+        if (!document.fullscreenElement) el.requestFullscreen();
+        else document.exitFullscreen();
+    };
 });
