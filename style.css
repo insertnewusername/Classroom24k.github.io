@@ -1,12 +1,14 @@
-/* style.css - Clean Horizontal Edition */
+/* style.css - Classroom 24k Final Master */
 
 body {
     background-color: #081221; 
     color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0; padding: 0; text-align: center;
+    overflow-x: hidden; /* Prevents side-scrolling on the main page */
 }
 
+/* --- HEADER & NAV --- */
 header {
     background-color: #1c426e; width: 60%; max-width: 700px;
     margin: 15px auto; padding: 8px; border-radius: 8px; 
@@ -28,12 +30,13 @@ nav {
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- FIXED CAROUSEL SYSTEM --- */
+/* --- CAROUSEL SYSTEM --- */
 .carousel-container { 
-    width: 95%; 
+    width: 90%; 
     max-width: 1100px; 
-    margin: 0 auto 50px auto; 
+    margin: 0 auto 60px auto; 
     text-align: left; 
+    position: relative; 
 }
 
 .carousel-title { 
@@ -49,34 +52,54 @@ nav {
     position: relative; 
     display: flex; 
     align-items: center; 
+    width: 100%;
 }
 
 .carousel-track {
     display: flex; 
-    flex-direction: row; /* Force horizontal */
-    flex-wrap: nowrap;   /* Prevent stacking */
+    flex-direction: row; 
+    flex-wrap: nowrap;   
     gap: 20px; 
     overflow-x: auto; 
-    padding: 15px 5px;
+    padding: 20px 0; 
     scroll-behavior: smooth; 
-    scrollbar-width: none;
+    scrollbar-width: none; /* Firefox */
     width: 100%;
+    touch-action: pan-x; /* Improves mobile swiping */
 }
-.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-track::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 
 .scroll-btn {
-    position: absolute; width: 40px; height: 40px; background: rgba(28, 66, 110, 0.9);
-    color: #00aaff; border: 2px solid #00aaff; border-radius: 50%;
-    cursor: pointer; z-index: 10; display: flex; justify-content: center; align-items: center;
-    font-weight: bold; transition: 0.3s;
+    position: absolute; 
+    width: 45px; 
+    height: 45px; 
+    background: rgba(28, 66, 110, 0.95);
+    color: #00aaff; 
+    border: 2px solid #00aaff; 
+    border-radius: 50%;
+    cursor: pointer; 
+    z-index: 999; /* STAYS ON TOP */
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    font-size: 1.5rem;
+    transition: 0.3s;
+    pointer-events: all;
 }
-.scroll-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 15px #00aaff; }
-.left-btn { left: -20px; }
-.right-btn { right: -20px; }
+
+.scroll-btn:hover { 
+    background: #00aaff; 
+    color: #081221; 
+    box-shadow: 0 0 20px #00aaff; 
+}
+
+.left-btn { left: -25px; }
+.right-btn { right: -25px; }
 
 /* --- GAME CARDS --- */
 .game-card {
-    flex: 0 0 auto; /* Essential: prevents cards from squeezing */
+    flex: 0 0 auto; 
     width: 200px; 
     height: 200px; 
     background: #0d1b2e;
@@ -89,6 +112,12 @@ nav {
     flex-direction: column;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
-.game-img-container { width: 100%; height: 150px; overflow: hidden; }
+.game-img-container { width: 100%; height: 150px; overflow: hidden; background: #000; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
-.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 5px; }
+.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 5px; color: white; }
+
+/* --- GAME PAGE PLAYER --- */
+#game-container { width: 100%; max-width: 1100px; height: 80vh; background: #000; border: 4px solid #00aaff; border-radius: 15px; margin: 0 auto 10px auto; position: relative; overflow: hidden; }
+#game-container:fullscreen { width: 100vw; height: 100vh; border: none; border-radius: 0; }
+.fullscreen-btn { display: inline-block; background: #1c426e; color: #ffffff; border: 2px solid #00aaff; padding: 15px 45px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; margin: 20px 0; }
+.fullscreen-btn:hover { background: #00aaff; color: #081221; transform: scale(1.05); }
