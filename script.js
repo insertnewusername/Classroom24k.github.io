@@ -1,4 +1,4 @@
-// --- GOOGLE ANALYTICS ---
+// --- LOGIC MASTER ---
 (function() {
     var gtagScript = document.createElement('script');
     gtagScript.async = true;
@@ -11,7 +11,6 @@
     window.gtag = gtag;
 })();
 
-// --- UNIVERSAL NAVIGATION ---
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -28,9 +27,6 @@ function generateNav() {
     `;
 }
 
-// --- IMPROVED CAROUSEL LOGIC ---
-
-// Button Scrolling
 function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
     const track = wrapper.querySelector('.carousel-track');
@@ -38,16 +34,13 @@ function scrollCarousel(btn, direction) {
     track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
-// Mouse Wheel Scrolling (Sideways only)
 function initCarousels() {
     const tracks = document.querySelectorAll('.carousel-track');
     tracks.forEach(track => {
         track.addEventListener('wheel', (e) => {
             if (e.deltaY !== 0) {
-                // If the track can actually scroll more, stop the page from moving
                 const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth && e.deltaY > 0;
                 const isAtStart = track.scrollLeft <= 0 && e.deltaY < 0;
-
                 if (!isAtEnd && !isAtStart) {
                     e.preventDefault(); 
                     track.scrollLeft += e.deltaY;
@@ -57,7 +50,6 @@ function initCarousels() {
     });
 }
 
-// --- SEARCH LOGIC ---
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
@@ -71,7 +63,6 @@ function filterGames() {
     }
 }
 
-// --- GAME PAGE LOGIC ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
@@ -96,11 +87,9 @@ function openFullscreen() {
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
 }
 
-// --- INITIALIZE ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
-    
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
