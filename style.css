@@ -30,7 +30,7 @@ nav {
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- FEATURED BANNER --- */
+/* --- FEATURED BANNER (HOME ONLY) --- */
 .featured-banner {
     width: 95%; max-width: 1100px; height: 400px;
     margin: 0 auto 50px auto; border-radius: 20px;
@@ -53,7 +53,7 @@ nav {
 }
 .play-now-btn:hover { background: white; transform: scale(1.05); }
 
-/* --- CAROUSEL SYSTEM --- */
+/* --- CAROUSEL SYSTEM (HOME PAGE) --- */
 .carousel-container { width: 90%; max-width: 1100px; margin: 0 auto 60px auto; text-align: left; position: relative; }
 .carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
 .carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
@@ -75,9 +75,23 @@ nav {
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
-/* --- GAME CARDS --- */
+/* --- GRID SYSTEM (MULTIPLAYER/CATEGORY PAGES) --- */
+.game-grid {
+    display: flex;
+    flex-wrap: wrap;       /* Allows wrapping to new rows */
+    justify-content: center; 
+    gap: 30px;            /* Mandatory space between tiles */
+    padding: 20px 0;
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- UNIVERSAL GAME CARDS --- */
 .game-card {
-    flex: 0 0 auto; width: 200px; height: 200px; background: #0d1b2e;
+    flex: 0 0 200px; /* Width remains 200px */
+    height: 200px; 
+    background: #0d1b2e;
     border-radius: 12px; border: 2px solid #1c426e; text-decoration: none;
     overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
 }
@@ -86,7 +100,7 @@ nav {
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 5px; color: white; }
 
-/* --- GAME PLAYER (FIXED ANIMATIONS) --- */
+/* --- GAME PLAYER & BUTTONS --- */
 #game-container { 
     width: 100%; max-width: 1100px; height: 80vh; 
     background: #000; border: 4px solid #00aaff; 
@@ -95,28 +109,13 @@ nav {
 }
 #game-container:fullscreen { width: 100vw; height: 100vh; border: none; border-radius: 0; }
 
-/* The "Breathing" Play Button */
 #playButton { transition: transform 0.3s ease-in-out; text-align: center; }
 #clickableArea:hover #playButton { transform: scale(1.15); }
 .play-icon { font-size: 80px; text-shadow: 0 0 20px #00aaff; color: white; margin-bottom: 10px; }
 
-/* The Pill-Shaped Fullscreen Button */
 .fullscreen-btn { 
-    display: inline-block; 
-    background: #1c426e; 
-    color: #ffffff; 
-    border: 2px solid #00aaff; 
-    padding: 15px 45px; 
-    border-radius: 50px; /* Pill Shape */
-    cursor: pointer; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    transition: 0.3s; 
-    margin: 20px 0; 
+    display: inline-block; background: #1c426e; color: #ffffff; 
+    border: 2px solid #00aaff; padding: 15px 45px; border-radius: 50px; 
+    cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; margin: 20px 0; 
 }
-.fullscreen-btn:hover { 
-    background: #00aaff; 
-    color: #081221; 
-    transform: scale(1.05); 
-    box-shadow: 0 0 15px rgba(0, 170, 255, 0.5); 
-}
+.fullscreen-btn:hover { background: #00aaff; color: #081221; transform: scale(1.05); }
