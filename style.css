@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k V5.8 - Container & Iframe Fix */
+/* style.css - Classroom 24k V5.9 - Layout & Aesthetic Restoration */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 a { text-decoration: none !important; }
@@ -7,114 +7,99 @@ body {
     background-color: #081221;
     color: #ffffff;
     font-family: 'Segoe UI', sans-serif;
-    overflow-x: hidden;
+    text-align: center; /* Centers inline-block elements */
 }
 
-/* --- NAV & SEARCH (Unchanged) --- */
+/* --- 1. TOP HEADER & NAV --- */
+header {
+    background-color: #1c426e; 
+    display: table; margin: 25px auto; padding: 12px 50px; 
+    border-radius: 15px; border: 2px solid #00aaff; cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
+    transition: 0.3s;
+}
+
 nav {
     background-color: #0d1b2e;
     padding: 15px 5%;
     border-bottom: 2px solid #1c426e;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 2000;
+    display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 2000;
 }
 
 .nav-links a {
-    color: #00aaff !important;
-    font-weight: 800;
-    margin-left: 20px;
-    text-transform: uppercase;
+    color: #00aaff !important; font-weight: 800;
+    margin-left: 25px; text-transform: uppercase; transition: 0.3s;
 }
+.nav-links a:hover { color: #ffffff !important; text-shadow: 0 0 10px #00aaff; }
 
 #gameSearch {
-    background: #081221;
-    border: 1px solid #1c426e;
-    border-radius: 6px;
-    padding: 8px 15px;
-    color: white;
+    background: #081221; border: 2px solid #1c426e; border-radius: 8px;
+    padding: 10px 15px; color: white; width: 280px; outline: none;
 }
 
-/* --- THE GAME AREA (CRITICAL FIXES) --- */
+/* --- 2. GAME BOX & OVERLAY --- */
 #game-container {
-    position: relative; /* THIS KEEPS THE OVERLAY INSIDE */
-    width: 90%;
-    max-width: 1100px;
-    height: 75vh; /* Adjust this to change game height */
-    margin: 40px auto;
-    background: #000;
-    border: 4px solid #00aaff;
-    border-radius: 20px;
-    overflow: hidden; /* Clips anything that tries to leak out */
-}
-
-/* Forces the iframe to be the same size as the container */
-#game-iframe {
-    width: 100% !important;
-    height: 100% !important;
-    border: none;
-    display: block;
-}
-
-/* --- THE OVERLAY (Restricted to Parent) --- */
-#play-overlay {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    right: 0; 
-    bottom: 0; /* Attach to all 4 corners of #game-container */
-    background: rgba(8, 18, 33, 0.98);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 500;
-    transition: opacity 0.4s ease;
-}
-
-.neon-triangle {
-    font-size: 90px;
-    color: #f0faff;
-    margin-bottom: 20px;
-    text-shadow: 0 0 30px #00aaff;
-    cursor: pointer;
-}
-
-.play-now-btn {
-    background: #f0faff !important;
-    color: #081221 !important;
-    padding: 16px 50px;
-    border-radius: 50px;
-    font-weight: 900;
-    border: 2px solid #00aaff;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00aaff;
-}
-
-/* --- GRID & CAROUSEL (Protecting Square Icons) --- */
-.game-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px 5%;
-}
-
-.game-card {
-    flex: 0 0 180px !important;
-    width: 180px !important;
-    height: 180px !important;
-    border: 2px solid #1c426e;
-    border-radius: 12px;
-    overflow: hidden;
     position: relative;
+    width: 90%; max-width: 1100px; height: 75vh;
+    margin: 40px auto; /* Centers the box */
+    background: #000; border: 4px solid #00aaff;
+    border-radius: 20px; overflow: hidden;
 }
 
-.game-img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+#game-iframe { width: 100%; height: 100%; border: none; display: block; }
+
+#play-overlay {
+    position: absolute; inset: 0;
+    background: rgba(8, 18, 33, 0.98);
+    display: flex; flex-direction: column; 
+    justify-content: center; align-items: center; z-index: 500;
+    cursor: pointer;
 }
+
+/* Hover Logic: Triangle and Button turn blue when you hover over the overlay */
+.neon-triangle {
+    font-size: 100px; color: #f0faff; margin-bottom: 20px;
+    text-shadow: 0 0 30px #00aaff; transition: 0.3s;
+}
+.play-now-btn {
+    background: #f0faff !important; color: #081221 !important;
+    padding: 18px 60px; border-radius: 50px; font-weight: 900;
+    border: 2px solid #00aaff; box-shadow: 0 0 20px #00aaff; transition: 0.3s;
+}
+
+#play-overlay:hover .neon-triangle { color: #00aaff; transform: scale(1.1); }
+#play-overlay:hover .play-now-btn { 
+    background: #00aaff !important; color: #ffffff !important; 
+    box-shadow: 0 0 40px #00aaff; 
+}
+
+/* --- 3. FULLSCREEN BUTTON --- */
+.fullscreen-btn {
+    background: #1c426e; color: #00aaff;
+    border: 2px solid #00aaff; padding: 12px 30px;
+    border-radius: 10px; cursor: pointer; font-weight: bold;
+    margin: 20px auto; display: block; transition: 0.3s;
+}
+.fullscreen-btn:hover { background: #00aaff; color: #fff; }
+
+/* --- 4. ABOUT SECTION (Centered with Gradient Border) --- */
+.about-section {
+    width: 90%; max-width: 1100px; 
+    margin: 60px auto; padding: 4px; /* The padding creates the border thickness */
+    border-radius: 20px;
+    background: linear-gradient(135deg, #00aaff, #1c426e, #0d1b2e); /* Non-animated gradient */
+}
+.about-content {
+    background: #081221; padding: 40px; border-radius: 16px; text-align: left;
+}
+.about-content h2 { color: #00aaff; margin-bottom: 20px; text-transform: uppercase; }
+
+/* --- 5. GRID & CAROUSEL --- */
+.category-header {
+    text-align: left; margin: 50px 5% 20px 5%;
+    color: #00aaff; font-size: 1.8rem; text-transform: uppercase;
+}
+.game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
+.game-card { flex: 0 0 180px; width: 180px; height: 180px; position: relative; border-radius: 15px; border: 2px solid #1c426e; overflow: hidden; }
+.game-card img { width: 100%; height: 100%; object-fit: cover; }
