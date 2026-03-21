@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Master Script */
+/* style.css - Classroom 24k Final Polish */
 
 body {
     background-color: #081221; 
@@ -53,7 +53,7 @@ nav {
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- GAME DISPLAY & PLAY BUTTON --- */
+/* --- GAME DISPLAY & SMOOTH GROW --- */
 .game-title-header {
     font-size: 2.2rem; margin: 15px 0 25px 0;
     text-transform: uppercase; letter-spacing: 2px;
@@ -66,6 +66,15 @@ nav {
     position: relative; overflow: hidden;
 }
 
+/* Ensures container fills the screen when fullscreened */
+#game-container:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    border: none;
+    border-radius: 0;
+}
+
 #clickableArea {
     width: 100%; height: 100%; display: flex;
     justify-content: center; align-items: center; cursor: pointer;
@@ -73,11 +82,11 @@ nav {
 }
 
 #playButton { 
-    transition: transform 0.4s ease-in-out; /* THE GROWTH EFFECT */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
 }
 
 #clickableArea:hover #playButton { 
-    transform: scale(1.15); /* Grows when you hover the game area */
+    transform: scale(1.15); 
 }
 
 .play-icon { 
@@ -101,11 +110,11 @@ nav {
 
 .fullscreen-btn:hover {
     background: #00aaff; color: #081221;
-    transform: scale(1.05); /* Button also grows slightly */
+    transform: scale(1.05);
     box-shadow: 0 0 20px rgba(0, 170, 255, 0.6);
 }
 
-/* --- GAME CARDS (Home/Popular Page) --- */
+/* --- GAME CARDS --- */
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
 
 .game-card {
@@ -117,7 +126,7 @@ nav {
 }
 
 .game-card:hover { 
-    transform: translateY(-8px) scale(1.03); /* Card grows and lifts */
+    transform: translateY(-8px) scale(1.03); 
     border-color: #00aaff; 
 }
 
@@ -127,7 +136,7 @@ nav {
 
 .game-img-container img { 
     width: 100%; height: 100%; 
-    object-fit: cover; /* Fills entire box */
+    object-fit: cover; 
 }
 
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; }
