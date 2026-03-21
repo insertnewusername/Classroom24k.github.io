@@ -1,5 +1,6 @@
 /**
- * script.js - Classroom 24k Final Master
+ * script.js - Classroom 24k Final Master REPAIR V2.0
+ * Integrated with Neon CSS and Optimized Search
  */
 
 // --- 1. GOOGLE ANALYTICS ---
@@ -20,7 +21,7 @@ function generateNav() {
     if (!nav) return;
     nav.innerHTML = `
         <div class="search-container">
-            <input type="text" id="gameSearch" placeholder="Search" 
+            <input type="text" id="gameSearch" placeholder="Search Games..." 
                    onkeydown="if(event.key==='Enter') filterGames()">
         </div>
         <div class="nav-links">
@@ -41,7 +42,7 @@ function filterGames() {
     let cards = document.getElementsByClassName('game-card');
     let noResultsMsg = document.getElementById('noResults');
     
-    // REDIRECT: If searching from popular.html or a game page, jump to index
+    // REDIRECT: If searching from a sub-page, jump to index with the query
     const path = window.location.pathname;
     const isHomePage = path.endsWith('index.html') || path.endsWith('/') || path === "";
 
@@ -50,13 +51,12 @@ function filterGames() {
         return;
     }
 
-    // UI Elements to toggle
+    // UI Elements to toggle for a clean search result look
     const featuredBanner = document.querySelector('.featured-banner');
     const allCarousels = document.querySelectorAll('.carousel-container');
     const allGamesHeader = document.querySelector('.full-library-section h2');
 
     if (input.length > 0) {
-        // Hide regular layout for search results
         if (featuredBanner) featuredBanner.style.display = "none";
         allCarousels.forEach(c => { c.style.display = "none"; });
         
@@ -65,7 +65,6 @@ function filterGames() {
             allGamesHeader.style.marginTop = "20px";
         }
     } else {
-        // Restore regular layout
         if (featuredBanner) featuredBanner.style.display = "flex";
         allCarousels.forEach(c => { c.style.display = "block"; });
         if (allGamesHeader) {
@@ -79,7 +78,7 @@ function filterGames() {
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
         if (title.includes(input)) {
-            card.style.display = "flex"; 
+            card.style.display = "block"; // Card handles its own flex settings in CSS
             visibleCount++;
         } else {
             card.style.display = "none";
@@ -91,12 +90,11 @@ function filterGames() {
     }
 }
 
-// --- 4. CAROUSEL LOGIC (Arrows + Wheel) ---
+// --- 4. CAROUSEL LOGIC ---
 function scrollCarousel(btn, direction) {
     const container = btn.closest('.carousel-container');
     const track = container.querySelector('.carousel-track');
-    // Scroll by roughly 3 cards (200px + 20px gap) * 3 = 660px
-    const scrollAmount = 660; 
+    const scrollAmount = 660; // Approx 3 cards + gaps
     track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
 }
 
@@ -107,7 +105,6 @@ function initCarousels() {
             if (e.deltaY !== 0) {
                 const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth && e.deltaY > 0;
                 const isAtStart = track.scrollLeft <= 0 && e.deltaY < 0;
-                // Only prevent default if we aren't at the very start/end of the track
                 if (!isAtEnd && !isAtStart) { 
                     e.preventDefault(); 
                     track.scrollLeft += e.deltaY; 
@@ -117,30 +114,30 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING (Clean Play Button, No Hover Box) ---
+// --- 5. GAME LOADING (Neon Fix) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
-    // Clear the container and add the "Play Now" overlay
+    // Uses the .play-now-btn class from your CSS for the neon glow/animation
     container.innerHTML = `
         <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:#081221;" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton" style="transition: transform 0.2s ease; pointer-events: none;">
-                <div class="play-icon" style="font-size:120px; color:#00aaff; text-shadow: 0 0 25px rgba(0, 170, 255, 0.6);">▶</div>
-                <div class="play-text" style="color:#00aaff; font-size:2rem; letter-spacing:5px; margin-top:10px; font-weight:bold;">PLAY NOW</div>
+            <div class="play-now-btn" style="font-size:1.5rem; letter-spacing:2px;">
+                CLICK TO PLAY
             </div>
         </div>`;
-    
-    // Manual hover listener to ensure a snappy scale without blue boxes
-    const area = document.getElementById('clickableArea');
-    const btn = document.getElementById('playButton');
-    area.onmouseenter = () => btn.style.transform = "scale(1.1)";
-    area.onmouseleave = () => btn.style.transform = "scale(1)";
 }
 
 function loadIframe(url) {
     const container = document.getElementById('game-container');
-    container.innerHTML = `<iframe id="game-frame" src="${url}" style="width:100%; height:100%; border:none;" allowfullscreen="true"></iframe>`;
+    // Allow standard game permissions
+    container.innerHTML = `
+        <iframe id="game-frame" 
+                src="${url}" 
+                style="width:100%; height:100%; border:none;" 
+                allowfullscreen="true"
+                allow="autoplay; fullscreen; keyboard-map">
+        </iframe>`;
 }
 
 function openFullscreen() {
@@ -157,15 +154,19 @@ window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     initCarousels();
     
-    // Handle cross-page search parameters
+    // Cross-page search handling
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
-            // Small delay to ensure all carousels/cards are rendered before filtering
-            setTimeout(filterGames, 150); 
+            setTimeout(() => {
+                filterGames();
+                // Smooth scroll to the library section on arrival
+                const lib = document.querySelector('.full-library-section');
+                if(lib) lib.scrollIntoView({ behavior: 'smooth' });
+            }, 200); 
         }
     }
 });
