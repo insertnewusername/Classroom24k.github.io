@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR - V4.0 CLEAN */
+/* style.css - Classroom 24k Final Master REPAIR - V4.1 CLEAN */
 
 * { box-sizing: border-box; }
 
@@ -30,103 +30,18 @@ nav {
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.2s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- WIDER LAYOUT (1480px) --- */
-.featured-banner, .carousel-container, #game-container, .about-section {
+/* --- LAYOUT WIDTHS --- */
+.featured-banner, .carousel-container, .about-section {
     width: 96%; 
     max-width: 1480px !important; 
-    margin-left: auto; 
-    margin-right: auto;
+    margin: 0 auto;
 }
 
-/* --- FEATURED BANNER --- */
-.featured-banner {
-    height: 500px;
-    margin: 0 auto 50px auto; border-radius: 20px;
-    position: relative; overflow: hidden;
-    border: 3px solid #00aaff; display: flex; align-items: flex-end;
-    background: #000; cursor: pointer;
-}
-
-.featured-banner::before {
-    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
-    transition: transform 0.4s ease; z-index: 1;
-}
-.featured-banner:hover::before { transform: scale(1.05); }
-
-.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 20%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
-
-/* --- STATIC NEON BUTTONS (Animations Removed - Hover Only) --- */
-.play-now-btn, .fullscreen-btn {
-    display: inline-block; 
-    background: #ffffff !important; 
-    color: #081221 !important; 
-    padding: 12px 45px; 
-    border-radius: 50px; 
-    font-weight: bold;
-    text-transform: uppercase; 
-    border: 2px solid #00aaff;
-    box-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
-    transition: all 0.3s ease-in-out; /* Smooth hover transition */
-    cursor: pointer;
-    text-decoration: none;
-}
-
-/* Hover Interaction: Breathe + Color Change + Glow */
-.play-now-btn:hover, .fullscreen-btn:hover { 
-    background: #00aaff !important; 
-    color: #ffffff !important;
-    transform: scale(1.1); 
-    box-shadow: 0 0 25px #00aaff, 0 0 45px rgba(0, 170, 255, 0.6);
-}
-
-.fullscreen-btn {
-    margin-top: 45px !important; 
-    margin-bottom: 50px;
-}
-
-/* --- CAROUSELS --- */
-.carousel-container { 
-    margin-bottom: 60px; 
-    text-align: left; position: relative;
-    border: 1px solid rgba(0, 170, 255, 0.3); 
-    padding: 25px; border-radius: 15px; background: rgba(13, 27, 46, 0.5);
-}
-.carousel-title { 
-    color: #00aaff !important; text-transform: uppercase; 
-    margin: 0 0 20px 0; font-size: 1.6rem; letter-spacing: 3px; 
-}
-
-.carousel-track {
-    display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;
-    gap: 20px; overflow-x: auto; padding: 10px 0; 
-    scroll-behavior: smooth; scrollbar-width: none; width: 100%;
-}
-.carousel-track::-webkit-scrollbar { display: none; }
-
-/* --- GAME CARDS --- */
-.game-card {
-    flex: 0 0 200px !important; width: 200px !important; height: 200px !important; 
-    background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
-    text-decoration: none !important; overflow: hidden; position: relative;
-    transition: 0.3s; display: flex; flex-direction: column;
-}
-.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
-
-.game-img-container { width: 100%; height: 160px; position: relative; z-index: 1; overflow: hidden; }
-.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
-
-.game-info { 
-    width: 100%; height: 40px; z-index: 5;
-    background: #1c426e !important; 
-    display: flex; align-items: center; justify-content: center;
-    border-top: 2px solid #00aaff;
-}
-.game-info h3 { margin: 0; color: #ffffff !important; font-size: 0.8rem; text-transform: uppercase; }
-
-/* --- GAME CONTAINER (Shrunk to 80vh) --- */
+/* --- GAME CONTAINER (SHRUNK WIDTH, FIXED HEIGHT) --- */
 #game-container { 
     height: 80vh; 
+    width: 80%; /* Shrinks the length (horizontal) to 80% screen width */
+    max-width: 1100px; /* Prevents it from being too stretched on large monitors */
     background: #000; border: 4px solid #00aaff; 
     border-radius: 20px; margin: 0 auto; position: relative;
     overflow: hidden; 
@@ -137,9 +52,79 @@ nav {
     width: 100% !important; height: 100% !important; border: none !important; display: block;
 }
 
+/* --- NEON WHITE-BLUE BUTTONS (Hover Logic) --- */
+.play-now-btn, .fullscreen-btn {
+    display: inline-block; 
+    background: #f0faff !important; /* Neon White-Blue Base */
+    color: #081221 !important; 
+    padding: 12px 45px; 
+    border-radius: 50px; 
+    font-weight: bold;
+    text-transform: uppercase; 
+    border: 2px solid #00aaff;
+    box-shadow: 0 0 15px #00aaff, 0 0 5px #ffffff;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Container hover: Scale and swap to Electric Blue */
+.play-now-btn:hover, .fullscreen-btn:hover { 
+    background: #00aaff !important; 
+    color: #ffffff !important;
+    transform: scale(1.1); 
+    box-shadow: 0 0 30px #00aaff, 0 0 10px #ffffff;
+}
+
+/* Ensure the Triangle inside the Play Now button changes color too */
+.play-now-btn:hover div {
+    color: #ffffff !important; /* Changes from current color to white on hover */
+    text-shadow: 0 0 10px #ffffff;
+}
+
+.fullscreen-btn {
+    margin-top: 55px !important; /* Shifted further down from the frame */
+    margin-bottom: 60px;
+}
+
+/* --- CAROUSELS --- */
+.carousel-container { 
+    margin-bottom: 60px; text-align: left; position: relative;
+    border: 1px solid rgba(0, 170, 255, 0.3); 
+    padding: 25px; border-radius: 15px; background: rgba(13, 27, 46, 0.5);
+}
+
+/* --- GAME CARDS (LARGER TITLES) --- */
+.game-card {
+    flex: 0 0 200px !important; width: 200px !important; height: 215px !important; /* Height increased for bigger text */
+    background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e;
+    text-decoration: none !important; overflow: hidden; position: relative;
+    transition: 0.3s; display: flex; flex-direction: column;
+}
+.game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
+
+.game-img-container { width: 100%; height: 160px; position: relative; z-index: 1; overflow: hidden; }
+.game-img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+.game-info { 
+    width: 100%; height: 55px; /* Taller info box */
+    z-index: 5; background: #1c426e !important; 
+    display: flex; align-items: center; justify-content: center;
+    border-top: 2px solid #00aaff;
+}
+.game-info h3 { 
+    margin: 0; color: #ffffff !important; 
+    font-size: 1.1rem; /* Larger Title Size */
+    text-transform: uppercase;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* --- STATIC ABOUT SECTION --- */
 .about-section {
     margin: 60px auto; padding: 4px; border-radius: 20px; 
-    background: #1c426e; /* Animation removed */
+    background: #1c426e; 
 }
 .about-content { background: #081221; padding: 40px; border-radius: 16px; text-align: left; }
