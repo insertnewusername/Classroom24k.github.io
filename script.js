@@ -21,9 +21,9 @@ function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
     
-    // Redirect logic for searching from game pages
+    // Redirect logic for searching from game pages back to home
     if (cards.length === 0) {
-        window.location.href = "index.html?search=" + input;
+        window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
     }
 
@@ -50,6 +50,12 @@ function setupGame(gameUrl) {
 function loadIframe(url) {
     const container = document.getElementById('game-container');
     container.innerHTML = `<iframe id="game-frame" src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
+    
+    // Focus the iframe so controls work immediately
+    setTimeout(() => {
+        const frame = document.getElementById('game-frame');
+        if(frame) frame.focus();
+    }, 100);
 }
 
 // --- FULLSCREEN LOGIC ---
@@ -64,6 +70,7 @@ function openFullscreen() {
     else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
 
+// Check for search query on page load (Helper for search across pages)
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     const urlParams = new URLSearchParams(window.location.search);
