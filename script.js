@@ -1,78 +1,141 @@
-/* script.js - Classroom 24k V5.9 Master Restoration */
+/**
+ * script.js - Classroom 24k Final Merged Master
+ */
 
-// 1. GOOGLE ANALYTICS
+// --- 1. GOOGLE ANALYTICS ---
 (function() {
-    const G_ID = 'G-XXXXXXXXXX'; // Replace with yours
-    const s = document.createElement('script');
-    s.async = true; s.src = `https://www.googletagmanager.com/gtag/js?id=${G_ID}`;
-    document.head.appendChild(s);
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-2D22NMRV2Z";
+    document.head.appendChild(gtagScript);
+
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date()); gtag('config', G_ID);
+    window.gtag = gtag; // Make globally accessible
+    gtag('js', new Date());
+    gtag('config', 'G-2D22NMRV2Z');
 })();
 
-// 2. SEARCH ENGINE
-function filterGames() {
-    const term = document.getElementById('gameSearch').value.toLowerCase();
-    const cards = document.querySelectorAll('.game-card');
-    cards.forEach(card => {
-        const title = card.querySelector('h3') ? card.querySelector('h3').innerText.toLowerCase() : '';
-        card.style.display = title.includes(term) ? "flex" : "none";
+// --- 2. UNIVERSAL NAVIGATION ---
+// Automatically fills <nav></nav> on every page
+function generateNav() {
+    const nav = document.querySelector('nav');
+    if (!nav) return;
+    
+    // Using your V2.0 styling logic for the nav-links
+    nav.innerHTML = `
+        <div class="search-container">
+            <input type="text" id="gameSearch" placeholder="Search games..." oninput="filterGames()">
+        </div>
+        <div class="nav-links">
+            <a href="index.html#popular">Popular</a>
+            <a href="index.html#multiplayer">Multiplayer</a>
+            <a href="index.html#sports">Sports</a>
+            <a href="index.html#new">New</a>
+        </div>
+    `;
+}
+
+// --- 3. CAROUSEL LOGIC ---
+function scrollCarousel(btn, direction) {
+    const wrapper = btn.closest('.carousel-wrapper');
+    if(!wrapper) return;
+    const track = wrapper.querySelector('.carousel-track');
+    // Scroll by 660px (roughly 3 cards: 200px + 20px gap)
+    track.scrollBy({ left: direction * 660, behavior: 'smooth' });
+}
+
+// Support for mouse scroll wheels and mobile touch
+function initCarousels() {
+    const tracks = document.querySelectorAll('.carousel-track');
+    tracks.forEach(track => {
+        track.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                e.preventDefault();
+                track.scrollLeft += e.deltaY;
+            }
+        });
     });
 }
 
-// 3. GAME LOADER
-function setupGame(url) {
-    const container = document.getElementById('game-container');
-    if (!container) return;
-
-    // "Game" text removed as requested
-    container.innerHTML = `
-        <div id="play-overlay">
-            <div class="neon-triangle">▶</div>
-            <div class="play-now-btn">PLAY NOW</div>
-        </div>
-        <iframe src="" id="game-iframe" allowfullscreen></iframe>
-    `;
-
-    document.getElementById('play-overlay').onclick = function() {
-        const iframe = document.getElementById('game-iframe');
-        iframe.src = url;
-        this.remove(); // Removes overlay so game is clickable
-        iframe.focus();
-    };
-}
-
-// 4. FULLSCREEN (Fixed Aesthetic)
-function toggleFullscreen() {
-    const container = document.getElementById('game-container');
-    if (!document.fullscreenElement) {
-        if (container.requestFullscreen) container.requestFullscreen();
-        else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
-    } else {
-        document.exitFullscreen();
+// --- 4. SEARCH LOGIC ---
+function filterGames() {
+    let inputField = document.getElementById('gameSearch');
+    if (!inputField) return;
+    
+    let input = inputField.value.toLowerCase();
+    let cards = document.getElementsByClassName('game-card');
+    
+    // If on a subpage (no cards found), redirect to home with search query
+    if (cards.length === 0 && input.length > 0) {
+        window.location.href = "index.html?search=" + encodeURIComponent(input);
+        return;
+    }
+    
+    for (let card of cards) {
+        let h3 = card.querySelector('h3');
+        if (h3) {
+            let title = h3.innerText.toLowerCase();
+            card.style.display = title.includes(input) ? "" : "none";
+        }
     }
 }
 
-// 5. CAROUSEL & INIT
-function scrollCarousel(id, dir) {
-    const track = document.getElementById(id);
-    if(track) track.scrollBy({ left: dir === 'left' ? -600 : 600, behavior: 'smooth' });
+// --- 5. GAME LOADING (Improved Neon Style) ---
+function setupGame(gameUrl) {
+    const container = document.getElementById('game-container');
+    if (!container) return;
+    
+    // Using the play-icon and play-text classes for the vertical stack
+    container.innerHTML = `
+        <div id="clickableArea" 
+             style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" 
+             onclick="loadIframe('${gameUrl}')">
+            <div id="playButton" style="text-align:center;">
+                <div class="play-icon" style="font-size:80px; color:#f0faff; text-shadow: 0 0 20px #00aaff; margin-bottom:15px;">▶</div>
+                <div class="play-text" style="font-weight:bold; letter-spacing:2px; color:white; font-size:1.2rem; border:2px solid #00aaff; padding:10px 30px; border-radius:50px; box-shadow: 0 0 15px #00aaff;">PLAY</div>
+            </div>
+        </div>`;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const search = document.getElementById('gameSearch');
-    if (search) search.oninput = filterGames;
+function loadIframe(url) {
+    const container = document.getElementById('game-container');
+    container.innerHTML = `
+        <iframe id="game-frame" 
+                src="${url}" 
+                style="width:100%; height:100%; border:none;" 
+                allowfullscreen="true" 
+                webkitallowfullscreen="true" 
+                mozallowfullscreen="true">
+        </iframe>`;
+}
 
-    const fsBtn = document.querySelector('.fullscreen-btn');
-    if (fsBtn) fsBtn.onclick = toggleFullscreen;
+// --- 6. FULLSCREEN ---
+function openFullscreen() {
+    const elem = document.getElementById("game-container");
+    if (!elem) return;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    }
+}
 
-    // Restore Category Scroll
-    document.querySelectorAll('.carousel-track').forEach(track => {
-        let isDown = false; let startX; let scrollLeft;
-        track.onmousedown = (e) => { isDown = true; startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; };
-        track.onmouseleave = () => isDown = false;
-        track.onmouseup = () => isDown = false;
-        track.onmousemove = (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - track.offsetLeft; const walk = (x - startX) * 2; track.scrollLeft = scrollLeft - walk; };
-    });
+// --- 7. INITIALIZE ON LOAD ---
+window.addEventListener('DOMContentLoaded', () => {
+    generateNav();
+    initCarousels();
+    
+    // Check if we arrived from a search redirect
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchVal = urlParams.get('search');
+    if (searchVal) {
+        const input = document.getElementById('gameSearch');
+        if (input) { 
+            input.value = searchVal; 
+            filterGames(); 
+        }
+    }
 });
