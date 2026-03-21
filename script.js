@@ -32,7 +32,7 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (Triggers on Enter) ---
+// --- 3. SEARCH LOGIC (Enter to trigger, hides UI) ---
 function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
@@ -54,19 +54,18 @@ function filterGames() {
     const allGamesHeader = document.querySelector('.full-library-section h2');
 
     if (input.length > 0) {
-        // VANISH the banner and all carousels
+        // HIDE banner and all carousels
         if (featuredBanner) featuredBanner.style.display = "none";
-        allCarousels.forEach(c => c.style.display = "none");
+        allCarousels.forEach(c => { c.style.display = "none"; });
         
-        // Change the main header to show we are in search mode
         if (allGamesHeader) {
             allGamesHeader.innerText = "Search Results";
-            allGamesHeader.style.marginTop = "20px"; // Move it up since banner is gone
+            allGamesHeader.style.marginTop = "20px";
         }
     } else {
-        // RESET if search is cleared
-        if (featuredBanner) featuredBanner.style.display = "";
-        allCarousels.forEach(c => c.style.display = "");
+        // RESET UI if search is empty
+        if (featuredBanner) featuredBanner.style.display = "flex";
+        allCarousels.forEach(c => { c.style.display = "block"; });
         if (allGamesHeader) {
             allGamesHeader.innerText = "All Games";
             allGamesHeader.style.marginTop = "80px";
@@ -78,7 +77,7 @@ function filterGames() {
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
         if (title.includes(input)) {
-            card.style.display = "";
+            card.style.display = "flex"; // Changed to flex to match your CSS
             visibleCount++;
         } else {
             card.style.display = "none";
@@ -110,7 +109,7 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING ---
+// --- 5. GAME LOADING & FULLSCREEN ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
@@ -143,7 +142,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
-            setTimeout(filterGames, 100); 
+            setTimeout(filterGames, 150); // Slight delay for smoother loading
         }
     }
 });
