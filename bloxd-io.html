@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloxd.io | Classroom 24k</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header onclick="location.href='index.html'">
+        <h1>Classroom 24k</h1>
+    </header>
+
+    <nav></nav>
+
+    <div class="container">
+        <h1 class="game-title-header">Bloxd.io</h1>
+
+        <div id="game-container"></div>
+
+        <button class="fullscreen-btn" onclick="openFullscreen()">
+            ⛶ Fullscreen Mode
+        </button>
+
+        <div class="info-box">
+            <h2>About the Game</h2>
+            <p>
+                Bloxd.io is a massive multiplayer parkour and building game. 
+                <strong>Note:</strong> This game is being loaded through a Google Proxy to ensure better connectivity and performance on restricted networks.
+            </p>
+            
+            <h3>Controls</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><strong>WASD:</strong> Movement</li>
+                <li><strong>Spacebar:</strong> Jump</li>
+                <li><strong>Shift:</strong> Sprint</li>
+                <li><strong>C:</strong> Crouch</li>
+                <li><strong>B / E:</strong> Shop & Inventory</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script>
+        // We wrap the URL in the Google Gadget Proxy format
+        const targetUrl = "https://bloxd.io";
+        const proxiedUrl = `https://www.google.com/ig/ifr?url=https://www.google.com/ig/modules/freetext.xml&up_content=${encodeURIComponent(targetUrl)}`;
+        
+        setupGame(proxiedUrl);
+    </script>
+
+</body>
+</html>
