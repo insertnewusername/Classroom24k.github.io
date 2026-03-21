@@ -8,6 +8,16 @@ body {
     overflow-x: hidden;
 }
 
+/* --- GAME PAGE SPECIFIC TITLE --- */
+.game-page-title {
+    color: #ffffff !important; /* Forces text to be white */
+    font-size: 2.5rem; /* Makes it much bigger */
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 20px 0;
+    text-shadow: 0 0 15px rgba(0, 170, 255, 0.4); /* Subtle glow while staying white */
+}
+
 /* --- HEADER & NAV --- */
 header {
     background-color: #1c426e; width: 60%; max-width: 700px;
@@ -39,7 +49,6 @@ nav {
     background: #000; cursor: pointer;
 }
 
-/* The Background Image Layer */
 .featured-banner::before {
     content: "";
     position: absolute;
@@ -49,7 +58,6 @@ nav {
     z-index: 1;
 }
 
-/* Zoom image on banner hover */
 .featured-banner:hover::before { transform: scale(1.1); }
 
 .featured-overlay { 
@@ -68,7 +76,6 @@ nav {
     position: relative; z-index: 3;
 }
 
-/* Zoom button ONLY on button hover */
 .play-now-btn:hover {
     transform: scale(1.2);
     background: white;
@@ -97,7 +104,6 @@ nav {
 .left-btn { left: -25px; }
 .right-btn { right: -25px; }
 
-/* --- FULL LIBRARY GRID --- */
 .game-grid {
     display: flex; flex-wrap: wrap; justify-content: center; 
     gap: 30px; padding: 40px 0; width: 100%; max-width: 1200px; margin: 0 auto;
@@ -114,7 +120,7 @@ nav {
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 5px; color: white; }
 
-/* --- ABOUT SECTION & BUTTONS (For Game Pages) --- */
+/* --- ABOUT SECTION & BUTTONS --- */
 .about-section {
     max-width: 1100px; margin: 40px auto; padding: 3px; 
     border-radius: 20px; background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
