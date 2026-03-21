@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master Edition */
+/* style.css - Classroom 24k Full Box & Fullscreen Restored */
 
 body {
     background-color: #081221; 
@@ -23,7 +23,7 @@ header h1 {
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
 }
 
-/* --- WIDER NAVIGATION & LEFT SEARCH --- */
+/* --- WIDER NAVIGATION --- */
 nav {
     background-color: #0d1b2e; 
     padding: 15px 30px; 
@@ -44,8 +44,6 @@ nav {
     width: 200px; transition: all 0.3s ease;
 }
 
-#gameSearch:focus { border-color: #00aaff; box-shadow: 0 0 10px rgba(0, 170, 255, 0.3); }
-
 .nav-links {
     display: flex; gap: 35px; margin-left: 30px;
     text-transform: uppercase; font-weight: bold;
@@ -53,9 +51,9 @@ nav {
 }
 
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
-.nav-links a:hover { color: #ffffff; text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); }
+.nav-links a:hover { color: #ffffff; }
 
-/* --- GAME ELEMENTS --- */
+/* --- GAME DISPLAY --- */
 .game-title-header {
     font-size: 2.2rem; margin: 15px 0 25px 0;
     text-transform: uppercase; letter-spacing: 2px;
@@ -74,26 +72,29 @@ nav {
     background: radial-gradient(circle, #1c426e 0%, #081221 100%);
 }
 
-/* --- WHITE NEON PLAY BUTTON --- */
-#playButton { transition: transform 0.7s ease-in-out; }
 .play-icon { 
     font-size: 100px; color: #ffffff; 
     text-shadow: 0 0 10px #ffffff, 0 0 20px #00aaff, 0 0 40px #00aaff;
 }
+
 .play-text { 
     font-size: 24px; color: #ffffff; font-weight: bold; 
     letter-spacing: 4px; margin-top: 10px; text-shadow: 0 0 10px #ffffff;
 }
-#clickableArea:hover #playButton { transform: scale(1.1); }
 
-/* --- FULLSCREEN BUTTON --- */
+/* --- FULLSCREEN BUTTON (CRITICAL) --- */
 .fullscreen-btn {
+    display: inline-block; /* Ensures it's visible */
     background: #1c426e; color: #ffffff; border: 2px solid #00aaff;
     padding: 15px 45px; border-radius: 50px; cursor: pointer;
     font-size: 1rem; font-weight: bold; text-transform: uppercase;
-    transition: 0.3s; margin-bottom: 40px; outline: none;
+    transition: 0.3s; margin: 20px 0 40px 0; outline: none;
 }
-.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px rgba(0, 170, 255, 0.6); }
+
+.fullscreen-btn:hover {
+    background: #00aaff; color: #081221;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.6);
+}
 
 /* --- INFO BOX --- */
 .info-box {
@@ -101,29 +102,33 @@ nav {
     text-align: left; max-width: 900px; margin: 0 auto 60px auto;
     position: relative; border: 2px solid transparent; background-clip: padding-box;
 }
+
 .info-box::before {
     content: ''; position: absolute; top: -2px; bottom: -2px; left: -2px; right: -2px;
-    background: linear-gradient(135deg, #00d4ff, #1c426e); 
-    border-radius: 16px; z-index: -1;
+    background: linear-gradient(135deg, #00d4ff, #1c426e); border-radius: 16px; z-index: -1;
 }
 
-/* --- UPDATED GAME CARD (SHOW FULL IMAGE) --- */
+/* --- GAME CARDS (NO BLACK BORDERS) --- */
 .game-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+
 .game-card {
     background: #0d1b2e; width: 180px; height: 180px; 
     border-radius: 12px; border: 2px solid #1c426e;
     text-decoration: none; overflow: hidden; transition: 0.4s;
     display: flex; flex-direction: column;
 }
+
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
 .game-img-container { 
     width: 100%; height: 135px; background: #000; 
-    display: flex; justify-content: center; align-items: center; 
+    overflow: hidden;
 }
+
 .game-img-container img { 
     width: 100%; height: 100%; 
-    object-fit: contain; /* Shows entire image without cropping */
+    object-fit: cover; /* BACK TO COVER: Fills the entire box, no gaps */
 }
+
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; }
 .game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; color: #fff; }
