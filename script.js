@@ -1,29 +1,32 @@
-/* script.js - Classroom 24k V4.7 Master */
+/* script.js - Classroom 24k V4.8 Master */
 
-// --- 1. GOOGLE ANALYTICS (Insert your Measurement ID below) ---
-// This ensures your traffic is tracked correctly.
+// --- 1. GOOGLE ANALYTICS (Auto-Config) ---
 (function() {
+    var GA_ID = 'G-XXXXXXXXXX'; // <-- CHANGE THIS ONCE
     var gaScript = document.createElement('script');
     gaScript.async = true;
-    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX'; // REPLACE WITH YOUR ID
+    gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.appendChild(gaScript);
 
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX'); // REPLACE WITH YOUR ID
+    gtag('config', GA_ID);
+
+    // Helper for tracking specific game plays
+    window.trackGame = function(name) {
+        gtag('event', 'play_game', { 'game_name': name });
+    };
 })();
 
 // --- 2. GAME LOADING & PLAY OVERLAY ---
-/**
- * Sets up the game container with a Play Button before loading the Iframe.
- * This prevents the page from lagging and ensures the neon hover effect is visible.
- */
-function setupGame(url) {
+function setupGame(url, gameName = "Game") {
     const container = document.getElementById('game-container');
-    
-    // Create the Play Overlay with the Triangle and "Play Now" text
-    // The CSS handles the neon blue-white to solid blue color swap
+    if(!container) return;
+
+    // Track which game is being loaded
+    if(window.trackGame) window.trackGame(gameName);
+
     container.innerHTML = `
         <div id="play-overlay" style="
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -34,96 +37,74 @@ function setupGame(url) {
                 <span class="neon-triangle" style="margin-right: 12px;">▶</span> PLAY NOW
             </div>
         </div>
-        <iframe src="" id="game-iframe" allowfullscreen></iframe>
+        <iframe src="" id="game-iframe" allow="autoplay; fullscreen; keyboard" allowfullscreen></iframe>
     `;
 
-    // Click Event to remove overlay and start the game
     document.getElementById('start-game-trigger').addEventListener('click', function(e) {
         e.preventDefault();
         const iframe = document.getElementById('game-iframe');
-        iframe.src = url;
-        document.getElementById('play-overlay').style.display = 'none';
+        const overlay = document.getElementById('play-overlay');
         
-        // Focus the iframe so keyboard controls work immediately
-        iframe.focus();
+        iframe.src = url;
+        
+        // Use a slight fade out for polish, then REMOVE from DOM
+        overlay.style.transition = "opacity 0.3s";
+        overlay.style.opacity = "0";
+        setTimeout(() => { 
+            overlay.remove(); 
+            iframe.focus(); // Vital for keyboard controls!
+        }, 300);
     });
 }
 
 // --- 3. FULLSCREEN FUNCTIONALITY ---
-/**
- * Targets the game container to expand the game to the whole screen.
- */
 function toggleFullscreen() {
     const elem = document.getElementById('game-container');
-    
+    if (!elem) return;
+
     if (!document.fullscreenElement) {
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) { /* Firefox */
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
-            elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { /* IE/Edge */
-            elem.msRequestFullscreen();
-        }
+        if (elem.requestFullscreen) { elem.requestFullscreen(); }
+        else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
+        else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); }
     } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
+        document.exitFullscreen();
     }
 }
 
 // --- 4. CAROUSEL SCROLLING ---
-/**
- * Scrolls the specific carousel track left or right.
- */
 function scrollCarousel(trackId, direction) {
     const track = document.getElementById(trackId);
     if (!track) return;
 
-    const scrollAmount = 400; // Adjust for scroll speed
-    if (direction === 'left') {
-        track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-    } else {
-        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
+    const scrollAmount = 450; // Matches card width + gap
+    track.scrollBy({ 
+        left: direction === 'left' ? -scrollAmount : scrollAmount, 
+        behavior: 'smooth' 
+    });
 }
 
 // --- 5. SEARCH & FILTERING ---
-/**
- * Filters game cards in real-time based on search input.
- */
 function filterGames() {
     const input = document.getElementById('gameSearch').value.toLowerCase();
     const cards = document.querySelectorAll('.game-card');
 
     cards.forEach(card => {
         const title = card.querySelector('h3').textContent.toLowerCase();
-        if (title.includes(input)) {
-            card.style.display = "flex";
-        } else {
-            card.style.display = "none";
-        }
+        card.style.display = title.includes(input) ? "flex" : "none";
     });
 }
 
 // --- 6. INITIALIZATION ---
-/**
- * Runs when the page is loaded to set up persistent listeners.
- */
 document.addEventListener('DOMContentLoaded', () => {
-    // Connect the Search Bar to the filter function
     const searchBar = document.getElementById('gameSearch');
     if (searchBar) {
-        searchBar.addEventListener('keyup', filterGames);
+        searchBar.addEventListener('input', filterGames); // 'input' is smoother than 'keyup'
     }
 
-    // Connect the Fullscreen button
     const fsBtn = document.querySelector('.fullscreen-btn');
     if (fsBtn) {
         fsBtn.addEventListener('click', toggleFullscreen);
     }
-
-    // Optional: Log to console to verify script loaded
-    console.log("Classroom 24k V4.7 Engine: Active");
+    
+    console.log("Classroom 24k V4.8: Engine Online");
 });
