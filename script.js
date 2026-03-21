@@ -114,43 +114,25 @@ function initCarousels() {
     });
 }
 
-// --- 5. GAME LOADING (Neon Triangle & Text Repair) ---
+// --- 5. GAME LOADING (Expanding Triangle + Text) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
     container.innerHTML = `
         <div id="clickableArea" style="width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; background:#081221;" onclick="loadIframe('${gameUrl}')">
-            <div id="neonPulseContainer" style="text-align:center;">
-                <div style="font-size:100px; color:#ffffff; text-shadow: 0 0 15px #00aaff, 0 0 30px #ffffff; line-height:1;">▶</div>
-                <div class="play-now-btn" style="margin-top:20px;">
+            
+            <div class="play-now-btn" style="background:transparent !important; border:none !important; box-shadow:none !important; animation: neonPulse 2s infinite !important;">
+                
+                <div style="font-size:120px; color:#ffffff; text-shadow: 0 0 15px #00aaff, 0 0 30px #ffffff; line-height:1; margin-bottom:10px;">▶</div>
+                
+                <div style="background:#ffffff; color:#081221; padding:12px 45px; border-radius:50px; border:2px solid #00aaff; box-shadow: 0 0 10px #00aaff; font-weight:bold; letter-spacing:2px;">
                     PLAY NOW
                 </div>
+                
             </div>
         </div>`;
 }
-
-function loadIframe(url) {
-    const container = document.getElementById('game-container');
-    container.innerHTML = `
-        <iframe id="game-frame" 
-                src="${url}" 
-                style="width:100%; height:100%; border:none;" 
-                allowfullscreen="true"
-                allow="autoplay; fullscreen; keyboard-map">
-        </iframe>`;
-}
-
-function openFullscreen() {
-    const elem = document.getElementById("game-container");
-    // Ensure the button in HTML has class="fullscreen-btn" to trigger the CSS animation
-    if (elem) {
-        if (elem.requestFullscreen) elem.requestFullscreen();
-        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-        else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
-    }
-}
-
 // --- 6. INITIALIZATION ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
