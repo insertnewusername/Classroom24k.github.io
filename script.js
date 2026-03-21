@@ -21,8 +21,7 @@ function generateNav() {
     nav.innerHTML = `
         <div class="search-container">
             <input type="text" id="gameSearch" placeholder="Search" 
-                   oninput="filterGames()" 
-                   onkeydown="if(event.key==='Enter') filterGames()">
+                   onkeydown="if(event.key==='Enter') filterGames(true)">
         </div>
         <div class="nav-links">
             <a href="index.html">Home</a>
@@ -33,46 +32,52 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC ---
-function filterGames() {
+// --- 3. SEARCH LOGIC (With Multi-page Redirection) ---
+function filterGames(isEnterPressed = false) {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
     
     let input = inputField.value.toLowerCase();
-    let cards = document.getElementsByClassName('game-card');
-    let noResultsMsg = document.getElementById('noResults');
     
-    const isGamePage = document.getElementById('game-container');
-    if (isGamePage && input.length > 0) {
+    // Check if we are on the Home Page
+    const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
+
+    // If NOT on home page and user presses Enter, redirect to home with search query
+    if (!isHomePage && isEnterPressed && input.length > 0) {
         window.location.href = "index.html?search=" + encodeURIComponent(input);
         return;
     }
 
-    const featured = document.querySelector('.featured-banner');
-    const sections = document.querySelectorAll('.carousel-container, .full-library-section h2');
+    // If we ARE on home page, perform the UI filtering
+    if (isHomePage) {
+        let cards = document.getElementsByClassName('game-card');
+        let noResultsMsg = document.getElementById('noResults');
+        const featured = document.querySelector('.featured-banner');
+        const sections = document.querySelectorAll('.carousel-container, .full-library-section h2');
 
-    if (input.length > 0) {
-        if (featured) featured.style.display = "none";
-        sections.forEach(s => s.style.display = "none");
-    } else {
-        if (featured) featured.style.display = "";
-        sections.forEach(s => s.style.display = "");
-        if (noResultsMsg) noResultsMsg.style.display = "none";
-    }
-
-    let visibleCount = 0;
-    for (let card of cards) {
-        let title = card.querySelector('h3').innerText.toLowerCase();
-        if (title.includes(input)) {
-            card.style.display = "";
-            visibleCount++;
+        if (input.length > 0) {
+            if (featured) featured.style.display = "none";
+            sections.forEach(s => s.style.display = "none");
         } else {
-            card.style.display = "none";
+            if (featured) featured.style.display = "";
+            sections.forEach(s => s.style.display = "";
+            if (noResultsMsg) noResultsMsg.style.display = "none";
         }
-    }
 
-    if (noResultsMsg) {
-        noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
+        let visibleCount = 0;
+        for (let card of cards) {
+            let title = card.querySelector('h3').innerText.toLowerCase();
+            if (title.includes(input)) {
+                card.style.display = "";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        }
+
+        if (noResultsMsg) {
+            noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
+        }
     }
 }
 
@@ -131,6 +136,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const searchVal = urlParams.get('search');
     if (searchVal) {
         const input = document.getElementById('gameSearch');
-        if (input) { input.value = searchVal; setTimeout(filterGames, 50); }
+        if (input) { 
+            input.value = searchVal; 
+            // Small delay to ensure all game cards are rendered before filtering
+            setTimeout(() => filterGames(false), 100); 
+        }
     }
 });
