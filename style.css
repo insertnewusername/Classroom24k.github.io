@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master REPAIR - V3.5 FULL */
+/* style.css - Classroom 24k Final Master REPAIR - V3.6 FULL */
 
 * { box-sizing: border-box; }
 
@@ -30,17 +30,17 @@ nav {
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.2s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- WIDER LAYOUT (1450px) --- */
+/* --- WIDER LAYOUT (1480px - Tiny bit wider) --- */
 .featured-banner, .carousel-container, #game-container, .about-section {
     width: 96%; 
-    max-width: 1450px !important; 
+    max-width: 1480px !important; 
     margin-left: auto; 
     margin-right: auto;
 }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
-    height: 480px;
+    height: 500px; /* Slightly taller for the wider screen */
     margin: 0 auto 50px auto; border-radius: 20px;
     position: relative; overflow: hidden;
     border: 3px solid #00aaff; display: flex; align-items: flex-end;
@@ -59,7 +59,7 @@ nav {
 .featured-title { color: #ffffff !important; font-size: 3rem; margin: 0; text-decoration: none !important; }
 .featured-desc { color: #ffffff !important; margin: 10px 0 20px 0; text-decoration: none !important; }
 
-/* --- NEON BUTTONS & PULSE ANIMATION --- */
+/* --- NEON BUTTONS & PULSE ANIMATION (Expanded scale) --- */
 .play-now-btn, .fullscreen-btn {
     display: inline-block; 
     background: #ffffff !important; 
@@ -82,10 +82,10 @@ nav {
     box-shadow: 0 0 25px #00aaff, 0 0 40px #00aaff;
 }
 
-/* FIX: Fullscreen spacing from frame */
+/* FIX: Fullscreen shifted down significantly from frame */
 .fullscreen-btn {
-    margin-top: 35px !important; 
-    margin-bottom: 40px;
+    margin-top: 50px !important; 
+    margin-bottom: 60px;
 }
 
 /* --- CAROUSELS --- */
@@ -134,7 +134,7 @@ nav {
 
 .game-img-container { 
     width: 100%; 
-    height: 160px; /* Locked height for image */
+    height: 160px; /* Locked height */
     position: relative; 
     z-index: 1; 
     overflow: hidden;
@@ -143,7 +143,7 @@ nav {
 
 .game-info { 
     width: 100%; 
-    height: 40px; /* Locked height for text - No Collision */
+    height: 40px; /* Locked height - No Collision */
     z-index: 5;
     background: #1c426e !important; 
     display: flex; align-items: center; justify-content: center;
@@ -192,7 +192,7 @@ nav {
     }
     50% { 
         box-shadow: 0 0 25px #00aaff, 0 0 15px #ffffff; 
-        transform: scale(1.08); /* This handles the triangle & button growth */
+        transform: scale(1.1); /* Triangle and button both expand 10% */
     }
     100% { 
         box-shadow: 0 0 10px #00aaff, 0 0 5px #ffffff; 
