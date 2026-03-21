@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Carousel Edition */
+/* style.css - Clean Horizontal Edition */
 
 body {
     background-color: #081221; 
@@ -28,25 +28,39 @@ nav {
 .nav-links a { color: #00aaff; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff; }
 
-/* --- FEATURED BANNER --- */
-.featured-banner {
-    width: 95%; max-width: 1100px; height: 350px;
-    margin: 0 auto 40px auto; border-radius: 20px;
-    position: relative; overflow: hidden;
-    background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
-    border: 3px solid #00aaff; display: flex; align-items: flex-end;
+/* --- FIXED CAROUSEL SYSTEM --- */
+.carousel-container { 
+    width: 95%; 
+    max-width: 1100px; 
+    margin: 0 auto 50px auto; 
+    text-align: left; 
 }
-.featured-overlay { background: linear-gradient(to top, rgba(8, 18, 33, 0.9), transparent); width: 100%; padding: 40px; text-align: left; }
-.featured-overlay h2 { font-size: 2.5rem; margin: 0; }
 
-/* --- CAROUSEL SYSTEM --- */
-.carousel-container { width: 95%; max-width: 1100px; margin: 0 auto 50px auto; text-align: left; }
-.carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
-.carousel-wrapper { position: relative; display: flex; align-items: center; }
+.carousel-title { 
+    font-size: 1.4rem; 
+    color: #00aaff; 
+    text-transform: uppercase; 
+    border-left: 4px solid #00aaff; 
+    padding-left: 15px; 
+    margin-bottom: 15px; 
+}
+
+.carousel-wrapper { 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+}
 
 .carousel-track {
-    display: flex; gap: 20px; overflow-x: auto; padding: 15px 5px;
-    scroll-behavior: smooth; scrollbar-width: none;
+    display: flex; 
+    flex-direction: row; /* Force horizontal */
+    flex-wrap: nowrap;   /* Prevent stacking */
+    gap: 20px; 
+    overflow-x: auto; 
+    padding: 15px 5px;
+    scroll-behavior: smooth; 
+    scrollbar-width: none;
+    width: 100%;
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 
@@ -62,21 +76,19 @@ nav {
 
 /* --- GAME CARDS --- */
 .game-card {
-    flex: 0 0 auto; width: 180px; height: 180px; background: #0d1b2e;
-    border-radius: 12px; border: 2px solid #1c426e; text-decoration: none;
-    overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
+    flex: 0 0 auto; /* Essential: prevents cards from squeezing */
+    width: 200px; 
+    height: 200px; 
+    background: #0d1b2e;
+    border-radius: 12px; 
+    border: 2px solid #1c426e; 
+    text-decoration: none;
+    overflow: hidden; 
+    transition: 0.3s; 
+    display: flex; 
+    flex-direction: column;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
-.game-img-container { width: 100%; height: 135px; overflow: hidden; }
+.game-img-container { width: 100%; height: 150px; overflow: hidden; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
-.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
-
-/* --- GAME PLAYER & BUTTONS --- */
-#game-container { width: 100%; max-width: 1100px; height: 80vh; background: #000; border: 4px solid #00aaff; border-radius: 15px; margin: 0 auto 10px auto; position: relative; overflow: hidden; }
-#game-container:fullscreen { width: 100vw; height: 100vh; border: none; border-radius: 0; }
-.fullscreen-btn { display: inline-block; background: #1c426e; color: #ffffff; border: 2px solid #00aaff; padding: 15px 45px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; transition: 0.3s; margin: 20px 0; }
-.fullscreen-btn:hover { background: #00aaff; color: #081221; transform: scale(1.05); }
-
-#playButton { transition: transform 0.6s ease-in-out; }
-#clickableArea:hover #playButton { transform: scale(1.06); }
-.play-icon { font-size: 80px; text-shadow: 0 0 20px #00aaff; }
+.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; padding: 5px; }
