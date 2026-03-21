@@ -21,7 +21,7 @@ function generateNav() {
     nav.innerHTML = `
         <div class="search-container">
             <input type="text" id="gameSearch" placeholder="Search" 
-                   onkeydown="if(event.key==='Enter') filterGames(true)">
+                   onkeydown="if(event.key==='Enter') filterGames()">
         </div>
         <div class="nav-links">
             <a href="index.html">Home</a>
@@ -32,52 +32,54 @@ function generateNav() {
     `;
 }
 
-// --- 3. SEARCH LOGIC (With Multi-page Redirection) ---
-function filterGames(isEnterPressed = false) {
+// --- 3. SEARCH LOGIC ---
+function filterGames() {
     let inputField = document.getElementById('gameSearch');
     if (!inputField) return;
     
     let input = inputField.value.toLowerCase();
     
-    // Check if we are on the Home Page
-    const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
-
-    // If NOT on home page and user presses Enter, redirect to home with search query
-    if (!isHomePage && isEnterPressed && input.length > 0) {
-        window.location.href = "index.html?search=" + encodeURIComponent(input);
-        return;
+    // Determine if we are on the main library page (index.html)
+    // This checks the end of the URL to support both local files and hosted domains
+    const isMainLibrary = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
+    
+    // REDIRECTION LOGIC:
+    // If we are NOT on index.html, or we are on a game-specific page, redirect to index
+    if (!isMainLibrary || document.getElementById('game-container')) {
+        if (input.length > 0) {
+            window.location.href = "index.html?search=" + encodeURIComponent(input);
+            return;
+        }
     }
 
-    // If we ARE on home page, perform the UI filtering
-    if (isHomePage) {
-        let cards = document.getElementsByClassName('game-card');
-        let noResultsMsg = document.getElementById('noResults');
-        const featured = document.querySelector('.featured-banner');
-        const sections = document.querySelectorAll('.carousel-container, .full-library-section h2');
+    // FILTERING LOGIC (Only runs if we are on index.html and not playing a game):
+    let cards = document.getElementsByClassName('game-card');
+    let noResultsMsg = document.getElementById('noResults');
+    const featured = document.querySelector('.featured-banner');
+    const sections = document.querySelectorAll('.carousel-container, .full-library-section h2');
 
-        if (input.length > 0) {
-            if (featured) featured.style.display = "none";
-            sections.forEach(s => s.style.display = "none");
+    if (input.length > 0) {
+        if (featured) featured.style.display = "none";
+        sections.forEach(s => s.style.display = "none");
+    } else {
+        if (featured) featured.style.display = "";
+        sections.forEach(s => s.style.display = "");
+        if (noResultsMsg) noResultsMsg.style.display = "none";
+    }
+
+    let visibleCount = 0;
+    for (let card of cards) {
+        let title = card.querySelector('h3').innerText.toLowerCase();
+        if (title.includes(input)) {
+            card.style.display = "";
+            visibleCount++;
         } else {
-            if (featured) featured.style.display = "";
-            sections.forEach(s => s.style.display = "";
-            if (noResultsMsg) noResultsMsg.style.display = "none";
+            card.style.display = "none";
         }
+    }
 
-        let visibleCount = 0;
-        for (let card of cards) {
-            let title = card.querySelector('h3').innerText.toLowerCase();
-            if (title.includes(input)) {
-                card.style.display = "";
-                visibleCount++;
-            } else {
-                card.style.display = "none";
-            }
-        }
-
-        if (noResultsMsg) {
-            noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
-        }
+    if (noResultsMsg) {
+        noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
     }
 }
 
@@ -138,8 +140,8 @@ window.addEventListener('DOMContentLoaded', () => {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
-            // Small delay to ensure all game cards are rendered before filtering
-            setTimeout(() => filterGames(false), 100); 
+            // Give the DOM a moment to settle before filtering
+            setTimeout(filterGames, 100); 
         }
     }
 });
