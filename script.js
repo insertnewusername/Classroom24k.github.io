@@ -1,4 +1,4 @@
-// --- UNIVERSAL NAVIGATION GENERATOR ---
+// --- UNIVERSAL NAVIGATION ---
 function generateNav() {
     const nav = document.querySelector('nav');
     if (!nav) return;
@@ -16,12 +16,12 @@ function generateNav() {
     `;
 }
 
-// --- SEARCH FILTER (Only triggers on Enter) ---
+// --- SEARCH LOGIC (Only triggers on Enter) ---
 function filterGames() {
     let input = document.getElementById('gameSearch').value.toLowerCase();
     let cards = document.getElementsByClassName('game-card');
     
-    // If we aren't on a grid page, redirect to index with search query (Optional logic)
+    // Redirect logic for searching from game pages
     if (cards.length === 0) {
         window.location.href = "index.html?search=" + input;
         return;
@@ -33,7 +33,7 @@ function filterGames() {
     }
 }
 
-// --- GAME LOADING LOGIC ---
+// --- GAME LOADING ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
@@ -49,18 +49,21 @@ function setupGame(gameUrl) {
 
 function loadIframe(url) {
     const container = document.getElementById('game-container');
-    container.innerHTML = `<iframe src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
+    container.innerHTML = `<iframe id="game-frame" src="${url}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
 }
 
+// --- FULLSCREEN LOGIC ---
 function openFullscreen() {
-    const elem = document.querySelector("iframe");
-    if (!elem) return;
+    const elem = document.getElementById("game-frame");
+    if (!elem) {
+        alert("Please click PLAY before entering fullscreen!");
+        return;
+    }
     if (elem.requestFullscreen) elem.requestFullscreen();
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
     else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
 }
 
-// Check for search query on page load (Helper for search across pages)
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     const urlParams = new URLSearchParams(window.location.search);
