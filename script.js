@@ -39,13 +39,8 @@ function filterGames() {
     if (!inputField) return;
     
     let input = inputField.value.toLowerCase();
+    const isMainLibrary = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('.html') === false;
     
-    // Determine if we are on the main library page (index.html)
-    // This checks the end of the URL to support both local files and hosted domains
-    const isMainLibrary = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
-    
-    // REDIRECTION LOGIC:
-    // If we are NOT on index.html, or we are on a game-specific page, redirect to index
     if (!isMainLibrary || document.getElementById('game-container')) {
         if (input.length > 0) {
             window.location.href = "index.html?search=" + encodeURIComponent(input);
@@ -53,7 +48,6 @@ function filterGames() {
         }
     }
 
-    // FILTERING LOGIC (Only runs if we are on index.html and not playing a game):
     let cards = document.getElementsByClassName('game-card');
     let noResultsMsg = document.getElementById('noResults');
     const featured = document.querySelector('.featured-banner');
@@ -84,23 +78,18 @@ function filterGames() {
     }
 }
 
-// --- 4. CAROUSEL & UTILS ---
+// --- 4. CAROUSEL LOGIC ---
 function scrollCarousel(btn, direction) {
     const wrapper = btn.closest('.carousel-wrapper');
     const track = wrapper.querySelector('.carousel-track');
-    track.scrollBy({ left: direction * 660, behavior: 'smooth' });
-}
-
-function initCarousels() {
-    const tracks = document.querySelectorAll('.carousel-track');
-    tracks.forEach(track => {
-        track.addEventListener('wheel', (e) => {
-            if (e.deltaY !== 0) {
-                const isAtEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth && e.deltaY > 0;
-                const isAtStart = track.scrollLeft <= 0 && e.deltaY < 0;
-                if (!isAtEnd && !isAtStart) { e.preventDefault(); track.scrollLeft += e.deltaY; }
-            }
-        }, { passive: false });
+    
+    // 225px (1 card + gap) * 5 cards = 1125px
+    // This shifts 5 games, leaving the 6th one as the new first icon.
+    const scrollStep = 1125; 
+    
+    track.scrollBy({ 
+        left: direction * scrollStep, 
+        behavior: 'smooth' 
     });
 }
 
@@ -134,15 +123,15 @@ function openFullscreen() {
 // --- 6. INITIALIZATION ---
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
-    initCarousels();
+    
+    // Check for search redirect
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
         const input = document.getElementById('gameSearch');
         if (input) { 
             input.value = searchVal; 
-            // Give the DOM a moment to settle before filtering
-            setTimeout(filterGames, 100); 
+            setTimeout(filterGames, 150); 
         }
     }
 });
