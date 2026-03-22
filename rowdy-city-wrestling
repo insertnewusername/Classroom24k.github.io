@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rowdy City Wrestling | Classroom 24k</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header onclick="location.href='index.html'">
+        <h1>Classroom 24k</h1>
+    </header>
+
+    <nav></nav>
+
+    <div class="container">
+        <h2 class="game-page-title">Rowdy City Wrestling</h2>
+
+        <div id="game-container"></div>
+
+        <button class="fullscreen-btn" onclick="openFullscreen()">
+            ⛶ Fullscreen Mode
+        </button>
+
+        <div class="about-section">
+            <div class="about-content">
+                <h2>About the Game</h2>
+                <p>
+                    Rowdy City Wrestling is a retro style, arcade wrestling game. The main game mode is the career mode where you fight in 1vs1 matches, royal rumble events and a 6 person free for all brawl mode. 
+                </p>
+                
+                <h3 style="color: #00aaff; margin-top: 20px;">Controls</h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li><strong>WASD:</strong> Movement</li>
+                    <li><strong>Spacebar:</strong> Jump</li>
+                    <li><strong>Shift:</strong> Sprint</li>
+                    <li><strong>C:</strong> Crouch</li>
+                    <li><strong>B / E:</strong> Shop & Inventory</li>
+                    <li><strong>Esc:</strong> Exit Fullscreen / Cursor Lock</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script>
+        setupGame("https://htmlxm.github.io/h6/rowdy-city-wrestling/");
+    </script>
+
+</body>
+</html>
