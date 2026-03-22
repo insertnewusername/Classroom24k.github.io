@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Refined Master (Perfect Edge Alignment) */
+/* style.css - Classroom 24k Final Master (Fluid Multi-Icon & Aligned) */
 
 body {
     background-color: #081221; 
@@ -7,33 +7,22 @@ body {
     margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
-/* --- THE GAME PAGE TITLE --- */
-.game-page-title {
-    color: #ffffff !important;
-    font-size: 2.2rem; 
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin: 25px 0 15px 0;
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-/* --- SHARED MASTER LENGTH --- */
-/* This forces Header, Container, and About to be the exact same width */
+/* --- MASTER ALIGNMENT --- */
+/* This ensures everything from Header to Grid shares the same edges */
 header, 
 .container,
 .about-section {
-    width: 90%;
-    max-width: 1325px; /* Locked for 6 columns on your PC, fluid for others */
+    width: 92%;           /* Occupies 92% of screen width */
+    max-width: 1400px;    /* Prevents it from getting too wide on 4K */
     margin-left: auto !important;
     margin-right: auto !important;
     box-sizing: border-box;
 }
 
-/* --- HEADER & NAV --- */
+/* --- HEADER --- */
 header {
     background-color: #1c426e; 
-    padding: 10px; 
+    padding: 12px; 
     border-radius: 10px; 
     border: 2px solid #00aaff; 
     cursor: pointer;
@@ -45,6 +34,7 @@ header {
 header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
+/* --- NAVIGATION (Search & Categories) --- */
 nav {
     background-color: #0d1b2e; 
     padding: 15px 30px; 
@@ -53,10 +43,30 @@ nav {
     display: flex; 
     align-items: center; 
     justify-content: center;
+    flex-wrap: wrap; /* Allows stacking on small phones */
+    gap: 20px;
 }
-.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
-#gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 8px 12px; color: white; width: 200px; outline: none; }
-.nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
+.search-container { 
+    display: flex; 
+    align-items: center; 
+    padding-right: 25px; 
+    border-right: 2px solid #1c426e; 
+}
+#gameSearch { 
+    background: #081221; 
+    border: 1px solid #1c426e; 
+    border-radius: 6px; 
+    padding: 8px 12px; 
+    color: white; 
+    width: 220px; 
+    outline: none; 
+}
+.nav-links { 
+    display: flex; 
+    gap: 30px; 
+    text-transform: uppercase; 
+    font-weight: bold; 
+}
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff !important; }
 
@@ -64,53 +74,60 @@ nav {
 .featured-banner {
     width: 100%;
     height: 400px; 
-    margin: 0 auto 50px auto; 
-    border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #00aaff; 
-    display: flex; align-items: flex-end; background: #000; cursor: pointer;
+    margin-bottom: 50px; 
+    border-radius: 20px; 
+    position: relative; 
+    overflow: hidden; 
+    border: 3px solid #00aaff; 
+    display: flex; 
+    align-items: flex-end; 
+    background: #000; 
+    cursor: pointer;
 }
 .featured-banner::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
     transition: transform 0.7s ease; z-index: 1;
 }
-.featured-banner:hover::before { transform: scale(1.08); }
-.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, rgba(8, 18, 33, 0.4) 60%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
+.featured-overlay { 
+    position: relative; z-index: 2; 
+    background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, transparent 100%); 
+    width: 100%; padding: 50px; text-align: left; 
+}
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
-
-.play-now-btn { display: inline-block; background: #00aaff; color: #081221; padding: 12px 40px; border-radius: 50px; font-weight: bold; text-transform: uppercase; transition: 0.3s ease; position: relative; z-index: 3; }
 
 /* --- CAROUSELS --- */
 .carousel-container { 
     width: 100%; 
-    margin: 0 auto 60px auto; 
+    margin-bottom: 60px; 
     text-align: left; 
     position: relative; 
 }
-.carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
-
+.carousel-title { 
+    font-size: 1.4rem; color: #00aaff; text-transform: uppercase; 
+    border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; 
+}
 .carousel-track { 
     display: flex; 
     gap: 25px; 
     overflow-x: hidden; 
     padding: 15px 0; 
-    scroll-behavior: smooth; 
     width: 100%; 
     flex-wrap: nowrap;
 }
 
-/* --- GRID & CARDS (The Alignment Fix) --- */
+/* --- GRID & CARDS (The Dynamic Column Fix) --- */
 .game-grid { 
-    display: flex; 
-    flex-wrap: wrap; 
-    /* This spreads the tiles to touch the left and right edges exactly */
-    justify-content: space-between; 
-    gap: 25px 15px; 
+    display: grid;
+    /* auto-fill: Fits more icons on big screens; minmax: handles phone sizes */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    justify-items: center;
+    gap: 25px; 
     padding: 30px 0; 
     width: 100%; 
 }
 
 .game-card { 
-    flex: 0 0 200px; 
     width: 200px; 
     height: 200px; 
     background: #0d1b2e; 
@@ -131,17 +148,20 @@ nav {
 
 /* --- ABOUT SECTION (Battery-Saver Static) --- */
 .about-section {
-    margin: 40px auto; 
     padding: 2px; 
     border-radius: 20px; 
-    background: #00aaff; /* Solid color, no GPU drain */
+    background: #00aaff; 
+    margin-bottom: 60px;
 }
 .about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
 
 /* --- MOBILE & SMALL SCREEN TWEAKS --- */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     header, .container, .about-section { width: 95%; }
+    .search-container { border-right: none; padding-right: 0; }
+    .nav-links { gap: 15px; font-size: 0.8rem; }
     .featured-title { font-size: 2rem; }
-    .game-card { flex: 0 0 160px; height: 160px; }
-    .game-grid { justify-content: center; } /* Centers icons on tiny phone screens */
+    .game-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    .game-card { width: 140px; height: 160px; }
+    .game-img-container { height: 110px; }
 }
