@@ -62,6 +62,10 @@ nav {
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
     transition: transform 0.7s ease; z-index: 1;
 }
+/* --- FEATURED BANNER HOVER FIX --- */
+.featured-banner:hover::before { 
+    transform: scale(1.08); /* This makes the background image grow on hover */
+}
 .featured-overlay { 
     position: relative; z-index: 2; 
     background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, transparent 100%); 
