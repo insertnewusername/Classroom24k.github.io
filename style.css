@@ -8,12 +8,11 @@ body {
 }
 
 /* --- MASTER ALIGNMENT --- */
-/* This ensures everything from Header to Grid shares the same edges */
 header, 
 .container,
 .about-section {
-    width: 92%;           /* Occupies 92% of screen width */
-    max-width: 1400px;    /* Prevents it from getting too wide on 4K */
+    width: 92%;
+    max-width: 1400px;
     margin-left: auto !important;
     margin-right: auto !important;
     box-sizing: border-box;
@@ -34,7 +33,7 @@ header {
 header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
-/* --- NAVIGATION (Search & Categories) --- */
+/* --- NAVIGATION --- */
 nav {
     background-color: #0d1b2e; 
     padding: 15px 30px; 
@@ -43,46 +42,20 @@ nav {
     display: flex; 
     align-items: center; 
     justify-content: center;
-    flex-wrap: wrap; /* Allows stacking on small phones */
+    flex-wrap: wrap; 
     gap: 20px;
 }
-.search-container { 
-    display: flex; 
-    align-items: center; 
-    padding-right: 25px; 
-    border-right: 2px solid #1c426e; 
-}
-#gameSearch { 
-    background: #081221; 
-    border: 1px solid #1c426e; 
-    border-radius: 6px; 
-    padding: 8px 12px; 
-    color: white; 
-    width: 220px; 
-    outline: none; 
-}
-.nav-links { 
-    display: flex; 
-    gap: 30px; 
-    text-transform: uppercase; 
-    font-weight: bold; 
-}
+.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
+#gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 8px 12px; color: white; width: 220px; outline: none; }
+.nav-links { display: flex; gap: 30px; text-transform: uppercase; font-weight: bold; }
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff !important; }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
-    width: 100%;
-    height: 400px; 
-    margin-bottom: 50px; 
-    border-radius: 20px; 
-    position: relative; 
-    overflow: hidden; 
-    border: 3px solid #00aaff; 
-    display: flex; 
-    align-items: flex-end; 
-    background: #000; 
-    cursor: pointer;
+    width: 100%; height: 400px; margin-bottom: 50px; 
+    border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #00aaff; 
+    display: flex; align-items: flex-end; background: #000; cursor: pointer;
 }
 .featured-banner::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -95,120 +68,55 @@ nav {
     width: 100%; padding: 50px; text-align: left; 
 }
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
+.featured-desc { font-size: 1.2rem; color: white; margin: 10px 0 20px 0; opacity: 0.9; }
+
+/* --- PLAY NOW BUTTON (The Missing Piece) --- */
+.play-now-btn { 
+    display: inline-block; background: #00aaff; color: #081221; 
+    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
+    text-transform: uppercase; transition: 0.3s ease; 
+    position: relative; z-index: 3; text-decoration: none;
+}
+.play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
 
 /* --- CAROUSELS --- */
-.carousel-container { 
-    width: 100%; 
-    margin-bottom: 60px; 
-    text-align: left; 
-    position: relative; 
-}
-
-.carousel-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    /* Prevents buttons from causing horizontal scroll on the whole page */
-    overflow: visible; 
-}
-
-.carousel-title { 
-    font-size: 1.4rem; 
-    color: #00aaff; 
-    text-transform: uppercase; 
-    border-left: 4px solid #00aaff; 
-    padding-left: 15px; 
-    margin-bottom: 15px; 
-}
+.carousel-container { width: 100%; margin-bottom: 60px; text-align: left; position: relative; }
+.carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; overflow: visible; }
+.carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
 
 .carousel-track { 
-    display: flex; 
-    gap: 25px; 
-    /* This enables finger swiping on mobile/trackpads */
-    overflow-x: auto; 
-    scroll-behavior: smooth; 
-    width: 100%; 
-    flex-wrap: nowrap;
-    padding: 15px 0;
-    /* Hides the ugly scrollbar while keeping the swipe functionality */
+    display: flex; gap: 25px; overflow-x: auto; scroll-behavior: smooth; 
+    width: 100%; flex-wrap: nowrap; padding: 15px 0;
     scrollbar-width: none; 
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 
-/* --- SCROLL BUTTONS (Desktop & Mobile) --- */
+/* --- SCROLL BUTTONS --- */
 .scroll-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 45px;
-    height: 45px;
-    /* Glass effect: semi-transparent and blurred */
-    background: rgba(13, 27, 46, 0.8);
-    backdrop-filter: blur(5px); 
-    color: #00aaff;
-    border: 2px solid #00aaff;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 100; /* Ensure they stay on top of images */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 45px; height: 45px; background: rgba(13, 27, 46, 0.8);
+    backdrop-filter: blur(5px); color: #00aaff; border: 2px solid #00aaff;
+    border-radius: 50%; cursor: pointer; z-index: 100;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 1.2rem; transition: 0.3s;
 }
-
 .left-btn { left: -22px; }
 .right-btn { right: -22px; }
+.scroll-btn:hover { background: #00aaff; color: white; box-shadow: 0 0 20px #00aaff; }
 
-/* Hover Aesthetics */
-.scroll-btn:hover {
-    background: #00aaff;
-    color: #ffffff;
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 0 0 25px rgba(0, 170, 255, 0.8);
-}
-
-/* --- MOBILE SPECIFIC BUTTON TWEAK --- */
-@media (max-width: 768px) {
-    /* Bring buttons slightly inward on mobile so they don't go off-screen */
-    .left-btn { left: 5px; }
-    .right-btn { right: 5px; }
-    
-    .scroll-btn {
-        width: 40px;
-        height: 40px;
-        background: rgba(13, 27, 46, 0.9); /* More solid on mobile for visibility */
-    }
-
-    .carousel-track {
-        gap: 15px; /* Tighter gap for smaller screens */
-    }
-}
-
-/* --- GRID & CARDS (The Dynamic Column Fix) --- */
+/* --- GRID & CARDS --- */
 .game-grid { 
     display: grid;
-    /* auto-fill: Fits more icons on big screens; minmax: handles phone sizes */
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    justify-items: center;
-    gap: 25px; 
-    padding: 30px 0; 
-    width: 100%; 
+    justify-items: center; gap: 25px; padding: 30px 0; width: 100%; 
 }
 
 .game-card { 
-    width: 200px; 
-    height: 200px; 
-    background: #0d1b2e; 
-    border-radius: 12px; 
-    border: 2px solid #1c426e; 
-    text-decoration: none; 
-    overflow: hidden; 
-    transition: 0.3s; 
-    display: flex; 
-    flex-direction: column;
+    flex: 0 0 200px; /* IMPORTANT: Restores carousel scrolling */
+    width: 200px; height: 200px; background: #0d1b2e; 
+    border-radius: 12px; border: 2px solid #1c426e; 
+    text-decoration: none; overflow: hidden; transition: 0.3s; 
+    display: flex; flex-direction: column;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
@@ -217,22 +125,17 @@ nav {
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; }
 .game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- ABOUT SECTION (Battery-Saver Static) --- */
-.about-section {
-    padding: 2px; 
-    border-radius: 20px; 
-    background: #00aaff; 
-    margin-bottom: 60px;
-}
+/* --- ABOUT SECTION --- */
+.about-section { padding: 2px; border-radius: 20px; background: #00aaff; margin-bottom: 60px; }
 .about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
 
-/* --- MOBILE & SMALL SCREEN TWEAKS --- */
+/* --- MOBILE TWEAKS --- */
 @media (max-width: 768px) {
     header, .container, .about-section { width: 95%; }
-    .search-container { border-right: none; padding-right: 0; }
-    .nav-links { gap: 15px; font-size: 0.8rem; }
     .featured-title { font-size: 2rem; }
+    .left-btn { left: 5px; }
+    .right-btn { right: 5px; }
     .game-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-    .game-card { width: 140px; height: 160px; }
+    .game-card { flex: 0 0 140px; width: 140px; height: 160px; }
     .game-img-container { height: 110px; }
 }
