@@ -62,10 +62,7 @@ nav {
     background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
     transition: transform 0.7s ease; z-index: 1;
 }
-/* --- FEATURED BANNER HOVER FIX --- */
-.featured-banner:hover::before { 
-    transform: scale(1.08); /* This makes the background image grow on hover */
-}
+.featured-banner:hover::before { transform: scale(1.08); }
 .featured-overlay { 
     position: relative; z-index: 2; 
     background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, transparent 100%); 
@@ -74,14 +71,52 @@ nav {
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
 .featured-desc { font-size: 1.2rem; color: white; margin: 10px 0 20px 0; opacity: 0.9; }
 
-/* --- PLAY NOW BUTTON (The Missing Piece) --- */
-.play-now-btn { 
-    display: inline-block; background: #00aaff; color: #081221; 
-    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
-    text-transform: uppercase; transition: 0.3s ease; 
-    position: relative; z-index: 3; text-decoration: none;
+/* --- RESPONSIVE GAME PLAYER --- */
+#game-container { 
+    width: 100%; 
+    max-width: 1100px; 
+    height: 75vh; 
+    background: #000; 
+    border: 3px solid #00aaff; 
+    border-radius: 15px; 
+    margin: 0 auto 10px auto; 
+    position: relative; 
+    overflow: hidden; 
 }
-.play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
+
+/* Ensure the actual iframe fills the container space */
+#game-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Restored Play Icon Growth */
+.iframe-hover-zone:hover .play-icon, 
+.iframe-hover-zone:hover .play-text {
+    filter: drop-shadow(0 0 15px #00aaff);
+    transform: scale(1.1);
+}
+
+.play-icon, .play-text {
+    transition: transform 0.2s ease-out, filter 0.2s ease-out;
+    display: block;
+}
+
+/* Restored Fullscreen Button Logic */
+.fullscreen-btn {
+    background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff;
+    padding: 15px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; 
+    text-transform: uppercase; margin: 20px 0; transition: 0.3s ease;
+    display: inline-block;
+}
+
+.fullscreen-btn:hover { 
+    background: #00aaff; 
+    color: #081221; 
+    box-shadow: 0 0 20px #00aaff; 
+    transform: translateY(-2px) scale(1.05);
+}
 
 /* --- CAROUSELS --- */
 .carousel-container { width: 100%; margin-bottom: 60px; text-align: left; position: relative; }
@@ -95,7 +130,6 @@ nav {
 }
 .carousel-track::-webkit-scrollbar { display: none; }
 
-/* --- SCROLL BUTTONS --- */
 .scroll-btn {
     position: absolute; top: 50%; transform: translateY(-50%);
     width: 45px; height: 45px; background: rgba(13, 27, 46, 0.8);
@@ -116,7 +150,7 @@ nav {
 }
 
 .game-card { 
-    flex: 0 0 200px; /* IMPORTANT: Restores carousel scrolling */
+    flex: 0 0 200px;
     width: 200px; height: 200px; background: #0d1b2e; 
     border-radius: 12px; border: 2px solid #1c426e; 
     text-decoration: none; overflow: hidden; transition: 0.3s; 
@@ -141,5 +175,11 @@ nav {
     .right-btn { right: 5px; }
     .game-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
     .game-card { flex: 0 0 140px; width: 140px; height: 160px; }
-    .game-img-container { height: 110px; }
+    
+    /* Responsive adjustment for the player on mobile */
+    #game-container {
+        height: 50vh;
+        width: 100%;
+        border-width: 2px;
+    }
 }
