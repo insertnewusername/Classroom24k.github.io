@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Fluid & Grouped Alignment */
+/* style.css - Classroom 24k Final Refined Master (Perfect Edge Alignment) */
 
 body {
     background-color: #081221; 
@@ -7,36 +7,44 @@ body {
     margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
-/* --- MASTER ALIGNMENT GROUP --- */
-/* This ensures Header, Banner, Carousel, and Grid always have the exact same edges */
+/* --- THE GAME PAGE TITLE --- */
+.game-page-title {
+    color: #ffffff !important;
+    font-size: 2.2rem; 
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 25px 0 15px 0;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* --- SHARED MASTER LENGTH --- */
+/* This forces Header, Container, and About to be the exact same width */
 header, 
-.featured-banner, 
-.carousel-container, 
-.full-library-section,
+.container,
 .about-section {
-    width: 92%;           /* Controls the side margins globally */
-    max-width: 1800px;    /* Keeps it from getting too stretched on ultra-wide screens */
+    width: 90%;
+    max-width: 1325px; /* Locked for 6 columns on your PC, fluid for others */
     margin-left: auto !important;
     margin-right: auto !important;
     box-sizing: border-box;
 }
 
-/* --- HEADER --- */
+/* --- HEADER & NAV --- */
 header {
     background-color: #1c426e; 
-    padding: 15px; 
-    border-radius: 12px; 
+    padding: 10px; 
+    border-radius: 10px; 
     border: 2px solid #00aaff; 
     cursor: pointer;
     box-shadow: 0 0 15px rgba(0, 170, 255, 0.3); 
     transition: 0.3s;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
-/* --- NAVIGATION --- */
 nav {
     background-color: #0d1b2e; 
     padding: 15px 30px; 
@@ -46,20 +54,19 @@ nav {
     align-items: center; 
     justify-content: center;
 }
+.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
 #gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 8px 12px; color: white; width: 200px; outline: none; }
+.nav-links { display: flex; gap: 30px; margin-left: 30px; text-transform: uppercase; font-weight: bold; }
+.nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
+.nav-links a:hover { color: #ffffff !important; }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
+    width: 100%;
     height: 400px; 
-    border-radius: 20px; 
-    border: 3px solid #00aaff; 
-    position: relative; 
-    overflow: hidden; 
-    display: flex; 
-    align-items: flex-end; 
-    background: #000; 
-    cursor: pointer;
-    margin-bottom: 50px;
+    margin: 0 auto 50px auto; 
+    border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #00aaff; 
+    display: flex; align-items: flex-end; background: #000; cursor: pointer;
 }
 .featured-banner::before {
     content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -67,46 +74,52 @@ nav {
     transition: transform 0.7s ease; z-index: 1;
 }
 .featured-banner:hover::before { transform: scale(1.08); }
-.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, rgba(8, 18, 33, 0.4) 60%, transparent 100%); width: 100%; padding: 40px; text-align: left; }
+.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 0%, rgba(8, 18, 33, 0.4) 60%, transparent 100%); width: 100%; padding: 50px; text-align: left; }
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
 
-/* --- CAROUSELS & GRIDS --- */
-.carousel-container, .full-library-section {
-    text-align: left;
-    position: relative;
-}
+.play-now-btn { display: inline-block; background: #00aaff; color: #081221; padding: 12px 40px; border-radius: 50px; font-weight: bold; text-transform: uppercase; transition: 0.3s ease; position: relative; z-index: 3; }
 
-.carousel-track, .game-grid {
-    display: flex;
-    gap: 25px;
-    width: 100%;
+/* --- CAROUSELS --- */
+.carousel-container { 
+    width: 100%; 
+    margin: 0 auto 60px auto; 
+    text-align: left; 
+    position: relative; 
 }
+.carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
 
-.carousel-track {
-    overflow-x: hidden;
-    padding: 15px 0;
-    scroll-behavior: smooth;
+.carousel-track { 
+    display: flex; 
+    gap: 25px; 
+    overflow-x: hidden; 
+    padding: 15px 0; 
+    scroll-behavior: smooth; 
+    width: 100%; 
     flex-wrap: nowrap;
 }
 
-.game-grid {
-    flex-wrap: wrap;
-    padding: 30px 0;
-    justify-content: center; /* Centers icons nicely if there's extra space */
+/* --- GRID & CARDS (The Alignment Fix) --- */
+.game-grid { 
+    display: flex; 
+    flex-wrap: wrap; 
+    /* This spreads the tiles to touch the left and right edges exactly */
+    justify-content: space-between; 
+    gap: 25px 15px; 
+    padding: 30px 0; 
+    width: 100%; 
 }
 
-/* --- GAME TILES (Fixed size, Fluid quantity) --- */
-.game-card {
+.game-card { 
     flex: 0 0 200px; 
-    width: 200px;
-    height: 200px;
-    background: #0d1b2e;
-    border-radius: 12px;
-    border: 2px solid #1c426e;
-    text-decoration: none;
-    overflow: hidden;
-    transition: 0.3s;
-    display: flex;
+    width: 200px; 
+    height: 200px; 
+    background: #0d1b2e; 
+    border-radius: 12px; 
+    border: 2px solid #1c426e; 
+    text-decoration: none; 
+    overflow: hidden; 
+    transition: 0.3s; 
+    display: flex; 
     flex-direction: column;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
@@ -116,33 +129,19 @@ nav {
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; }
 .game-info h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; }
 
-/* --- ABOUT SECTION (Static/Battery Saver) --- */
+/* --- ABOUT SECTION (Battery-Saver Static) --- */
 .about-section {
-    padding: 2px;
-    border-radius: 20px;
-    background: #00aaff; /* Solid color, no animation */
-    margin-bottom: 60px;
+    margin: 40px auto; 
+    padding: 2px; 
+    border-radius: 20px; 
+    background: #00aaff; /* Solid color, no GPU drain */
 }
 .about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
 
-/* --- SCROLL BUTTONS --- */
-.scroll-btn {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px;
-    background: rgba(28, 66, 110, 0.9); color: #00aaff; border: 2px solid #00aaff; border-radius: 50%;
-    cursor: pointer; z-index: 10;
-}
-.left-btn { left: -22px; }
-.right-btn { right: -22px; }
-
 /* --- MOBILE & SMALL SCREEN TWEAKS --- */
-@media (max-width: 768px) {
-    header, .featured-banner, .carousel-container, .full-library-section {
-        width: 95%; 
-    }
+@media (max-width: 600px) {
+    header, .container, .about-section { width: 95%; }
     .featured-title { font-size: 2rem; }
-    .featured-banner { height: 300px; }
-    .game-card { flex: 0 0 160px; width: 160px; height: 160px; }
-    .game-img-container { height: 110px; }
-    .scroll-btn { display: none; }
-    .carousel-track { overflow-x: auto; }
+    .game-card { flex: 0 0 160px; height: 160px; }
+    .game-grid { justify-content: center; } /* Centers icons on tiny phone screens */
 }
