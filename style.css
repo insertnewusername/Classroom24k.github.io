@@ -139,17 +139,35 @@ nav {
 }
 
 .game-card { 
-    flex: 0 0 200px; width: 200px; height: 215px; 
+    flex: 0 0 200px; width: 200px; height: 210px; /* Slimmed height */
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e; 
     text-decoration: none; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
-.game-img-container { width: 100%; height: 150px; overflow: hidden; }
+.game-img-container { width: 100%; height: 165px; overflow: hidden; } /* Larger image area */
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
-.game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; padding: 5px; }
-.game-info h3 { margin: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+/* Slim Label Logic */
+.game-info { 
+    flex-grow: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+    background: #1c426e; 
+    padding: 0 8px; /* Tighter padding */
+}
+.game-info h3 { 
+    margin: 0; 
+    font-size: 0.95rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.5px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 180px; /* Ensures text stays within the slim border */
+}
 
 /* --- ABOUT SECTION --- */
 .about-section { padding: 2px; border-radius: 20px; background: #00aaff; margin-bottom: 60px; }
@@ -164,8 +182,9 @@ nav {
     .left-btn { left: 5px; }
     .right-btn { right: 5px; }
     .game-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-    .game-card { flex: 0 0 140px; width: 140px; height: 175px; }
-    .game-info h3 { font-size: 0.85rem; }
+    .game-card { flex: 0 0 140px; width: 140px; height: 165px; }
+    .game-img-container { height: 130px; }
+    .game-info h3 { font-size: 0.8rem; max-width: 120px; }
     
     #game-container {
         height: 50vh;
