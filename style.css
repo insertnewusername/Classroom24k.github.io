@@ -103,17 +103,88 @@ nav {
     text-align: left; 
     position: relative; 
 }
-.carousel-title { 
-    font-size: 1.4rem; color: #00aaff; text-transform: uppercase; 
-    border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; 
+
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Prevents buttons from causing horizontal scroll on the whole page */
+    overflow: visible; 
 }
+
+.carousel-title { 
+    font-size: 1.4rem; 
+    color: #00aaff; 
+    text-transform: uppercase; 
+    border-left: 4px solid #00aaff; 
+    padding-left: 15px; 
+    margin-bottom: 15px; 
+}
+
 .carousel-track { 
     display: flex; 
     gap: 25px; 
-    overflow-x: hidden; 
-    padding: 15px 0; 
+    /* This enables finger swiping on mobile/trackpads */
+    overflow-x: auto; 
+    scroll-behavior: smooth; 
     width: 100%; 
     flex-wrap: nowrap;
+    padding: 15px 0;
+    /* Hides the ugly scrollbar while keeping the swipe functionality */
+    scrollbar-width: none; 
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+/* --- SCROLL BUTTONS (Desktop & Mobile) --- */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45px;
+    height: 45px;
+    /* Glass effect: semi-transparent and blurred */
+    background: rgba(13, 27, 46, 0.8);
+    backdrop-filter: blur(5px); 
+    color: #00aaff;
+    border: 2px solid #00aaff;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100; /* Ensure they stay on top of images */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 15px rgba(0, 170, 255, 0.3);
+}
+
+.left-btn { left: -22px; }
+.right-btn { right: -22px; }
+
+/* Hover Aesthetics */
+.scroll-btn:hover {
+    background: #00aaff;
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 0 25px rgba(0, 170, 255, 0.8);
+}
+
+/* --- MOBILE SPECIFIC BUTTON TWEAK --- */
+@media (max-width: 768px) {
+    /* Bring buttons slightly inward on mobile so they don't go off-screen */
+    .left-btn { left: 5px; }
+    .right-btn { right: 5px; }
+    
+    .scroll-btn {
+        width: 40px;
+        height: 40px;
+        background: rgba(13, 27, 46, 0.9); /* More solid on mobile for visibility */
+    }
+
+    .carousel-track {
+        gap: 15px; /* Tighter gap for smaller screens */
+    }
 }
 
 /* --- GRID & CARDS (The Dynamic Column Fix) --- */
