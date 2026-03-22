@@ -38,10 +38,10 @@ nav {
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- FEATURED BANNER (Updated for 6 icons) --- */
+/* --- FEATURED BANNER --- */
 .featured-banner {
     width: 95%; 
-    max-width: 1325px; /* Matches 6 cards + 5 gaps */
+    max-width: 1325px; 
     height: 400px; 
     margin: 0 auto 50px auto; 
     border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #00aaff; 
@@ -59,7 +59,7 @@ nav {
 .play-now-btn { display: inline-block; background: #00aaff; color: #081221; padding: 12px 40px; border-radius: 50px; font-weight: bold; text-transform: uppercase; transition: 0.3s ease; position: relative; z-index: 3; }
 .play-now-btn:hover { transform: scale(1.15); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
 
-/* --- CAROUSELS (Updated for 6 icons) --- */
+/* --- CAROUSELS --- */
 .carousel-container { 
     width: 95%; 
     max-width: 1325px; 
@@ -73,12 +73,14 @@ nav {
 .carousel-track { 
     display: flex; 
     flex-direction: row; 
-    gap: 25px; /* Consistent gap with grid */
-    overflow-x: hidden; /* Button-only scrolling */
+    gap: 25px; 
+    overflow-x: hidden; 
     padding: 15px 0; 
     scroll-behavior: smooth; 
     width: 100%; 
     flex-wrap: nowrap;
+    /* Forces alignment when scrolling multiple items */
+    scroll-snap-type: x mandatory; 
 }
 
 .scroll-btn {
@@ -94,12 +96,13 @@ nav {
 .game-grid { 
     display: flex; 
     flex-wrap: wrap; 
-    justify-content: flex-start; /* Aligns with carousel start */
+    justify-content: flex-start; 
     gap: 25px; 
     padding: 30px 0; 
     max-width: 1325px; 
     margin: 0 auto;
 }
+
 .game-card { 
     flex: 0 0 200px !important; 
     width: 200px !important; 
@@ -111,7 +114,9 @@ nav {
     overflow: hidden; 
     transition: 0.3s; 
     display: flex; 
-    flex-direction: column; 
+    flex-direction: column;
+    /* Ensures card snaps to edge of carousel */
+    scroll-snap-align: start; 
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
@@ -130,7 +135,7 @@ nav {
 /* --- GAME PLAYER --- */
 #game-container { 
     width: 100%; 
-    max-width: 1325px; /* Unified width */
+    max-width: 1325px; 
     height: 75vh; 
     background: #000; 
     border: 3px solid #00aaff; 
@@ -160,7 +165,7 @@ nav {
 
 /* --- ABOUT SECTION --- */
 .about-section {
-    max-width: 1325px; /* Unified width */
+    max-width: 1325px; 
     margin: 40px auto; padding: 2px; border-radius: 20px; 
     background: linear-gradient(45deg, #00aaff, #004466, #00aaff);
     background-size: 200% 200%; animation: borderGlow 5s linear infinite;
