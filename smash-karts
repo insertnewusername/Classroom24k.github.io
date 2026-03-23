@@ -1,1 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smash Karts | Classroom 24k</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <header onclick="location.href='index.html'">
+        <h1>Classroom 24k</h1>
+    </header>
+
+    <nav></nav>
+
+    <div class="container">
+        <h2 class="game-page-title">Smash Karts</h2>
+
+        <div id="game-container"></div>
+
+        <button class="fullscreen-btn" onclick="openFullscreen()">
+            ⛶ Fullscreen Mode
+        </button>
+
+        <div class="about-section">
+            <div class="about-content">
+                <h2>About the Game</h2>
+                <p>
+                    Smash Karts is a free io Multiplayer Kart Battle Arena game. Drive fast. Fire rockets. Make big explosions.
+                </p>
+                
+                <h3 style="color: #00aaff; margin-top: 20px;">Controls</h3>
+                <ul style="list-style: none; padding: 0; line-height: 1.8;">
+                    <li><strong>WASD</strong> Movement</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script>
+        setupGame("https://abinbins.github.io/a/smash-karts/");
+    </script>
+
+</body>
+</html>
