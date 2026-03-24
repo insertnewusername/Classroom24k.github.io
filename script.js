@@ -1,6 +1,22 @@
 /**
- * script.js - Classroom 24k - Final Master (Carousel & Loading Fix)
+ * script.js - Classroom 24k - Final Master (Security & Loading Fix)
  */
+
+// --- 0. DOMAIN LOCK (Anti-Steal) ---
+(function() {
+    const authorized = "insertnewusername.github.io/Classroom24k.github.io";
+    const currentLoc = window.location.hostname + window.location.pathname;
+
+    // Allows 'localhost' for your development, but breaks on any other domain
+    if (!currentLoc.includes(authorized) && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+        document.body.innerHTML = `
+            <div style="background:#081221; color:white; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; font-family:sans-serif; text-align:center; padding: 20px;">
+                <h1 style="color:#00aaff; font-size: 3rem;">ACCESS DENIED</h1>
+                <p style="font-size: 1.2rem; opacity: 0.8;">This website content is protected and exclusive to Classroom 24k.</p>
+            </div>`;
+        throw new Error("Script terminated: Unauthorized Domain.");
+    }
+})();
 
 // --- 1. GOOGLE ANALYTICS ---
 (function() {
@@ -43,7 +59,6 @@ function filterGames() {
                           window.location.pathname === '/' || 
                           window.location.pathname.endsWith('.html') === false;
     
-    // Redirect to home if searching from a game page
     if (document.getElementById('game-container') || !isMainLibrary) {
         if (input.length > 0) {
             window.location.href = "index.html?search=" + encodeURIComponent(input);
@@ -66,39 +81,25 @@ function filterGames() {
         libraryHeaders.forEach(h => h.style.display = "");
     }
 
-    let visibleCount = 0;
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
-        if (title.includes(input)) {
-            card.style.display = "flex"; // Match CSS display
-            visibleCount++;
-        } else {
-            card.style.display = "none";
-        }
+        card.style.display = title.includes(input) ? "flex" : "none";
     }
 }
 
-// --- 4. CAROUSEL LOGIC (Fixed for 200px cards + 25px gap) ---
+// --- 4. CAROUSEL LOGIC ---
 function scrollCarousel(direction, btn) {
     const wrapper = btn.closest('.carousel-container');
     const track = wrapper.querySelector('.carousel-track');
-    
-    // One card (200px) + Gap (25px) = 225px. 
-    // Scroll 4 cards at a time = 900px
     const scrollStep = 900; 
-    
-    track.scrollBy({ 
-        left: direction * scrollStep, 
-        behavior: 'smooth' 
-    });
+    track.scrollBy({ left: direction * scrollStep, behavior: 'smooth' });
 }
 
-// --- 5. GAME LOADING (Optimized for Layout Lock) ---
+// --- 5. GAME LOADING ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
-    // Use the existing HTML hover zone or create it
     container.innerHTML = `
         <div class="iframe-hover-zone" onclick="loadIframe('${gameUrl}')">
             <div class="play-content">
@@ -110,16 +111,16 @@ function setupGame(gameUrl) {
 
 function loadIframe(url) {
     const container = document.getElementById('game-container');
-    // Clear the hover zone and inject iframe immediately
     container.innerHTML = `<iframe id="game-frame" src="${url}" allowfullscreen="true"></iframe>`;
 }
 
+// FIXED: Always request fullscreen on the container so the CSS border-hide works
 function openFullscreen() {
-    const frame = document.getElementById("game-frame") || document.getElementById("game-container");
-    if (frame) {
-        if (frame.requestFullscreen) frame.requestFullscreen();
-        else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
-        else if (frame.msRequestFullscreen) frame.msRequestFullscreen();
+    const container = document.getElementById("game-container");
+    if (container) {
+        if (container.requestFullscreen) container.requestFullscreen();
+        else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
+        else if (container.msRequestFullscreen) container.msRequestFullscreen();
     }
 }
 
@@ -127,7 +128,6 @@ function openFullscreen() {
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     
-    // Handle Search Redirects from other pages
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
@@ -138,7 +138,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Attach scroll events to carousel buttons if they exist
     document.querySelectorAll('.left-btn').forEach(btn => {
         btn.onclick = () => scrollCarousel(-1, btn);
     });
