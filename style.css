@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Balanced Height, Growth Animation & Layout Lock Fix */
+/* style.css - Classroom 24k - Fortified Loading & Layout Lock */
 
 body {
     background-color: #081221; 
@@ -16,7 +16,7 @@ header, .container, .about-section {
     box-sizing: border-box;
 }
 
-/* --- HEADER (TIGHTENED) --- */
+/* --- HEADER --- */
 header {
     background-color: #1c426e; padding: 10px; border-radius: 10px; border: 2px solid #00aaff; 
     cursor: pointer; box-shadow: 0 0 15px rgba(0, 170, 255, 0.3); 
@@ -25,7 +25,7 @@ header {
 header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
-/* --- NAVIGATION (TIGHTENED) --- */
+/* --- NAVIGATION --- */
 nav {
     background-color: #0d1b2e; padding: 10px 30px; border-bottom: 2px solid #1c426e; 
     margin-bottom: 10px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 20px;
@@ -52,7 +52,7 @@ nav {
 .featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 15%, transparent 100%); width: 100%; padding: 40px 50px; text-align: left; }
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
 
-/* --- PLAY BUTTONS & TRIANGLE GROWTH --- */
+/* --- PLAY BUTTONS & ANIMATION --- */
 .play-now-btn { 
     display: inline-block; background: #00aaff; color: #081221; 
     padding: 12px 40px; border-radius: 50px; font-weight: bold; 
@@ -72,7 +72,7 @@ nav {
     display: block; 
 }
 
-/* --- BALANCED GAME PLAYER & AD LAYOUT --- */
+/* --- FORTIFIED GAME PLAYER & AD LAYOUT --- */
 .game-layout-wrapper {
     display: flex;
     justify-content: center; 
@@ -91,37 +91,39 @@ nav {
     max-width: 1100px; 
     height: 76vh; 
     min-height: 580px; 
-    background: #081221; /* Matches body exactly to hide flicker */
+    background: #000; 
     border: 3px solid #00aaff; 
     border-radius: 15px; 
     margin: 0; 
     position: relative; 
-    overflow: hidden; 
+    overflow: hidden;
+    z-index: 1; /* Low index so curtain can sit on top */
+}
+
+/* THE SHIELD: This blocks any ads that try to load in the center */
+#loading-screen {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #081221; /* Matches body color */
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    z-index: 5; /* Stays above any ads that try to hijack the container early */
+    z-index: 999; /* HIGHEST PRIORITY */
+    transition: opacity 0.6s ease, visibility 0.6s;
 }
 
-/* Forces ads to stay on side by giving the sidebars a locked minimum width */
-.side-ad-container { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    gap: 5px; 
-    transition: 0.3s; 
-    width: 160px; 
-    min-width: 160px; 
-    flex-shrink: 0; 
+/* Class added via JS to reveal the game */
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
 }
 
-/* Fixes the "Ads in the middle" issue by providing visual and structural priority */
-#game-container:empty::before {
-    content: "INITIALIZING GAME...";
+.loader-text {
     color: #00aaff;
     font-weight: bold;
-    letter-spacing: 2px;
-    z-index: 10;
+    letter-spacing: 4px;
     animation: pulse 1.5s infinite;
 }
 
@@ -131,8 +133,21 @@ nav {
     100% { opacity: 0.4; }
 }
 
-#game-container iframe { width: 100%; height: 100%; border: none; display: block; position: relative; z-index: 6; }
+#game-container iframe { 
+    width: 100%; height: 100%; border: none; display: block; 
+    position: relative; z-index: 5; 
+}
 
+/* Ads are forced to stay in sidebars */
+.side-ad-container { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 5px; 
+    width: 160px; 
+    min-width: 160px; 
+    flex-shrink: 0; 
+}
 .ad-label { font-size: 10px; text-transform: uppercase; color: #00aaff; opacity: 0.6; letter-spacing: 1px; }
 .side-ad { width: 160px; height: 600px; background: #0d1b2e; border: 1px solid #1c426e; border-radius: 10px; overflow: hidden; }
 
