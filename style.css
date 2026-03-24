@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Fixed Carousel & Neon Glow */
+/* style.css - Classroom 24k - Final Master Version */
 
 body {
     background-color: #081221; 
@@ -45,6 +45,56 @@ nav {
 .nav-links { display: flex; gap: 30px; text-transform: uppercase; font-weight: bold; }
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff !important; }
+
+/* --- FEATURED BANNER (FIXED HEADER) --- */
+.featured-banner {
+    width: 100%; 
+    height: 450px; 
+    margin-top: 20px;
+    margin-bottom: 40px; 
+    border-radius: 20px; 
+    position: relative; 
+    overflow: hidden; 
+    border: 3px solid #00aaff; 
+    display: flex; 
+    align-items: flex-end; 
+    background: #000; 
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.featured-banner::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
+    transition: transform 0.7s ease; z-index: 1;
+}
+.featured-banner:hover::before { transform: scale(1.05); }
+
+.featured-overlay { 
+    position: relative; 
+    z-index: 2; 
+    background: linear-gradient(to top, rgba(8, 18, 33, 0.9) 20%, transparent 100%); 
+    width: 100%; 
+    padding: 40px 50px; 
+    text-align: left; 
+    box-sizing: border-box;
+}
+.featured-title { 
+    font-size: 3rem; 
+    margin: 0 0 15px 0; 
+    color: white; 
+    text-transform: uppercase; 
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* --- PLAY BUTTONS --- */
+.play-now-btn { 
+    display: inline-block; background: #00aaff; color: #081221; 
+    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
+    text-transform: uppercase; transition: all 0.3s ease; 
+    position: relative; z-index: 3; text-decoration: none;
+    border: none;
+}
+.play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
 
 /* --- GAME PLAYER & AD LAYOUT --- */
 .game-layout-wrapper {
@@ -162,6 +212,13 @@ nav {
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; padding: 0 8px; }
 .game-info h3 { margin: 0; font-size: 0.95rem; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* --- FULLSCREEN BUTTON --- */
+.fullscreen-btn {
+    background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
+    margin: 15px 0; transition: 0.3s ease; display: inline-block;
+}
+.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px); }
 
 /* --- ABOUT SECTION --- */
 .about-section { padding: 2px; border-radius: 20px; background: #00aaff; margin-bottom: 60px; }
