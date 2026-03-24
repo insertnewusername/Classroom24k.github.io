@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Final Balanced & Polished Version */
+/* style.css - Classroom 24k - Fixed Carousel & Neon Glow */
 
 body {
     background-color: #081221; 
@@ -7,7 +7,7 @@ body {
     margin: 0; padding: 0; text-align: center; overflow-x: hidden;
 }
 
-/* --- CUSTOM SCROLLBAR (PREMIUM TOUCH) --- */
+/* --- CUSTOM SCROLLBAR --- */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #081221; }
 ::-webkit-scrollbar-thumb { 
@@ -46,28 +46,6 @@ nav {
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- FEATURED BANNER --- */
-.featured-banner {
-    width: 100%; height: 450px; margin-bottom: 40px; border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #00aaff; display: flex; align-items: flex-end; background: #000; cursor: pointer;
-}
-.featured-banner::before {
-    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
-    transition: transform 0.7s ease; z-index: 1;
-}
-.featured-banner:hover::before { transform: scale(1.08); }
-.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 15%, transparent 100%); width: 100%; padding: 40px 50px; text-align: left; }
-.featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
-
-/* --- PLAY BUTTONS --- */
-.play-now-btn { 
-    display: inline-block; background: #00aaff; color: #081221; 
-    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
-    text-transform: uppercase; transition: all 0.3s ease; 
-    position: relative; z-index: 3; text-decoration: none;
-}
-.play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
-
 /* --- GAME PLAYER & AD LAYOUT --- */
 .game-layout-wrapper {
     display: flex;
@@ -99,42 +77,44 @@ nav {
     z-index: 5;
 }
 
-/* THE HOVER ZONE (GLOW EFFECT) */
+/* THE HOVER ZONE (NEON BLUE & WHITE GLOW) */
 .iframe-hover-zone {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(8, 18, 33, 0.4);
+    background: rgba(8, 18, 33, 0.7);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     cursor: pointer; z-index: 20;
     transition: 0.3s ease;
 }
-.iframe-hover-zone:hover { background: rgba(8, 18, 33, 0.2); }
-.iframe-hover-zone:hover .play-icon, 
-.iframe-hover-zone:hover .play-text {
-    filter: drop-shadow(0 0 15px #00aaff);
+
+.play-icon { 
+    font-size: 80px;
+    color: #ffffff; 
+    text-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff; 
+    transition: 0.3s;
+}
+
+.play-text { 
+    color: #ffffff; 
+    font-weight: bold; 
+    font-size: 1.8rem; 
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #00aaff;
+    transition: 0.3s;
+}
+
+.iframe-hover-zone:hover { background: rgba(8, 18, 33, 0.4); }
+.iframe-hover-zone:hover .play-icon {
     transform: scale(1.1);
     color: #ffffff;
+    text-shadow: 0 0 30px #ffffff, 0 0 50px #00aaff;
 }
-.play-icon, .play-text { transition: 0.3s; color: #00aaff; font-weight: bold; }
-
-/* INITIALIZING TEXT (ONLY SHOWS WHEN EMPTY) */
-#game-container:empty::before {
-    content: "INITIALIZING GAME...";
-    color: #00aaff;
-    font-weight: bold;
-    letter-spacing: 2px;
-    z-index: 10;
-    animation: pulse 1.5s infinite;
+.iframe-hover-zone:hover .play-text {
+    transform: scale(1.05);
+    text-shadow: 0 0 20px #ffffff;
 }
-
-@keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-}
-
-#game-container iframe { width: 100%; height: 100%; border: none; display: block; position: relative; z-index: 15; }
 
 /* SIDEBARS */
 .side-ad-container { 
@@ -149,19 +129,26 @@ nav {
 .ad-label { font-size: 10px; text-transform: uppercase; color: #00aaff; opacity: 0.6; letter-spacing: 1px; }
 .side-ad { width: 160px; height: 600px; background: #0d1b2e; border: 1px solid #1c426e; border-radius: 10px; overflow: hidden; }
 
-/* --- FULLSCREEN BUTTON --- */
-.fullscreen-btn {
-    background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
-    margin: 15px 0; transition: 0.3s ease; display: inline-block;
-}
-.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px); }
-
-/* --- CAROUSELS --- */
+/* --- CAROUSELS (FIXED SQUASHING) --- */
 .carousel-container { width: 100%; margin-bottom: 60px; text-align: left; position: relative; }
 .carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
 .carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
-.carousel-track { display: flex; gap: 25px; overflow-x: auto; scroll-behavior: smooth; padding: 15px 0; scrollbar-width: none; }
+
+.carousel-track { 
+    display: flex; 
+    gap: 25px; 
+    overflow-x: auto; 
+    scroll-behavior: smooth; 
+    padding: 15px 0; 
+    scrollbar-width: none; 
+}
 .carousel-track::-webkit-scrollbar { display: none; }
+
+/* THIS LINE FIXES THE SQUASHING */
+.carousel-track .game-card {
+    flex: 0 0 200px; 
+}
+
 .scroll-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: rgba(13, 27, 46, 0.8); color: #00aaff; border: 2px solid #00aaff; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
 .scroll-btn:hover { background: #00aaff; color: white; box-shadow: 0 0 15px #00aaff; }
 .left-btn { left: -22px; }
