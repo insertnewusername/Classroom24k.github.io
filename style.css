@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Final Master Version (Fixed Scaling) */
+/* style.css - Classroom 24k - Master Version with Auto-Fullscreen UI */
 
 body {
     background-color: #081221; 
@@ -87,6 +87,17 @@ nav {
     position: relative; overflow: hidden; display: flex; align-items: center; 
     justify-content: center; z-index: 5;
 }
+
+/* --- AUTO-HIDE BORDER IN FULLSCREEN --- */
+#game-container:fullscreen {
+    border: none !important;
+    border-radius: 0 !important;
+    max-width: none !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+/* Webkit (Chrome/Safari) support */
+#game-container:-webkit-full-screen { border: none !important; border-radius: 0 !important; }
 
 /* --- IFRAME FILL FIX --- */
 #game-container iframe {
