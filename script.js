@@ -1,5 +1,5 @@
 /**
- * script.js - Classroom 24k Final Master
+ * script.js - Classroom 24k - Final Master (Carousel & Loading Fix)
  */
 
 // --- 1. GOOGLE ANALYTICS ---
@@ -39,9 +39,12 @@ function filterGames() {
     if (!inputField) return;
     
     let input = inputField.value.toLowerCase();
-    const isMainLibrary = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('.html') === false;
+    const isMainLibrary = window.location.pathname.endsWith('index.html') || 
+                          window.location.pathname === '/' || 
+                          window.location.pathname.endsWith('.html') === false;
     
-    if (!isMainLibrary || document.getElementById('game-container')) {
+    // Redirect to home if searching from a game page
+    if (document.getElementById('game-container') || !isMainLibrary) {
         if (input.length > 0) {
             window.location.href = "index.html?search=" + encodeURIComponent(input);
             return;
@@ -49,43 +52,40 @@ function filterGames() {
     }
 
     let cards = document.getElementsByClassName('game-card');
-    let noResultsMsg = document.getElementById('noResults');
     const featured = document.querySelector('.featured-banner');
-    const sections = document.querySelectorAll('.carousel-container, .full-library-section h2');
+    const carousels = document.querySelectorAll('.carousel-container');
+    const libraryHeaders = document.querySelectorAll('.full-library-section h2');
 
     if (input.length > 0) {
         if (featured) featured.style.display = "none";
-        sections.forEach(s => s.style.display = "none");
+        carousels.forEach(c => c.style.display = "none");
+        libraryHeaders.forEach(h => h.style.display = "none");
     } else {
         if (featured) featured.style.display = "";
-        sections.forEach(s => s.style.display = "");
-        if (noResultsMsg) noResultsMsg.style.display = "none";
+        carousels.forEach(c => c.style.display = "");
+        libraryHeaders.forEach(h => h.style.display = "");
     }
 
     let visibleCount = 0;
     for (let card of cards) {
         let title = card.querySelector('h3').innerText.toLowerCase();
         if (title.includes(input)) {
-            card.style.display = "";
+            card.style.display = "flex"; // Match CSS display
             visibleCount++;
         } else {
             card.style.display = "none";
         }
     }
-
-    if (noResultsMsg) {
-        noResultsMsg.style.display = (visibleCount === 0 && input.length > 0) ? "block" : "none";
-    }
 }
 
-// --- 4. CAROUSEL LOGIC ---
-function scrollCarousel(btn, direction) {
-    const wrapper = btn.closest('.carousel-wrapper');
+// --- 4. CAROUSEL LOGIC (Fixed for 200px cards + 25px gap) ---
+function scrollCarousel(direction, btn) {
+    const wrapper = btn.closest('.carousel-container');
     const track = wrapper.querySelector('.carousel-track');
     
-    // 225px (1 card + gap) * 5 cards = 1125px
-    // This shifts 5 games, leaving the 6th one as the new first icon.
-    const scrollStep = 1125; 
+    // One card (200px) + Gap (25px) = 225px. 
+    // Scroll 4 cards at a time = 900px
+    const scrollStep = 900; 
     
     track.scrollBy({ 
         left: direction * scrollStep, 
@@ -93,30 +93,33 @@ function scrollCarousel(btn, direction) {
     });
 }
 
-// --- 5. GAME LOADING ---
+// --- 5. GAME LOADING (Optimized for Layout Lock) ---
 function setupGame(gameUrl) {
     const container = document.getElementById('game-container');
     if (!container) return;
     
+    // Use the existing HTML hover zone or create it
     container.innerHTML = `
-        <div id="clickableArea" class="iframe-hover-zone" style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; cursor:pointer; background:radial-gradient(circle, #1c426e 0%, #081221 100%);" onclick="loadIframe('${gameUrl}')">
-            <div id="playButton" style="text-align:center;">
-                <div class="play-icon" style="font-size:100px; color:#ffffff; text-shadow: 0 0 15px #00aaff; line-height:1;">▶</div>
-                <div class="play-text" style="color:#ffffff; font-size:1.8rem; letter-spacing:6px; margin-top:10px; font-weight:bold; text-shadow: 0 0 10px #00aaff;">PLAY</div>
+        <div class="iframe-hover-zone" onclick="loadIframe('${gameUrl}')">
+            <div class="play-content">
+                <div class="play-icon" style="font-size:80px; margin-bottom:10px;">▶</div>
+                <div class="play-text" style="font-size:2rem; letter-spacing:4px;">PLAY NOW</div>
             </div>
         </div>`;
 }
 
 function loadIframe(url) {
     const container = document.getElementById('game-container');
-    container.innerHTML = `<iframe id="game-frame" src="${url}" style="width:100%; height:100%; border:none;" allowfullscreen="true"></iframe>`;
+    // Clear the hover zone and inject iframe immediately
+    container.innerHTML = `<iframe id="game-frame" src="${url}" allowfullscreen="true"></iframe>`;
 }
 
 function openFullscreen() {
-    const elem = document.getElementById("game-container");
-    if (elem) {
-        if (elem.requestFullscreen) elem.requestFullscreen();
-        else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    const frame = document.getElementById("game-frame") || document.getElementById("game-container");
+    if (frame) {
+        if (frame.requestFullscreen) frame.requestFullscreen();
+        else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+        else if (frame.msRequestFullscreen) frame.msRequestFullscreen();
     }
 }
 
@@ -124,7 +127,7 @@ function openFullscreen() {
 window.addEventListener('DOMContentLoaded', () => {
     generateNav();
     
-    // Check for search redirect
+    // Handle Search Redirects from other pages
     const urlParams = new URLSearchParams(window.location.search);
     const searchVal = urlParams.get('search');
     if (searchVal) {
@@ -134,4 +137,12 @@ window.addEventListener('DOMContentLoaded', () => {
             setTimeout(filterGames, 150); 
         }
     }
+
+    // Attach scroll events to carousel buttons if they exist
+    document.querySelectorAll('.left-btn').forEach(btn => {
+        btn.onclick = () => scrollCarousel(-1, btn);
+    });
+    document.querySelectorAll('.right-btn').forEach(btn => {
+        btn.onclick = () => scrollCarousel(1, btn);
+    });
 });
