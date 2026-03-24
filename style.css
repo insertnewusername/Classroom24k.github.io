@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Final Spacing, Tall Iframe & Growth Animation */
+/* style.css - Classroom 24k - Balanced Height & Growth Animation */
 
 body {
     background-color: #081221; 
@@ -36,7 +36,7 @@ nav {
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- GAME PAGE TITLE (TIGHTENED) --- */
+/* --- GAME PAGE TITLE --- */
 .game-page-title { margin: 0 auto 5px auto; font-size: 1.7rem; color: #00aaff; }
 
 /* --- FEATURED BANNER --- */
@@ -61,20 +61,19 @@ nav {
 }
 .play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
 
-/* Play Icon/Triangle Growth Logic */
+/* Restored Play Icon/Triangle Growth Logic */
 .iframe-hover-zone:hover .play-icon, 
 .iframe-hover-zone:hover .play-text {
     filter: drop-shadow(0 0 15px #00aaff);
-    transform: scale(1.15); /* Triangle and text grow */
+    transform: scale(1.15); /* Triangle/Icon grows */
     color: #ffffff;
 }
-
 .play-icon, .play-text { 
     transition: transform 0.2s ease-out, filter 0.2s ease-out, color 0.2s ease-out; 
     display: block; 
 }
 
-/* --- TALL GAME PLAYER & AD LAYOUT --- */
+/* --- BALANCED GAME PLAYER & AD LAYOUT --- */
 .game-layout-wrapper {
     display: flex;
     justify-content: center; 
@@ -88,8 +87,8 @@ nav {
 #game-container { 
     width: 100%; 
     max-width: 1100px; 
-    height: 82vh; /* Made taller to fill vertical space */
-    min-height: 650px; /* Safety height for short viewports */
+    height: 76vh; /* BALANCED HEIGHT: Down from 82vh, up from 72vh */
+    min-height: 580px; /* Adjusted safety height */
     background: #000; 
     border: 3px solid #00aaff; 
     border-radius: 15px; 
@@ -104,10 +103,10 @@ nav {
 .ad-label { font-size: 10px; text-transform: uppercase; color: #00aaff; opacity: 0.6; letter-spacing: 1px; }
 .side-ad { width: 160px; height: 600px; background: #0d1b2e; border: 1px solid #1c426e; border-radius: 10px; overflow: hidden; }
 
-/* --- FULLSCREEN BUTTON (TIGHTENED) --- */
+/* --- FULLSCREEN BUTTON --- */
 .fullscreen-btn {
     background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
-    margin: 8px 0 15px 0; 
+    margin: 10px 0 15px 0; 
     transition: 0.3s ease; display: inline-block;
 }
 .fullscreen-btn:hover { 
@@ -145,7 +144,7 @@ nav {
 @media (max-width: 1200px) {
     .side-ad-container { display: none; }
     .game-layout-wrapper { min-height: auto; display: block; }
-    #game-container { width: 100%; height: 60vh; min-height: 400px; margin: 0 auto 10px auto; }
+    #game-container { width: 100%; height: 55vh; min-height: 380px; margin: 0 auto 10px auto; }
 }
 
 @media (max-width: 768px) {
