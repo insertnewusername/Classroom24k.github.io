@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master (Adaptive & Ad-Block Proof) */
+/* style.css - Classroom 24k Final Master (Complete Version) */
 
 body {
     background-color: #081221; 
@@ -25,11 +25,41 @@ header {
 header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION (RESTORED SEARCH & LINKS) --- */
 nav {
-    background-color: #0d1b2e; padding: 15px 30px; border-bottom: 2px solid #1c426e; 
-    margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 20px;
+    background-color: #0d1b2e; 
+    padding: 15px 30px; 
+    border-bottom: 2px solid #1c426e; 
+    margin-bottom: 25px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    flex-wrap: wrap; 
+    gap: 20px;
 }
+
+.search-container { 
+    display: flex; 
+    align-items: center; 
+    padding-right: 25px; 
+    border-right: 2px solid #1c426e; 
+}
+
+#gameSearch { 
+    background: #081221; 
+    border: 1px solid #1c426e; 
+    border-radius: 6px; 
+    padding: 8px 12px; 
+    color: white; 
+    width: 220px; 
+    outline: none; 
+    transition: 0.3s;
+}
+#gameSearch:focus { border-color: #00aaff; box-shadow: 0 0 10px rgba(0, 170, 255, 0.5); }
+
+.nav-links { display: flex; gap: 30px; text-transform: uppercase; font-weight: bold; }
+.nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
+.nav-links a:hover { color: #ffffff !important; }
 
 /* --- FEATURED BANNER --- */
 .featured-banner {
@@ -60,16 +90,15 @@ nav {
 }
 .play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
 
-/* --- GAME PLAYER & AD LAYOUT (SPACED OUT) --- */
+/* --- GAME PLAYER & AD LAYOUT (SPACED & SECURE) --- */
 .game-layout-wrapper {
     display: flex;
-    /* This distributes the space evenly across the x-axis */
-    justify-content: space-evenly; 
+    justify-content: space-evenly; /* Spaces ads away from game evenly */
     align-items: center; 
     width: 100%;
-    max-width: 1550px; /* Limits how far they spread on ultra-wide screens */
+    max-width: 1550px; 
     margin: 0 auto 15px auto;
-    min-height: 620px; 
+    min-height: 620px; /* Ad-blocker proof height */
 }
 
 #game-container { 
@@ -79,16 +108,13 @@ nav {
     background: #000; border: 3px solid #00aaff; 
     border-radius: 15px; margin: 0; 
     position: relative; overflow: hidden; 
-    /* Allows game to be the anchor while ads float on sides */
     flex-shrink: 1; 
 }
 #game-container iframe { width: 100%; height: 100%; border: none; }
 
 .side-ad-container { 
     display: flex; flex-direction: column; align-items: center; gap: 8px; 
-    transition: 0.3s; 
-    min-width: 160px; 
-    flex-shrink: 0; /* Ensures ads never get squished below 160px */
+    transition: 0.3s; min-width: 160px; flex-shrink: 0; 
 }
 .ad-label { font-size: 10px; text-transform: uppercase; color: #00aaff; opacity: 0.6; letter-spacing: 1px; }
 
@@ -171,17 +197,19 @@ nav {
 
 /* --- SMART RESPONSIVE TWEAKS --- */
 @media (max-width: 1550px) and (min-width: 1201px) {
-    .game-layout-wrapper { justify-content: center; gap: 20px; } /* Switch back to center when space is tight */
+    .game-layout-wrapper { justify-content: center; gap: 20px; }
     .side-ad-container { transform: scale(0.9); width: 144px; min-width: 144px; }
 }
 
 @media (max-width: 1200px) {
     .side-ad-container { display: none; }
+    .search-container { border-right: none; padding-right: 0; }
     #game-container { width: 100%; max-width: 1100px; }
 }
 
 @media (max-width: 768px) {
     header, .container, .about-section { width: 95%; }
-    .featured-banner { height: 350px; }
+    .nav-links { gap: 15px; font-size: 0.8rem; }
+    #gameSearch { width: 160px; }
     #game-container { height: 50vh; width: 100%; }
 }
