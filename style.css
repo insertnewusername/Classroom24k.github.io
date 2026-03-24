@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Final Spacing & Animation Fix */
+/* style.css - Classroom 24k - Final Spacing, Tall Iframe & Growth Animation */
 
 body {
     background-color: #081221; 
@@ -61,11 +61,11 @@ nav {
 }
 .play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
 
-/* Restored Play Icon/Triangle Growth Logic */
+/* Play Icon/Triangle Growth Logic */
 .iframe-hover-zone:hover .play-icon, 
 .iframe-hover-zone:hover .play-text {
     filter: drop-shadow(0 0 15px #00aaff);
-    transform: scale(1.15); /* Triangle grows */
+    transform: scale(1.15); /* Triangle and text grow */
     color: #ffffff;
 }
 
@@ -74,21 +74,29 @@ nav {
     display: block; 
 }
 
-/* --- GAME PLAYER & AD LAYOUT (SIDE-GAP & VERTICAL FIX) --- */
+/* --- TALL GAME PLAYER & AD LAYOUT --- */
 .game-layout-wrapper {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    gap: 50px; /* Forces physical gap between ads and iframe */
+    gap: 50px; /* Physical gap between ads and iframe */
     width: 100%;
     max-width: 1550px; 
     margin: 0 auto;
 }
 
 #game-container { 
-    width: 100%; max-width: 1100px; height: 72vh; 
-    background: #000; border: 3px solid #00aaff; border-radius: 15px; 
-    margin: 0; position: relative; overflow: hidden; flex-shrink: 1; 
+    width: 100%; 
+    max-width: 1100px; 
+    height: 82vh; /* Made taller to fill vertical space */
+    min-height: 650px; /* Safety height for short viewports */
+    background: #000; 
+    border: 3px solid #00aaff; 
+    border-radius: 15px; 
+    margin: 0; 
+    position: relative; 
+    overflow: hidden; 
+    flex-shrink: 1; 
 }
 #game-container iframe { width: 100%; height: 100%; border: none; display: block; }
 
@@ -99,7 +107,7 @@ nav {
 /* --- FULLSCREEN BUTTON (TIGHTENED) --- */
 .fullscreen-btn {
     background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
-    margin: 8px 0 15px 0; /* Snapped close to iframe */
+    margin: 8px 0 15px 0; 
     transition: 0.3s ease; display: inline-block;
 }
 .fullscreen-btn:hover { 
@@ -137,7 +145,7 @@ nav {
 @media (max-width: 1200px) {
     .side-ad-container { display: none; }
     .game-layout-wrapper { min-height: auto; display: block; }
-    #game-container { width: 100%; height: 50vh; margin: 0 auto 10px auto; }
+    #game-container { width: 100%; height: 60vh; min-height: 400px; margin: 0 auto 10px auto; }
 }
 
 @media (max-width: 768px) {
