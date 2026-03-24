@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Balanced Height, Growth Animation & Loading Fix */
+/* style.css - Classroom 24k - Balanced Height, Growth Animation & Layout Lock Fix */
 
 body {
     background-color: #081221; 
@@ -25,16 +25,42 @@ header {
 header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION (TIGHTENED) --- */
 nav {
     background-color: #0d1b2e; padding: 10px 30px; border-bottom: 2px solid #1c426e; 
     margin-bottom: 10px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 20px;
 }
+.search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
+#gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 8px 12px; color: white; width: 220px; outline: none; transition: 0.3s; }
+.nav-links { display: flex; gap: 30px; text-transform: uppercase; font-weight: bold; }
+.nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
+.nav-links a:hover { color: #ffffff !important; }
 
 /* --- GAME PAGE TITLE --- */
 .game-page-title { margin: 0 auto 5px auto; font-size: 1.7rem; color: #00aaff; }
 
+/* --- FEATURED BANNER --- */
+.featured-banner {
+    width: 100%; height: 450px; margin-bottom: 40px; border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #00aaff; display: flex; align-items: flex-end; background: #000; cursor: pointer;
+}
+.featured-banner::before {
+    content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://cdn2.spatial.io/assets/v1/static/external_games/bloxd-io.jpeg') no-repeat center center/cover;
+    transition: transform 0.7s ease; z-index: 1;
+}
+.featured-banner:hover::before { transform: scale(1.08); }
+.featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 15%, transparent 100%); width: 100%; padding: 40px 50px; text-align: left; }
+.featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
+
 /* --- PLAY BUTTONS & TRIANGLE GROWTH --- */
+.play-now-btn { 
+    display: inline-block; background: #00aaff; color: #081221; 
+    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
+    text-transform: uppercase; transition: all 0.3s ease; 
+    position: relative; z-index: 3; text-decoration: none;
+}
+.play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
+
 .iframe-hover-zone:hover .play-icon, 
 .iframe-hover-zone:hover .play-text {
     filter: drop-shadow(0 0 15px #00aaff);
@@ -55,26 +81,27 @@ nav {
     width: 100%;
     max-width: 1550px; 
     margin: 0 auto;
+    min-height: 76vh; /* Lock vertical height immediately */
 }
 
 #game-container { 
+    flex: 1; /* FORCES the container to occupy middle space even when empty */
     width: 100%; 
     max-width: 1100px; 
     height: 76vh; 
     min-height: 580px; 
-    background: #000c1a; /* Placeholder color to prevent ad-centering */
+    background: #000; 
     border: 3px solid #00aaff; 
     border-radius: 15px; 
     margin: 0; 
     position: relative; 
     overflow: hidden; 
-    flex-shrink: 1;
-    display: flex; /* Centers the loading text */
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Forces ads to stay on side while iframe is null */
+/* Fixes the "Ads in the middle" issue by adding placeholder content */
 #game-container:empty::before {
     content: "LOADING GAME...";
     color: #00aaff;
