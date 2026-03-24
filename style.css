@@ -78,7 +78,6 @@ nav {
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
 .featured-desc { font-size: 1.1rem; color: white; margin: 10px 0 20px 0; opacity: 0.9; }
 
-/* Play Now Button on Banner */
 .play-now-btn { 
     display: inline-block; background: #00aaff; color: #081221; 
     padding: 12px 40px; border-radius: 50px; font-weight: bold; 
@@ -87,20 +86,26 @@ nav {
 }
 .play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
 
-/* --- RESPONSIVE GAME PLAYER --- */
+/* --- GAME PLAYER & AD LAYOUT --- */
+.game-layout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
 #game-container { 
     width: 100%; max-width: 1100px; height: 75vh; 
     background: #000; border: 3px solid #00aaff; 
-    border-radius: 15px; margin: 0 auto 10px auto; 
+    border-radius: 15px; margin: 0; 
     position: relative; overflow: hidden; 
 }
 #game-container iframe { width: 100%; height: 100%; border: none; }
 
-.iframe-hover-zone:hover .play-icon, 
-.iframe-hover-zone:hover .play-text {
-    filter: drop-shadow(0 0 15px #00aaff); transform: scale(1.1);
-}
-.play-icon, .play-text { transition: transform 0.2s ease-out, filter 0.2s ease-out; display: block; }
+.side-ad-container { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.ad-label { font-size: 10px; text-transform: uppercase; color: #00aaff; opacity: 0.6; letter-spacing: 1px; }
+.side-ad { width: 160px; height: 600px; background: #0d1b2e; border: 1px solid #1c426e; border-radius: 10px; overflow: hidden; }
 
 .fullscreen-btn {
     background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff;
@@ -139,34 +144,22 @@ nav {
 }
 
 .game-card { 
-    flex: 0 0 200px; width: 200px; height: 210px; /* Slimmed height */
+    flex: 0 0 200px; width: 200px; height: 210px; 
     background: #0d1b2e; border-radius: 12px; border: 2px solid #1c426e; 
     text-decoration: none; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column;
 }
 .game-card:hover { transform: translateY(-5px); border-color: #00aaff; }
 
-.game-img-container { width: 100%; height: 165px; overflow: hidden; } /* Larger image area */
+.game-img-container { width: 100%; height: 165px; overflow: hidden; }
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Slim Label Logic */
 .game-info { 
-    flex-grow: 1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    color: white; 
-    background: #1c426e; 
-    padding: 0 8px; /* Tighter padding */
+    flex-grow: 1; display: flex; align-items: center; justify-content: center; 
+    color: white; background: #1c426e; padding: 0 8px; 
 }
 .game-info h3 { 
-    margin: 0; 
-    font-size: 0.95rem; 
-    text-transform: uppercase; 
-    letter-spacing: 0.5px;
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    max-width: 180px; /* Ensures text stays within the slim border */
+    margin: 0; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; 
 }
 
 /* --- ABOUT SECTION --- */
@@ -174,6 +167,10 @@ nav {
 .about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
 
 /* --- MOBILE TWEAKS --- */
+@media (max-width: 1450px) {
+    .side-ad-container { display: none; } /* Hides ads if screen too narrow */
+}
+
 @media (max-width: 768px) {
     header, .container, .about-section { width: 95%; }
     .featured-banner { height: 350px; }
@@ -186,9 +183,5 @@ nav {
     .game-img-container { height: 130px; }
     .game-info h3 { font-size: 0.8rem; max-width: 120px; }
     
-    #game-container {
-        height: 50vh;
-        width: 100%;
-        border-width: 2px;
-    }
+    #game-container { height: 50vh; width: 100%; border-width: 2px; }
 }
