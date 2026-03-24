@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k Final Master (Optimized & Animated) */
+/* style.css - Classroom 24k - Final Spacing & Button Animation */
 
 body {
     background-color: #081221; 
@@ -16,38 +16,30 @@ header, .container, .about-section {
     box-sizing: border-box;
 }
 
-/* --- HEADER (ANIMATIONS RESTORED) --- */
+/* --- HEADER (TIGHTENED) --- */
 header {
-    background-color: #1c426e; padding: 12px; border-radius: 10px; border: 2px solid #00aaff; 
+    background-color: #1c426e; padding: 10px; border-radius: 10px; border: 2px solid #00aaff; 
     cursor: pointer; box-shadow: 0 0 15px rgba(0, 170, 255, 0.3); 
-    transition: all 0.3s ease-in-out;
-    margin-top: 15px; margin-bottom: 10px; /* Tightened Gap */
+    transition: 0.3s; margin-top: 10px; margin-bottom: 5px;
 }
-header:hover { 
-    transform: translateY(-3px); 
-    box-shadow: 0 0 25px rgba(0, 170, 255, 0.6);
-    border-color: #ffffff;
-}
+header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
-/* --- NAVIGATION --- */
+/* --- NAVIGATION (TIGHTENED) --- */
 nav {
-    background-color: #0d1b2e; padding: 12px 30px; border-bottom: 2px solid #1c426e; 
-    margin-bottom: 15px; /* Tightened Gap */
-    display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 20px;
+    background-color: #0d1b2e; padding: 10px 30px; border-bottom: 2px solid #1c426e; 
+    margin-bottom: 10px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 20px;
 }
-
 .search-container { display: flex; align-items: center; padding-right: 25px; border-right: 2px solid #1c426e; }
 #gameSearch { background: #081221; border: 1px solid #1c426e; border-radius: 6px; padding: 8px 12px; color: white; width: 220px; outline: none; transition: 0.3s; }
-#gameSearch:focus { border-color: #00aaff; box-shadow: 0 0 10px rgba(0, 170, 255, 0.5); }
 .nav-links { display: flex; gap: 30px; text-transform: uppercase; font-weight: bold; }
 .nav-links a { color: #00aaff !important; text-decoration: none; transition: 0.3s; }
 .nav-links a:hover { color: #ffffff !important; }
 
-/* --- GAME PAGE SPECIFIC --- */
-.game-page-title { margin-top: 0; margin-bottom: 10px; font-size: 1.8rem; color: #00aaff; }
+/* --- GAME PAGE TITLE (TIGHTENED) --- */
+.game-page-title { margin: 0 auto 5px auto; font-size: 1.7rem; color: #00aaff; }
 
-/* --- FEATURED BANNER (ANIMATIONS RESTORED) --- */
+/* --- FEATURED BANNER --- */
 .featured-banner {
     width: 100%; height: 450px; margin-bottom: 40px; border-radius: 20px; position: relative; overflow: hidden; border: 3px solid #00aaff; display: flex; align-items: flex-end; background: #000; cursor: pointer;
 }
@@ -60,20 +52,39 @@ nav {
 .featured-overlay { position: relative; z-index: 2; background: linear-gradient(to top, rgba(8, 18, 33, 1) 15%, transparent 100%); width: 100%; padding: 40px 50px; text-align: left; }
 .featured-title { font-size: 3rem; margin: 0; color: white; text-transform: uppercase; }
 
+/* --- THE PLAY BUTTON & TRIANGLE ANIMATION --- */
 .play-now-btn { 
-    display: inline-block; background: #00aaff; color: #081221; padding: 12px 40px; border-radius: 50px; font-weight: bold; text-transform: uppercase; transition: all 0.3s ease; position: relative; z-index: 3; text-decoration: none;
+    display: inline-block; background: #00aaff; color: #081221; 
+    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
+    text-transform: uppercase; transition: all 0.3s ease; 
+    position: relative; z-index: 3; text-decoration: none;
 }
-.play-now-btn:hover { transform: scale(1.1) rotate(-2deg); background: #ffffff; box-shadow: 0 0 25px #ffffff; }
 
-/* --- GAME PLAYER & AD LAYOUT (TIGHTENED & SECURE) --- */
+/* Triangle inside the button (if using an <i> tag or similar) */
+.play-now-btn i { transition: all 0.3s ease; display: inline-block; margin-right: 8px; }
+
+.play-now-btn:hover { 
+    transform: scale(1.15); /* Grow effect */
+    background: #ffffff;    /* Color change */
+    box-shadow: 0 0 25px #ffffff; 
+}
+
+/* Make the triangle icon grow even more or rotate slightly when parent is hovered */
+.play-now-btn:hover i {
+    transform: scale(1.2) rotate(10deg);
+    color: #00aaff;
+}
+
+/* --- GAME PLAYER & AD LAYOUT (SIDE-GAP & VERTICAL FIX) --- */
 .game-layout-wrapper {
     display: flex;
-    justify-content: space-evenly; 
+    justify-content: center; /* Center to use the Gap property */
     align-items: center; 
+    gap: 50px; /* Forces ads away from the iframe so they never touch */
     width: 100%;
     max-width: 1550px; 
     margin: 0 auto;
-    min-height: 600px; /* Set to match ad height precisely */
+    min-height: 600px; 
 }
 
 #game-container { 
@@ -84,28 +95,23 @@ nav {
 
 .side-ad-container { display: flex; flex-direction: column; align-items: center; gap: 5px; transition: 0.3s; min-width: 160px; flex-shrink: 0; }
 .ad-label { font-size: 10px; text-transform: uppercase; color: #00aaff; opacity: 0.6; letter-spacing: 1px; }
-.side-ad { width: 160px; height: 600px; min-height: 600px; background: #0d1b2e; border: 1px solid #1c426e; border-radius: 10px; overflow: hidden; }
+.side-ad { width: 160px; height: 600px; background: #0d1b2e; border: 1px solid #1c426e; border-radius: 10px; overflow: hidden; }
 
 /* --- FULLSCREEN BUTTON (TIGHTENED) --- */
 .fullscreen-btn {
     background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
-    margin: 10px 0 20px 0; /* Tightened Gap */
-    transition: all 0.3s ease; display: inline-block; position: relative; z-index: 10;
+    margin: 8px 0 15px 0; /* Snapped closer to iframe */
+    transition: 0.3s ease; display: inline-block;
 }
-.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: scale(1.05); }
+.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px) scale(1.05); }
 
 /* --- CAROUSELS --- */
 .carousel-container { width: 100%; margin-bottom: 60px; text-align: left; position: relative; }
 .carousel-wrapper { position: relative; display: flex; align-items: center; width: 100%; overflow: visible; }
 .carousel-title { font-size: 1.4rem; color: #00aaff; text-transform: uppercase; border-left: 4px solid #00aaff; padding-left: 15px; margin-bottom: 15px; }
-
 .carousel-track { display: flex; gap: 25px; overflow-x: auto; scroll-behavior: smooth; width: 100%; flex-wrap: nowrap; padding: 15px 0; scrollbar-width: none; }
 .carousel-track::-webkit-scrollbar { display: none; }
-
-.scroll-btn {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: rgba(13, 27, 46, 0.8);
-    backdrop-filter: blur(5px); color: #00aaff; border: 2px solid #00aaff; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; transition: 0.3s;
-}
+.scroll-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 45px; height: 45px; background: rgba(13, 27, 46, 0.8); backdrop-filter: blur(5px); color: #00aaff; border: 2px solid #00aaff; border-radius: 50%; cursor: pointer; z-index: 100; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; transition: 0.3s; }
 .left-btn { left: -22px; }
 .right-btn { right: -22px; }
 .scroll-btn:hover { background: #00aaff; color: white; box-shadow: 0 0 20px #00aaff; }
@@ -123,23 +129,13 @@ nav {
 .about-section { padding: 2px; border-radius: 20px; background: #00aaff; margin-bottom: 60px; }
 .about-content { background: #081221; padding: 35px; border-radius: 18px; text-align: left; }
 
-/* --- LOADING SPINNER --- */
-.spinner { width: 40px; height: 40px; border: 4px solid #0d1b2e; border-top: 4px solid #00aaff; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-/* --- SMART RESPONSIVE TWEAKS --- */
+/* --- RESPONSIVE FIXES --- */
 @media (max-width: 1200px) {
     .side-ad-container { display: none; }
-    .game-layout-wrapper { 
-        min-height: auto; /* Fixes Ghost Space on Mobile/Adblock */
-        display: block; 
-    }
+    .game-layout-wrapper { min-height: auto; display: block; }
     #game-container { width: 100%; height: 50vh; margin-bottom: 10px; }
-    .search-container { border-right: none; padding-right: 0; }
 }
 
 @media (max-width: 768px) {
     header, .container, .about-section { width: 95%; }
-    .nav-links { gap: 15px; font-size: 0.8rem; }
-    #gameSearch { width: 160px; }
 }
