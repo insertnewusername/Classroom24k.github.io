@@ -101,27 +101,27 @@ nav {
 }
 .featured-title { font-size: 3rem; margin: 0 0 15px 0; color: white; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-/* --- PLAY BUTTONS (SMOOTH BREATHING) --- */
+/* --- PLAY BUTTONS (FAST NEON SYNC) --- */
 .play-now-btn { 
-    display: inline-block; background: #00aaff; color: #081221; 
+    display: inline-block; background: #1c426e; color: #ffffff; 
     padding: 12px 40px; border-radius: 50px; font-weight: bold; 
     text-transform: uppercase; 
-    transition: all 0.8s ease-in-out; /* Slower transition for color and scale */
-    position: relative; z-index: 100; text-decoration: none; border: none;
-    animation: breathingGlow 4s infinite ease-in-out; /* Slower 4s breath */
+    transition: 0.3s ease; /* Synced with Fullscreen Button */
+    position: relative; z-index: 100; text-decoration: none; border: 2px solid #00aaff;
+    animation: breathingGlow 4s infinite ease-in-out;
 }
 
 .play-now-btn:hover { 
-    transform: scale(1.05); /* Gentler scale increase */
-    background: #ffffff; 
-    color: #00aaff;
-    box-shadow: 0 0 30px #ffffff; 
+    transform: scale(1.1); 
+    background: #00aaff; 
+    color: #081221;
+    box-shadow: 0 0 25px #00aaff; 
 }
 
 @keyframes breathingGlow {
-    0% { box-shadow: 0 0 5px rgba(0, 170, 255, 0.4); transform: scale(1); }
-    50% { box-shadow: 0 0 20px rgba(0, 170, 255, 0.7); transform: scale(1.02); }
-    100% { box-shadow: 0 0 5px rgba(0, 170, 255, 0.4); transform: scale(1); }
+    0% { box-shadow: 0 0 5px rgba(0, 170, 255, 0.4); }
+    50% { box-shadow: 0 0 20px rgba(0, 170, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 170, 255, 0.4); }
 }
 
 /* --- GAME PLAYER & AD LAYOUT --- */
@@ -151,40 +151,43 @@ nav {
     border: none; z-index: 50;
 }
 
-/* THE HOVER ZONE (SMOOTH TRIANGLE) */
+/* THE HOVER ZONE (FAST NEON SYNC) */
 .iframe-hover-zone {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(8, 18, 33, 0.7); display: flex; flex-direction: column;
     align-items: center; justify-content: center; cursor: pointer; z-index: 20; 
-    transition: background 0.8s ease;
+    transition: 0.3s ease;
 }
 
 .play-icon { 
     font-size: 80px; color: #ffffff; 
     text-shadow: 0 0 20px #00aaff; 
-    transition: all 0.8s ease-in-out; 
-    animation: triangleBreathe 4s infinite ease-in-out; /* Slower 4s breath */
+    transition: 0.3s ease; /* Synced with Fullscreen Button */
+    animation: triangleBreathe 4s infinite ease-in-out;
 }
 
 .play-text { 
     color: #ffffff; font-weight: bold; font-size: 1.8rem; letter-spacing: 4px; 
     text-shadow: 0 0 10px #00aaff; 
-    transition: all 0.8s ease; 
+    transition: 0.3s ease; 
 }
 
-/* Hover effects for triangle zone */
+/* Hover effects for triangle zone - Turns Neon Blue */
 .iframe-hover-zone:hover .play-icon { 
-    color: #ffffff; 
-    text-shadow: 0 0 40px #00aaff, 0 0 60px #ffffff;
-    transform: scale(1.08); /* Gentler swell */
+    color: #00aaff; 
+    text-shadow: 0 0 40px #00aaff;
+    transform: scale(1.15);
 }
-.iframe-hover-zone:hover .play-text { color: #00aaff; }
+.iframe-hover-zone:hover .play-text { 
+    color: #00aaff; 
+    text-shadow: 0 0 20px #00aaff;
+}
 .iframe-hover-zone:hover { background: rgba(8, 18, 33, 0.4); }
 
 @keyframes triangleBreathe {
-    0% { transform: scale(1); opacity: 0.8; text-shadow: 0 0 10px #00aaff; }
-    50% { transform: scale(1.04); opacity: 1; text-shadow: 0 0 30px #00aaff; }
-    100% { transform: scale(1); opacity: 0.8; text-shadow: 0 0 10px #00aaff; }
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.08); opacity: 1; text-shadow: 0 0 40px #00aaff; }
+    100% { transform: scale(1); opacity: 0.8; }
 }
 
 /* SIDEBARS */
