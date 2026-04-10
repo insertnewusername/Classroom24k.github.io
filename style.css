@@ -35,18 +35,18 @@ header {
 header:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(0, 170, 255, 0.5); }
 header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 3px; color: white; }
 
-/* --- NAVIGATION (RESTORED & FORCED) --- */
+/* --- NAVIGATION --- */
 nav {
     background-color: #0d1b2e; 
     padding: 10px 30px; 
     border-bottom: 2px solid #1c426e; 
     margin-bottom: 10px; 
-    display: flex !important; /* Forces the bar to show */
+    display: flex !important; 
     align-items: center; 
     justify-content: center; 
     flex-wrap: wrap; 
     gap: 20px;
-    min-height: 60px; /* Prevents collapse if empty */
+    min-height: 60px;
     width: 100%;
     box-sizing: border-box;
 }
@@ -101,14 +101,29 @@ nav {
 }
 .featured-title { font-size: 3rem; margin: 0 0 15px 0; color: white; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-/* --- PLAY BUTTONS --- */
+/* --- PLAY BUTTONS (FIXED HOVER) --- */
 .play-now-btn { 
-    display: inline-block; background: #00aaff; color: #081221; 
-    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
-    text-transform: uppercase; transition: all 0.3s ease; 
-    position: relative; z-index: 3; text-decoration: none; border: none;
+    display: inline-block; 
+    background: #00aaff; 
+    color: #081221; 
+    padding: 12px 40px; 
+    border-radius: 50px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    transition: all 0.3s ease; 
+    position: relative; 
+    z-index: 100; /* Force it to stay on top */
+    text-decoration: none; 
+    border: none;
+    cursor: pointer;
 }
-.play-now-btn:hover { transform: scale(1.1); background: #ffffff; box-shadow: 0 0 20px #ffffff; }
+/* This ensures the hover works regardless of parent containers */
+.play-now-btn:hover { 
+    transform: scale(1.1) !important; 
+    background: #ffffff !important; 
+    box-shadow: 0 0 20px #ffffff !important; 
+    color: #081221 !important;
+}
 
 /* --- GAME PLAYER & AD LAYOUT --- */
 .game-layout-wrapper {
@@ -131,7 +146,6 @@ nav {
     width: 100vw !important;
     height: 100vh !important;
 }
-#game-container:-webkit-full-screen { border: none !important; border-radius: 0 !important; }
 
 /* --- IFRAME FILL FIX --- */
 #game-container iframe {
@@ -140,7 +154,7 @@ nav {
     border: none; z-index: 50;
 }
 
-/* THE HOVER ZONE (NEON GLOW) */
+/* THE HOVER ZONE */
 .iframe-hover-zone {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(8, 18, 33, 0.7); display: flex; flex-direction: column;
