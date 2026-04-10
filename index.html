@@ -59,21 +59,17 @@
                         <div class="game-img-container"><img src="https://abinbins.github.io/thumb/rowdy-city-wrestling.png"></div>
                         <div class="game-info"><h3>Rowdy City Wrestling</h3></div>
                     </a>
-                    <a href="tag.html" class="game-card">
+                    <a href="smash-karts.html" class="game-card">
                         <div class="game-img-container"><img src="https://abinbins.github.io/thumb/smash-karts.png"></div>
                         <div class="game-info"><h3>Smash Karts</h3></div>
                     </a>
-                    <a href="tag.html" class="game-card">
+                    <a href="rowdy-wrestling.html" class="game-card">
                         <div class="game-img-container"><img src="https://abinbins.github.io/thumb/rowdy-wrestling.png"></div>
                         <div class="game-info"><h3>Rowdy Wrestling</h3></div>
                     </a>
                     <a href="polytrack.html" class="game-card">
                         <div class="game-img-container"><img src="https://www.kizgame.com/thumbs/polytrack_small.webp"></div>
                         <div class="game-info"><h3>Polytrack</h3></div>
-                    </a>
-                    <a href="tag.html" class="game-card">
-                        <div class="game-img-container"><img src="https://abinbins.github.io/thumb/tag.png"></div>
-                        <div class="game-info"><h3>Tag</h3></div>
                     </a>
                     <a href="cookie-clicker.html" class="game-card">
                         <div class="game-img-container"><img src="https://abinbins.github.io/thumb/cookie-clicker.png"></div>
@@ -174,11 +170,19 @@
         <div class="about-section">
             <div class="about-content">
                 <h2>About Classroom 24k</h2>
-                <p>Welcome to Classroom 24k, a high quality gaming website, that provides you with a high end gaming experience. With a massive range of games for you to choose from, your guaranteed to find a game you like.</p>
+                <p>Welcome to Classroom 24k, a high quality gaming website that provides you with a high end gaming experience. With a massive range of games for you to choose from, you're guaranteed to find a game you like.</p>
             </div>
         </div>
     </div>
 
- 
+    <script src="script.js"></script>
+
+    <script>
+        function scrollCarousel(btn, direction) {
+            const track = btn.parentElement.querySelector('.carousel-track');
+            const scrollAmount = track.clientWidth * 0.8;
+            track.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
