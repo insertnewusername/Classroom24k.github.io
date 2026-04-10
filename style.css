@@ -101,55 +101,27 @@ nav {
 }
 .featured-title { font-size: 3rem; margin: 0 0 15px 0; color: white; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-/* --- PLAY BUTTONS (FIXED AESTHETICS) --- */
+/* --- PLAY BUTTONS (BREATHING & COLOR SHIFT) --- */
 .play-now-btn { 
-    display: inline-block; 
-    background: linear-gradient(135deg, #00aaff 0%, #0088cc 100%); 
-    color: #081221; 
-    padding: 14px 45px; 
-    border-radius: 50px; 
-    font-weight: 800; 
-    text-transform: uppercase; 
-    letter-spacing: 2px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-    position: relative; 
-    z-index: 100; 
-    text-decoration: none; 
-    border: 2px solid transparent;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+    display: inline-block; background: #00aaff; color: #081221; 
+    padding: 12px 40px; border-radius: 50px; font-weight: bold; 
+    text-transform: uppercase; transition: all 0.4s ease; 
+    position: relative; z-index: 100; text-decoration: none; border: none;
+    animation: breathingGlow 3s infinite ease-in-out;
 }
 
 .play-now-btn:hover { 
-    transform: translateY(-3px) scale(1.05) !important; 
-    background: #ffffff !important; 
-    color: #00aaff !important;
-    box-shadow: 0 0 30px #ffffff, 0 0 50px rgba(0, 170, 255, 0.6) !important;
-    border-color: #00aaff !important;
+    transform: scale(1.1); 
+    background: #ffffff; 
+    color: #00aaff;
+    box-shadow: 0 0 30px #ffffff; 
+    animation: none; /* Stops breathing when focused */
 }
 
-/* --- FULLSCREEN BUTTON (FIXED AESTHETICS) --- */
-.fullscreen-btn {
-    background: #0d1b2e; 
-    color: #00aaff; 
-    border: 2px solid #00aaff; 
-    padding: 12px 40px; 
-    border-radius: 50px; 
-    cursor: pointer; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    letter-spacing: 1.5px;
-    margin: 20px 0; 
-    transition: all 0.3s ease; 
-    display: inline-block;
-    box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
-}
-
-.fullscreen-btn:hover { 
-    background: #00aaff !important; 
-    color: #081221 !important; 
-    box-shadow: 0 0 25px #00aaff, 0 0 45px rgba(0, 170, 255, 0.4) !important; 
-    transform: translateY(-2px) !important;
+@keyframes breathingGlow {
+    0% { box-shadow: 0 0 5px rgba(0, 170, 255, 0.4); }
+    50% { box-shadow: 0 0 25px rgba(0, 170, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 170, 255, 0.4); }
 }
 
 /* --- GAME PLAYER & AD LAYOUT --- */
@@ -179,15 +151,37 @@ nav {
     border: none; z-index: 50;
 }
 
-/* THE HOVER ZONE */
+/* THE HOVER ZONE (TRIANGLE BREATHING) */
 .iframe-hover-zone {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(8, 18, 33, 0.7); display: flex; flex-direction: column;
     align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: 0.3s ease;
 }
-.play-icon { font-size: 80px; color: #ffffff; text-shadow: 0 0 20px #00aaff, 0 0 40px #00aaff; transition: 0.3s; }
+
+.play-icon { 
+    font-size: 80px; color: #ffffff; 
+    text-shadow: 0 0 20px #00aaff; 
+    transition: 0.4s; 
+    animation: triangleBreathe 3s infinite ease-in-out;
+}
+
 .play-text { color: #ffffff; font-weight: bold; font-size: 1.8rem; letter-spacing: 4px; text-shadow: 0 0 10px #00aaff; transition: 0.3s; }
+
+/* Triangle changes color and glows white on hover */
+.iframe-hover-zone:hover .play-icon { 
+    color: #00aaff; 
+    text-shadow: 0 0 40px #00aaff, 0 0 60px #ffffff;
+    transform: scale(1.15);
+    animation: none;
+}
+.iframe-hover-zone:hover .play-text { color: #00aaff; }
 .iframe-hover-zone:hover { background: rgba(8, 18, 33, 0.4); }
+
+@keyframes triangleBreathe {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.08); opacity: 1; text-shadow: 0 0 40px #00aaff; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
 
 /* SIDEBARS */
 .side-ad-container { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 160px; min-width: 160px; flex-shrink: 0; }
@@ -215,6 +209,13 @@ nav {
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; padding: 0 8px; }
 .game-info h3 { margin: 0; font-size: 0.95rem; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* --- FULLSCREEN BUTTON (RESTORED TO YOUR VERSION) --- */
+.fullscreen-btn {
+    background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
+    margin: 15px 0; transition: 0.3s ease; display: inline-block;
+}
+.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px); }
 
 /* --- ABOUT SECTION --- */
 .about-section { padding: 2px; border-radius: 20px; background: #00aaff; margin-bottom: 60px; }
