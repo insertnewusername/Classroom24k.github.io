@@ -101,28 +101,55 @@ nav {
 }
 .featured-title { font-size: 3rem; margin: 0 0 15px 0; color: white; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-/* --- PLAY BUTTONS (FIXED HOVER) --- */
+/* --- PLAY BUTTONS (FIXED AESTHETICS) --- */
 .play-now-btn { 
     display: inline-block; 
-    background: #00aaff; 
+    background: linear-gradient(135deg, #00aaff 0%, #0088cc 100%); 
     color: #081221; 
+    padding: 14px 45px; 
+    border-radius: 50px; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    position: relative; 
+    z-index: 100; 
+    text-decoration: none; 
+    border: 2px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 170, 255, 0.4);
+}
+
+.play-now-btn:hover { 
+    transform: translateY(-3px) scale(1.05) !important; 
+    background: #ffffff !important; 
+    color: #00aaff !important;
+    box-shadow: 0 0 30px #ffffff, 0 0 50px rgba(0, 170, 255, 0.6) !important;
+    border-color: #00aaff !important;
+}
+
+/* --- FULLSCREEN BUTTON (FIXED AESTHETICS) --- */
+.fullscreen-btn {
+    background: #0d1b2e; 
+    color: #00aaff; 
+    border: 2px solid #00aaff; 
     padding: 12px 40px; 
     border-radius: 50px; 
+    cursor: pointer; 
     font-weight: bold; 
     text-transform: uppercase; 
+    letter-spacing: 1.5px;
+    margin: 20px 0; 
     transition: all 0.3s ease; 
-    position: relative; 
-    z-index: 100; /* Force it to stay on top */
-    text-decoration: none; 
-    border: none;
-    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
 }
-/* This ensures the hover works regardless of parent containers */
-.play-now-btn:hover { 
-    transform: scale(1.1) !important; 
-    background: #ffffff !important; 
-    box-shadow: 0 0 20px #ffffff !important; 
-    color: #081221 !important;
+
+.fullscreen-btn:hover { 
+    background: #00aaff !important; 
+    color: #081221 !important; 
+    box-shadow: 0 0 25px #00aaff, 0 0 45px rgba(0, 170, 255, 0.4) !important; 
+    transform: translateY(-2px) !important;
 }
 
 /* --- GAME PLAYER & AD LAYOUT --- */
@@ -138,7 +165,6 @@ nav {
     justify-content: center; z-index: 5;
 }
 
-/* --- AUTO-HIDE BORDER IN FULLSCREEN --- */
 #game-container:fullscreen {
     border: none !important;
     border-radius: 0 !important;
@@ -147,7 +173,6 @@ nav {
     height: 100vh !important;
 }
 
-/* --- IFRAME FILL FIX --- */
 #game-container iframe {
     position: absolute; top: 0; left: 0;
     width: 100% !important; height: 100% !important;
@@ -190,13 +215,6 @@ nav {
 .game-img-container img { width: 100%; height: 100%; object-fit: cover; }
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; padding: 0 8px; }
 .game-info h3 { margin: 0; font-size: 0.95rem; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-/* --- FULLSCREEN BUTTON --- */
-.fullscreen-btn {
-    background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
-    margin: 15px 0; transition: 0.3s ease; display: inline-block;
-}
-.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px); }
 
 /* --- ABOUT SECTION --- */
 .about-section { padding: 2px; border-radius: 20px; background: #00aaff; margin-bottom: 60px; }
