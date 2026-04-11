@@ -45,6 +45,7 @@ function generateNav() {
             <a href="driving.html">Driving</a>
             <a href="multiplayer.html">Multiplayer</a>
             <a href="sports.html">Sports</a>
+            <a href="stickman.html">Stickman</a>
         </div>
     `;
 }
