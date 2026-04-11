@@ -1,4 +1,4 @@
-/* style.css - Classroom 24k - Master Version - FULL RESTORATION */
+/* style.css - Classroom 24k - Master Version - GLASSY EDITION */
 
 body {
     background-color: #081221; 
@@ -101,16 +101,18 @@ nav {
 }
 .featured-title { font-size: 3rem; margin: 0 0 15px 0; color: white; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
-/* --- PLAY BUTTONS (SNAPPY 0.3s NEON GROW) --- */
+/* --- GLASSY PLAY BUTTON --- */
 .play-now-btn { 
     display: inline-block; 
-    background: #1c426e; 
+    background: rgba(28, 66, 110, 0.4); /* Glassy Transparency */
+    backdrop-filter: blur(10px); /* Frosted Effect */
+    -webkit-backdrop-filter: blur(10px);
     color: #ffffff; 
     padding: 12px 40px; 
     border-radius: 50px; 
     font-weight: bold; 
     text-transform: uppercase; 
-    border: 2px solid #00aaff;
+    border: 2px solid rgba(0, 170, 255, 0.6);
     position: relative; 
     z-index: 100; 
     text-decoration: none; 
@@ -123,6 +125,7 @@ nav {
     background: #00aaff; 
     color: #081221;
     box-shadow: 0 0 25px #00aaff; 
+    border-color: #00aaff;
 }
 
 @keyframes breathingGlow {
@@ -158,10 +161,13 @@ nav {
     border: none; z-index: 50;
 }
 
-/* THE HOVER ZONE (SNAPPY 0.3s NEON GROW) */
+/* GLASSY HOVER ZONE (Triangle Area) */
 .iframe-hover-zone {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(8, 18, 33, 0.7); display: flex; flex-direction: column;
+    background: rgba(8, 18, 33, 0.6); /* Transparent Glass */
+    backdrop-filter: blur(8px); /* Blur behind the play icon */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex; flex-direction: column;
     align-items: center; justify-content: center; cursor: pointer; z-index: 20; 
     transition: 0.3s ease;
 }
@@ -190,7 +196,10 @@ nav {
     text-shadow: 0 0 20px #00aaff;
     transform: scale(1.1);
 }
-.iframe-hover-zone:hover { background: rgba(8, 18, 33, 0.4); }
+.iframe-hover-zone:hover { 
+    background: rgba(8, 18, 33, 0.3); /* Gets clearer on hover */
+    backdrop-filter: blur(2px);
+}
 
 @keyframes triangleBreathe {
     0% { transform: scale(1); opacity: 0.8; }
@@ -225,12 +234,29 @@ nav {
 .game-info { flex-grow: 1; display: flex; align-items: center; justify-content: center; color: white; background: #1c426e; padding: 0 8px; }
 .game-info h3 { margin: 0; font-size: 0.95rem; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* --- FULLSCREEN BUTTON --- */
+/* --- GLASSY FULLSCREEN BUTTON --- */
 .fullscreen-btn {
-    background: #0d1b2e; color: #00aaff; border: 2px solid #00aaff; padding: 10px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; text-transform: uppercase; 
-    margin: 15px 0; transition: 0.3s ease; display: inline-block;
+    background: rgba(13, 27, 46, 0.5); /* Glassy Background */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #00aaff; 
+    border: 2px solid rgba(0, 170, 255, 0.5); 
+    padding: 10px 40px; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    margin: 15px 0; 
+    transition: 0.3s ease; 
+    display: inline-block;
 }
-.fullscreen-btn:hover { background: #00aaff; color: #081221; box-shadow: 0 0 20px #00aaff; transform: translateY(-2px); }
+.fullscreen-btn:hover { 
+    background: #00aaff; 
+    color: #081221; 
+    box-shadow: 0 0 20px #00aaff; 
+    transform: translateY(-2px); 
+    border-color: #00aaff;
+}
 
 /* --- ABOUT SECTION --- */
 .about-section { padding: 2px; border-radius: 20px; background: #00aaff; margin-bottom: 60px; }
